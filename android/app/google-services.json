@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "580815345526",
+    "project_id": "careyaya-dev",
+    "storage_bucket": "careyaya-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580815345526:android:3930b261823aebc57e0c57",
+        "android_client_info": {
+          "package_name": "com.careyaya.caregivers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "580815345526-n0u1o4v2qpkigee97qjenqv06mvsecmg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.careyaya.caregivers",
+            "certificate_hash": "feef12d8899b7d51c85e31cc5c960003b8949710"
+          }
+        },
+        {
+          "client_id": "580815345526-pf9nbug7f58pfc34qejno8u1fjls5cit.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOgH_LfoPFubpL-9VfJNnsuu6jXZk79NM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "580815345526-pf9nbug7f58pfc34qejno8u1fjls5cit.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "580815345526-id9blvas408uv7b4aiace9rite1kpkld.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.careyaya.caregivers"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

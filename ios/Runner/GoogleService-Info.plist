@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>580815345526-id9blvas408uv7b4aiace9rite1kpkld.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.580815345526-id9blvas408uv7b4aiace9rite1kpkld</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>580815345526-n0u1o4v2qpkigee97qjenqv06mvsecmg.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDkW3r2z0SAGgSdMgatvABALUmM1GgLIy0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>580815345526</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.careyaya.caregivers</string>
+	<key>PROJECT_ID</key>
+	<string>careyaya-dev</string>
+	<key>STORAGE_BUCKET</key>
+	<string>careyaya-dev.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:580815345526:ios:77e0d76c4f8c22867e0c57</string>
+</dict>
+</plist>

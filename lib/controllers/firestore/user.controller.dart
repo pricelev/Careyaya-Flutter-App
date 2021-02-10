@@ -1,0 +1,28 @@
+import 'package:careyaya/controllers/firestore/firestore.controller.dart';
+import 'package:careyaya/models/user.model.dart';
+import 'package:get/get.dart';
+import 'package:meta/meta.dart';
+
+// Right now this doesn't get live updates. Only gets data on initialization.
+
+class UserController extends GetxController {
+  final String uid;
+
+  UserModel firestoreUser;
+
+  UserModel get user => firestoreUser;
+
+  UserController({@required this.uid});
+
+  // @override
+  // void onInit() async {
+  //   super.onInit();
+  // }
+
+  @override
+  void onReady() async {
+    print(this.uid);
+    firestoreUser = await FirestoreController.to.getFirestoreUser(this.uid);
+    update();
+  }
+}

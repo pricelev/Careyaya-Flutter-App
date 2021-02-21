@@ -1,9 +1,9 @@
 import 'package:careyaya/constants/routes.dart';
 import 'package:careyaya/constants/themes.dart';
-import 'package:careyaya/controllers/auth.controller.dart';
+// import 'package:careyaya/controllers/auth.controller.dart';
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
 import 'package:careyaya/controllers/language.controller.dart';
-import 'package:careyaya/controllers/location/location.controller.dart';
+// import 'package:careyaya/controllers/location/location.controller.dart';
 import 'package:careyaya/controllers/theme.controller.dart';
 import 'package:careyaya/localizations.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -19,11 +19,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
-  Get.put<AuthController>(AuthController(), permanent: true);
+  // Get.put<AuthController>(AuthController(), permanent: true);
   Get.put<FirestoreController>(FirestoreController());
   Get.put<ThemeController>(ThemeController());
   Get.put<LanguageController>(LanguageController());
-  Get.put<LocationController>(LocationController());
+  // Get.put<LocationController>(LocationController());
   analytics = FirebaseAnalytics();
   runApp(CaregiversApp());
 }
@@ -48,7 +48,7 @@ class CaregiversApp extends StatelessWidget {
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
       themeMode: ThemeMode.light,
-      initialRoute: '/',
+      initialRoute: '/application',
       getPages: AppRoutes.routes,
       defaultTransition: Transition.noTransition,
     );

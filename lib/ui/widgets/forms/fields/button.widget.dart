@@ -30,17 +30,18 @@ class Button extends StatelessWidget {
         ),
       ),
     );
-    final buttonContent = submit
-        ? GetX<FormController>(
-            builder: (FormController fc) {
-              if (this.submit && fc != null && fc.isSubmitting) {
-                return CircularProgressIndicator();
-              } else {
-                return basicButtonContent;
-              }
-            },
-          )
-        : basicButtonContent;
+
+    Widget submitButton() {
+      FormController fc = Get.find<FormController>();
+      if (fc != null && fc.isSubmitting) {
+        return CircularProgressIndicator();
+      } else {
+        return basicButtonContent;
+      }
+    }
+
+    final buttonContent = basicButtonContent;
+
     return GestureDetector(
       onTap: () {
         if (this.onTap != null) {

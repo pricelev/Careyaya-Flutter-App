@@ -38,9 +38,8 @@ class AuthController extends GetxController {
   // ignore: must_call_super
   void onReady() async {
     //run every time auth state changes
-    firebaseUser.value = await getUser;
-    firebaseUser.bindStream(userStream);
     ever(firebaseUser, handleAuthChanged);
+    firebaseUser.bindStream(userStream);
   }
 
   @override
@@ -50,7 +49,7 @@ class AuthController extends GetxController {
 
   handleAuthChanged(_firebaseUser) {
     // Get user data from firestore
-    if (_firebaseUser?.uid != null) {
+    if (_firebaseUser != null && _firebaseUser?.uid != null) {
       firestoreUser.bindStream(streamFirestoreUser());
     }
 

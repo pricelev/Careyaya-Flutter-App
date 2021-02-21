@@ -10,7 +10,8 @@ abstract class FormValuesInterface {
 typedef SubmitFunction<FormValues> = void Function(
     GlobalKey<FormBuilderState> key, Map<String, dynamic> values);
 
-class FormWidget<FormValues> extends StatelessWidget {
+class FormWidget<FormValues extends FormValuesInterface>
+    extends StatelessWidget {
   final Widget child;
   final SubmitFunction<FormValues> onSubmit;
   final Map<String, dynamic> initialValue;

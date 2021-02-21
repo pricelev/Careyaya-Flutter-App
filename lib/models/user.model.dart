@@ -6,8 +6,16 @@ class UserModel {
   Map<String, dynamic> name;
   String email;
   String profilePicUrl;
+  String phoneNNumber;
+  String dob;
 
-  UserModel({@required this.uid, this.name, this.email, this.profilePicUrl});
+  UserModel(
+      {@required this.uid,
+      @required this.email,
+      this.name,
+      this.profilePicUrl,
+      this.phoneNNumber,
+      this.dob});
 
   factory UserModel.fromMap(Map data, String uid) {
     return UserModel(

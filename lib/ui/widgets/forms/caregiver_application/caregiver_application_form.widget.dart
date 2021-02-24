@@ -6,6 +6,7 @@ import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/scheduling
 import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/identity_details_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/joygiver_profile_details_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/service_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/reference_details_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/form.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ final steps = [
   Step(title: Text('Verify your identity'), content: IdentityDetailsPage()),
   Step(title: Text('Create your Joygiver Profile'), content: JoygiverProfileDetailsPage()),
   Step(title: Text('Define you service'), content: ServiceDetailsPage()),
+  Step(title: Text('Provide your references'), content: ReferenceDetailsPage()),
 ];
 
 // Have these values autocomplete
@@ -51,6 +53,15 @@ class CaregiverApplicationValues extends FormValuesInterface {
   final String sexPreference;
   final String maxDistance;
   final covidPrevention;
+  // Reference information
+  final String reference1Name;
+  final String reference1Relationship;
+  final int reference1PhoneNumber;
+  final String reference1Email;
+  final String reference2Name;
+  final String reference2Relationship;
+  final int reference2PhoneNumber;
+  final String reference2Email;
 
 
 
@@ -81,6 +92,14 @@ class CaregiverApplicationValues extends FormValuesInterface {
         this.sexPreference = map['sexPreference'],
         this.maxDistance = map['maxDistance'],
         this.covidPrevention = map['covidPrevention'],
+        this.reference1Name = map['reference1Name'],
+        this.reference1Relationship = map['reference1Relationship'],
+        this.reference1PhoneNumber = int.parse(map['reference1PhoneNumber']),
+        this.reference1Email = map['reference1Email'],
+        this.reference2Name = map['reference2Name'],
+        this.reference2Relationship = map['reference2Relationship'],
+        this.reference2PhoneNumber = int.parse(map['reference2PhoneNumber']),
+        this.reference2Email = map['reference2Email'],
         super.fromJson(null);
 }
 

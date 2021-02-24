@@ -7,6 +7,8 @@ import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/identity_d
 import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/joygiver_profile_details_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/service_details_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/reference_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/schedule_meeting_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/upload_video_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/form.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +21,8 @@ final steps = [
   Step(title: Text('Create your Joygiver Profile'), content: JoygiverProfileDetailsPage()),
   Step(title: Text('Define you service'), content: ServiceDetailsPage()),
   Step(title: Text('Provide your references'), content: ReferenceDetailsPage()),
+  Step(title: Text('Meet with us'), content: ScheduleMeetingPage()),
+  Step(title: Text('Upload your Profile Video'), content: UploadVideoPage()),
 ];
 
 // Have these values autocomplete
@@ -62,6 +66,8 @@ class CaregiverApplicationValues extends FormValuesInterface {
   final String reference2Relationship;
   final int reference2PhoneNumber;
   final String reference2Email;
+  // Meeting information
+  final DateTime meetingDateTime;
 
 
 
@@ -100,6 +106,7 @@ class CaregiverApplicationValues extends FormValuesInterface {
         this.reference2Relationship = map['reference2Relationship'],
         this.reference2PhoneNumber = int.parse(map['reference2PhoneNumber']),
         this.reference2Email = map['reference2Email'],
+        this.meetingDateTime = DateTime.parse(map['meetingDateTime']),
         super.fromJson(null);
 }
 

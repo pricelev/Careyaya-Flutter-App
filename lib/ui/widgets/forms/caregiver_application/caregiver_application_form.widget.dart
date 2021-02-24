@@ -5,6 +5,7 @@ import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/pricing_de
 import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/scheduling_details_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/identity_details_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/joygiver_profile_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/service_details_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/form.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ final steps = [
   Step(title: Text('Set your schedule'), content: SchedulingDetailsPage()),
   Step(title: Text('Verify your identity'), content: IdentityDetailsPage()),
   Step(title: Text('Create your Joygiver Profile'), content: JoygiverProfileDetailsPage()),
+  Step(title: Text('Define you service'), content: ServiceDetailsPage()),
 ];
 
 // Have these values autocomplete
@@ -42,7 +44,14 @@ class CaregiverApplicationValues extends FormValuesInterface {
   final String challengingSituation;
   final String situational;
   final String selfPitch;
-  //
+  // Service information
+  final tasks;
+  final experienceSelection;
+  final certifications;
+  final String sexPreference;
+  final String maxDistance;
+  final covidPrevention;
+
 
 
   CaregiverApplicationValues.fromJson(Map<String, dynamic> map)
@@ -66,6 +75,12 @@ class CaregiverApplicationValues extends FormValuesInterface {
         this.challengingSituation = map['challengingSituation'],
         this.situational = map['situational'],
         this.selfPitch = map['selfPitch'],
+        this.tasks = map['tasks'],
+        this.experienceSelection = map['experienceSelection'],
+        this.certifications = map['certifications'],
+        this.sexPreference = map['sexPreference'],
+        this.maxDistance = map['maxDistance'],
+        this.covidPrevention = map['covidPrevention'],
         super.fromJson(null);
 }
 

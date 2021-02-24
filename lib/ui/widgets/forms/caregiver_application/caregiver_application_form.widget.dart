@@ -2,6 +2,9 @@ import 'package:careyaya/controllers/form.controller.dart';
 // import 'package:careyaya/models/address.model.dart';
 import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/personal_details_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/pricing_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/scheduling_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/identity_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/joygiver_profile_details_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/form.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +12,9 @@ import 'package:get/get.dart';
 final steps = [
   Step(title: Text('Tell us about yourself'), content: PersonalDetailsPage()),
   Step(title: Text('Set your rate'), content: PricingDetailsPage()),
+  Step(title: Text('Set your schedule'), content: SchedulingDetailsPage()),
+  Step(title: Text('Verify your identity'), content: IdentityDetailsPage()),
+  Step(title: Text('Create your Joygiver Profile'), content: JoygiverProfileDetailsPage()),
 ];
 
 // Have these values autocomplete
@@ -22,6 +28,22 @@ class CaregiverApplicationValues extends FormValuesInterface {
   final String experienceDescription;
   final int yearsExperience;
   final int hourlyRate;
+  // weekly schedule information
+  final String weeklySchedule; // currently a placeholder, actual weekly availability info will need to be in a different format
+  // Joygiver identity information
+  final DateTime birthdate;
+  final int ssn;
+  final int driversLicenseNumber;
+  // Joygiver Profile information
+  final String intro;
+  final hobbies;
+  final foreignLanguages;
+  final preferences;
+  final String challengingSituation;
+  final String situational;
+  final String selfPitch;
+  //
+
 
   CaregiverApplicationValues.fromJson(Map<String, dynamic> map)
       : this.firstName = map['firstName'],
@@ -33,6 +55,17 @@ class CaregiverApplicationValues extends FormValuesInterface {
         this.yearsExperience = int.parse(map['yearsExperience']),
         this.experienceDescription = map['experienceDescription'],
         this.hourlyRate = int.parse(map['hourlyRate']),
+        this.weeklySchedule = map['weeklySchedule'],
+        this.birthdate = DateTime.parse(map['birthdate']),
+        this.ssn = int.parse(map['ssn']),
+        this.driversLicenseNumber = int.parse(map['driversLicenseNumber']),
+        this.intro = map['intro'],
+        this.hobbies = map['hobbies'],
+        this.foreignLanguages = map['foreignLanguages'],
+        this.preferences = map['preferences'],
+        this.challengingSituation = map['challengingSituation'],
+        this.situational = map['situational'],
+        this.selfPitch = map['selfPitch'],
         super.fromJson(null);
 }
 
@@ -81,6 +114,7 @@ class CaregiverApplicationForm extends StatelessWidget {
               'yearsExperience': '0',
               'experienceDescription': '',
               'hourlyRate': '1200',
+              'weeklySchedule': '',
             },
             child: Stepper(
               controlsBuilder: controlsBuilder,

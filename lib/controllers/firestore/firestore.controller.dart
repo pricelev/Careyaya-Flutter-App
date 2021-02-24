@@ -67,7 +67,7 @@ class FirestoreController {
     try{
 
 
-      await _db.collection(USERS_COLLECTION).doc('pricelev@gmail.com').set(value, SetOptions(merge: true));
+      await _db.collection(CAREGIVER_APPLICATIONS_COLLECTION).doc('pricelev@gmail.com').set(value, SetOptions(merge: true));
 
 
     }

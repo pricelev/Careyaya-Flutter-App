@@ -57,6 +57,24 @@ class FirestoreController {
       });
       return chatList;
     });
+
+
+  }
+
+  //
+  Future<void> setCaregiverApplication(value) async{
+    print(value);
+    try{
+
+
+      await _db.collection(USERS_COLLECTION).doc('pricelev@gmail.com').set(value, SetOptions(merge: true));
+
+
+    }
+    catch(error){
+      print(error);
+    }
+    return null;
   }
 
   // static Future<void> updateLocation(BackgroundLocation locationDto) async {

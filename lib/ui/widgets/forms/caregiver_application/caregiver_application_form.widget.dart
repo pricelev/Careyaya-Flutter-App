@@ -5,6 +5,8 @@ import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/pricing_de
 import 'package:careyaya/ui/widgets/forms/form.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:careyaya/controllers/firestore/firestore.controller.dart';
+
 
 final steps = [
   Step(title: Text('Tell us about yourself'), content: PersonalDetailsPage()),
@@ -92,7 +94,9 @@ class CaregiverApplicationForm extends StatelessWidget {
             ),
             onSubmit: (formKey, values) async {
               // Transform values into typed class
-              print(values);
+              FirestoreController fc = new FirestoreController();
+              fc.setCaregiverApplication(values);
+              //print(values);
               final applicationValues =
                   CaregiverApplicationValues.fromJson(values);
             },

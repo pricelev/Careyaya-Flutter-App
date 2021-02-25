@@ -30,7 +30,7 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
             filled: true,
             labelText: 'Select any foreign languages you speak'
           ),
-          items: null
+          items:  ['spanish', 'french', 'latin', 'Chinese']
         ),
         FormBuilderCheckboxGroup(
           decoration: InputDecoration(labelText: 'Please Select any of the following that apply'),

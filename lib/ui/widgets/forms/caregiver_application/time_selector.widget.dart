@@ -10,8 +10,9 @@ class TimeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
+    return Column( children: [
+      SizedBox(height: 10),
+      Row( children: [
         Expanded(
           child: FormBuilderTextField(
             name: this.day + "_" + this.id.toString() + "_start",
@@ -23,7 +24,7 @@ class TimeSelector extends StatelessWidget {
         ),
         Expanded(
           child: FormBuilderDropdown(
-            name: "selector1",
+            name: this.day + "selector0",
             items: ['AM', 'PM']
                 .map((time) => DropdownMenuItem(
               value: time,
@@ -42,7 +43,7 @@ class TimeSelector extends StatelessWidget {
         ),
         Expanded(
           child: FormBuilderDropdown(
-            name: "selector2",
+            name: this.day + "selector1",
             items: ['AM', 'PM']
                 .map((time) => DropdownMenuItem(
               value: time,
@@ -50,7 +51,8 @@ class TimeSelector extends StatelessWidget {
             )).toList(),
           ),
         ),
-      ],
-    );
+      ]),
+      SizedBox(height: 10),
+    ]);
   }
 }

@@ -71,6 +71,7 @@ class ServiceDetailsPage extends StatelessWidget {
             value: distance,
             child: Text('$distance' + ' miles'),
           )).toList(),
+          validator: FormBuilderValidators.required(context),
         ),
         CheckboxField(
             'covidPrevention',

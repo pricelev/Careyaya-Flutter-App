@@ -34,6 +34,7 @@ class _SchedulerState extends State<Scheduler> {
 
   int numPeriods = 1;
   List<TimeSelector> timePeriods = <TimeSelector>[];
+  ElevatedButton removeTimePeriodBttn;
 
   @override
   Widget build(BuildContext context) {
@@ -44,18 +45,34 @@ class _SchedulerState extends State<Scheduler> {
           shrinkWrap: true,
           itemCount: this.timePeriods.length,
           itemBuilder: (context, index) {
-            return this.timePeriods[index];
+            return Column(children: [
+              SizedBox(height: 10),
+              this.timePeriods[index],
+              SizedBox(height: 10),
+            ]);
           }
       ),
-      ElevatedButton(onPressed: _handleAddTimePress, child: Text("+")),
+      Row(children: [
+        Expanded(child: ElevatedButton(onPressed: _handleAddTimePress, child: Text("+"))),
+        Expanded(child: ElevatedButton(onPressed: _handleRemoveTimePress, child: Text("-")))
+      ]),
       SizedBox(height: 10),
     ]);
   }
 
   _handleAddTimePress() {
-      setState(() {
-        this.timePeriods.add(TimeSelector(this.widget.day.toLowerCase(), this.numPeriods));
-        this.numPeriods = this.numPeriods + 1;
-      });
+    setState(() {
+      this.timePeriods.add(TimeSelector(this.widget.day.toLowerCase(), this.numPeriods));
+      this.numPeriods = this.numPeriods + 1;
+    });
+  }
+
+  _handleRemoveTimePress() {
+    setState(() {
+      if (this.numPeriods > 1) {
+        this.timePeriods.removeLast();
+        this.numPeriods = this.numPeriods - 1;
+      }
+    });
   }
 }

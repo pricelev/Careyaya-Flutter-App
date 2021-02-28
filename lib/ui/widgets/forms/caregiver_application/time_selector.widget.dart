@@ -3,16 +3,14 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class TimeSelector extends StatelessWidget {
 
-  final int id;
   final String day;
+  final int id;
 
-  TimeSelector(this.id, this.day);
+  TimeSelector(this.day, this.id);
 
   @override
   Widget build(BuildContext context) {
-    return Column( children: [
-      SizedBox(height: 10),
-      Row( children: [
+    return Row( children: [
         Expanded(
           child: FormBuilderTextField(
             name: this.day + "_" + this.id.toString() + "_start",
@@ -51,8 +49,6 @@ class TimeSelector extends StatelessWidget {
             )).toList(),
           ),
         ),
-      ]),
-      SizedBox(height: 10),
-    ]);
+      ]);
   }
 }

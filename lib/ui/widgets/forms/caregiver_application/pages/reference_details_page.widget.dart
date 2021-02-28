@@ -30,7 +30,10 @@ class ReferenceDetailsPage extends StatelessWidget {
             filled: true,
             hintText: 'Reference Phone Number',
           ),
-          validator: FormBuilderValidators.required(context),
+          validator: FormBuilderValidators.compose([
+        FormBuilderValidators.numeric(context),
+        FormBuilderValidators.required(context)
+      ]),
         ),
         FormBuilderTextField(
           name: 'reference1Email',
@@ -38,7 +41,10 @@ class ReferenceDetailsPage extends StatelessWidget {
             filled: true,
             hintText: 'Reference Email',
           ),
-          validator: FormBuilderValidators.required(context),
+          validator: FormBuilderValidators.compose([
+        FormBuilderValidators.email(context),
+        FormBuilderValidators.required(context)
+      ]),
         ),
         Text("Reference #2"),
         FormBuilderTextField(
@@ -68,7 +74,10 @@ class ReferenceDetailsPage extends StatelessWidget {
             filled: true,
             hintText: 'Reference Phone Number',
           ),
-          validator: FormBuilderValidators.required(context),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.numeric(context),
+            FormBuilderValidators.required(context)
+          ]),
         ),
         FormBuilderTextField(
           name: 'reference2Email',
@@ -76,7 +85,10 @@ class ReferenceDetailsPage extends StatelessWidget {
             filled: true,
             hintText: 'Reference Email',
           ),
-          validator: FormBuilderValidators.required(context),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.email(context),
+            FormBuilderValidators.required(context)
+          ]),
         ),
       ]
     );

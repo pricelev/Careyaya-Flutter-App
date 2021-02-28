@@ -28,7 +28,7 @@ class _UploadVideoPageState extends State<UploadVideoPage> {
     return Column( children: [
       Center(
         child: _video == null
-            ? Text('No image selected.')
+            ? Text('No video selected.')
             : Image.file(_video),
       ),
       FloatingActionButton(

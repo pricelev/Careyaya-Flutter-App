@@ -78,6 +78,9 @@ dependencies:
   # Easy form composition
   flutter_form_builder: "4.2.0"
 
+  # Easy image/video upload
+  image_picker: "^0.6.7+22"
+
   # Social Sign In Buttons
   flutter_signin_button: "^1.1.0"
 

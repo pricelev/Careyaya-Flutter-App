@@ -57,6 +57,42 @@ class FirestoreController {
       });
       return chatList;
     });
+
+
+  }
+
+  //
+  Future<void> setCaregiverApplication(value) async{
+    print(value);
+    var test = {'first': 'help',
+      'second': "me",
+      'list' : {'first':1 , 'second':2}};
+    test['second'] = 'this was changed';
+    print(test);
+    int applicationFinished = 0;
+    try{
+      value.forEach((k,v) {
+        print(k + ' ' + v.toString());
+        if (v == null) {
+          applicationFinished = 1;
+        }
+      });
+
+
+        if(applicationFinished==0){
+          return await _db.collection(JOYGIVER_APPLICATIONS_COLLECTION).doc('pricelev@gmail.com').set(value, SetOptions(merge: true));
+        }
+        else{
+          print('application is not filled');
+        }
+
+
+
+    }
+    catch(error){
+      print(error);
+    }
+    return null;
   }
 
   // static Future<void> updateLocation(BackgroundLocation locationDto) async {

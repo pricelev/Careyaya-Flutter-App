@@ -64,6 +64,11 @@ class FirestoreController {
   //
   Future<void> setCaregiverApplication(value) async{
     print(value);
+    var test = {'first': 'help',
+      'second': "me",
+      'list' : {'first':1 , 'second':2}};
+    test['second'] = 'this was changed';
+    print(test);
     int applicationFinished = 0;
     try{
       value.forEach((k,v) {
@@ -75,7 +80,7 @@ class FirestoreController {
 
 
         if(applicationFinished==0){
-          return await _db.collection(CAREGIVER_APPLICATIONS_COLLECTION).doc('pricelev@gmail.com').set(value, SetOptions(merge: true));
+          return await _db.collection(JOYGIVER_APPLICATIONS_COLLECTION).doc('pricelev@gmail.com').set(value, SetOptions(merge: true));
         }
         else{
           print('application is not filled');

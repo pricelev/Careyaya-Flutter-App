@@ -13,15 +13,21 @@ class PricingDetailsPage extends StatelessWidget {
             filled: true,
             hintText: 'Years Experience',
           ),
-          validator: FormBuilderValidators.required(context),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.numeric(context),
+            FormBuilderValidators.required(context)
+          ]),
         ),
         FormBuilderTextField(
           name: 'experienceDescription',
           decoration: InputDecoration(
             filled: true,
-            hintText: 'Experience Description',
+            hintText: 'Experience Description (max 200 char)',
           ),
-          validator: FormBuilderValidators.required(context),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(context),
+            FormBuilderValidators.maxLength(context, 200)
+          ]),
         ),
         // Need number formatter / mask
         FormBuilderTextField(
@@ -31,7 +37,10 @@ class PricingDetailsPage extends StatelessWidget {
             filled: true,
             hintText: 'Hourly Rate',
           ),
-          validator: FormBuilderValidators.required(context),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.numeric(context),
+              FormBuilderValidators.required(context)
+            ]),
         ),
       ],
     );

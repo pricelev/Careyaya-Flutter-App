@@ -10,7 +10,7 @@ class ScheduleMeetingPage extends StatelessWidget {
         FormBuilderDateTimePicker(
           name: 'meetingDateTime',
           inputType: InputType.date,
-          format: DateFormat('dd-MM-yyyy HH:MM'),
+          format: DateFormat('MM/dd/yyyy HH:MM'),
           decoration: InputDecoration(
               filled: true,
               hintText: 'Select a time to meet with us'

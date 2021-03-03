@@ -156,6 +156,8 @@ PODS:
   - GTMSessionFetcher/Core (1.5.0)
   - GTMSessionFetcher/Full (1.5.0):
     - GTMSessionFetcher/Core (= 1.5.0)
+  - image_picker (0.0.1):
+    - Flutter
   - nanopb (2.30906.0):
     - nanopb/decode (= 2.30906.0)
     - nanopb/encode (= 2.30906.0)
@@ -182,6 +184,7 @@ DEPENDENCIES:
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
 
@@ -239,6 +242,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/google_maps_flutter/ios"
   google_sign_in:
     :path: ".symlinks/plugins/google_sign_in/ios"
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   permission_handler:
@@ -283,6 +288,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: d866834472f1324d080496bc67ab3ce5d0d46027
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6

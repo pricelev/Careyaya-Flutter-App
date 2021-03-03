@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:careyaya/ui/widgets/forms/caregiver_application/time_selector.widget.dart';
+import 'package:time_range/time_range.dart';
 
 /*class Scheduler extends StatelessWidget {
 
@@ -33,7 +33,7 @@ class Scheduler extends StatefulWidget {
 class _SchedulerState extends State<Scheduler> {
 
   int numPeriods = 1;
-  List<TimeSelector> timePeriods = <TimeSelector>[];
+  List<TimeRange> timePeriods = <TimeRange>[];
   ElevatedButton removeTimePeriodBttn;
 
   @override
@@ -62,7 +62,17 @@ class _SchedulerState extends State<Scheduler> {
 
   _handleAddTimePress() {
     setState(() {
-      this.timePeriods.add(TimeSelector(this.widget.day.toLowerCase(), this.numPeriods));
+      this.timePeriods.add(
+        TimeRange(
+          fromTitle: Text('From', style: TextStyle(fontSize: 18)),
+          toTitle: Text('To', style: TextStyle(fontSize: 18)),
+          firstTime: TimeOfDay(hour: 5, minute: 0),
+          lastTime: TimeOfDay(hour: 23, minute: 59),
+          timeStep: 15,
+          timeBlock: 30,
+          onRangeCompleted: (range) => setState(() => print(range)),
+        )
+      );
       this.numPeriods = this.numPeriods + 1;
     });
   }

@@ -6,31 +6,40 @@ class FormController extends GetxController {
   static FormController to = Get.find();
   Function onSubmit;
   RxBool submitting = false.obs;
-  Rx<GlobalKey<FormBuilderState>> key = GlobalKey<FormBuilderState>().obs;
+  Rx<GlobalKey<FormBuilderState>> formKey;
 
   bool get isSubmitting => submitting.value;
 
-  FormController({this.onSubmit});
+  FormController(
+      {this.onSubmit, @required GlobalKey<FormBuilderState> formKey}) {
+    this.formKey = formKey.obs;
+  }
 
   @override
   void dispose() {
-    key = null;
-    key.close();
+    formKey = null;
+    formKey.close();
     super.dispose();
   }
 
-  Future<void> submit() async {
+  Future<bool> submit() async {
     submitting.value = true;
     update();
     try {
       if (onSubmit != null) {
-        final currentState = key.value.currentState;
-        currentState.save();
+        final currentState = formKey.value.currentState;
+        final isValid = currentState.saveAndValidate();
+        if (!isValid) {
+          print(currentState.value);
+          throw 'Form Values not valid.';
+        }
         final formValues = currentState.value;
-        await onSubmit(key.value, formValues);
+        await onSubmit(formKey.value, formValues);
+        return true;
       }
     } catch (error) {
       print(error);
+      return false;
     }
     submitting.value = false;
   }

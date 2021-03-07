@@ -7,6 +7,7 @@ class ApplicationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
+        bottom: false,
         child: CaregiverApplicationForm(),
       ),
     );

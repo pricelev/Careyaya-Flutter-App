@@ -13,28 +13,31 @@ typedef SubmitFunction<FormValues> = void Function(
 class FormWidget<FormValues extends FormValuesInterface>
     extends StatelessWidget {
   final Widget child;
+  final GlobalKey<FormBuilderState> formKey;
   final SubmitFunction<FormValues> onSubmit;
   final Map<String, dynamic> initialValue;
   final AutovalidateMode autovalidateMode;
+  final int index;
 
   FormWidget(
       {@required this.child,
       @required this.onSubmit,
+      @required this.formKey,
+      this.index,
       this.initialValue,
       this.autovalidateMode: AutovalidateMode.disabled});
 
   @override
   Widget build(BuildContext context) {
-    return GetX<FormController>(
-      init: Get.put<FormController>(FormController(onSubmit: onSubmit)),
-      builder: (formController) {
-        return FormBuilder(
-          key: formController.key.value,
-          child: child,
-          autovalidateMode: autovalidateMode,
-          initialValue: initialValue,
-        );
-      },
+    final tag = this.index != null ? this.index.toString() : '';
+    Get.put<FormController>(
+        FormController(formKey: this.formKey, onSubmit: this.onSubmit),
+        tag: tag);
+    return FormBuilder(
+      key: this.formKey,
+      child: child,
+      autovalidateMode: autovalidateMode,
+      initialValue: initialValue,
     );
   }
 }

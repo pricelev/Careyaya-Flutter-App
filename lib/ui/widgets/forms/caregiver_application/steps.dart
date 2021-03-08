@@ -66,7 +66,15 @@ final List<Step> steps = [
       child: FormStep(
         index: 2,
         content: SchedulingDetailsPage(),
-        initialValues: {},
+        initialValues: {
+          'schedule.Sunday': [],
+          'schedule.Monday': [],
+          'schedule.Tuesday': [],
+          'schedule.Wednesday': [],
+          'schedule.Thursday': [],
+          'schedule.Friday': [],
+          'schedule.Saturday': [],
+        },
       ),
     ),
   ),

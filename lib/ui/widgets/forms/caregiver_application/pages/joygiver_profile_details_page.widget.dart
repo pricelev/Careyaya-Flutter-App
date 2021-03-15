@@ -1,6 +1,13 @@
+import 'package:careyaya/constants/forms/hobbies.dart';
+import 'package:careyaya/constants/forms/languages.dart';
 import 'package:careyaya/ui/widgets/forms/fields/image_picker.widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+
+Future<String> loadHobbies() async {
+  return await rootBundle.loadString('assets/config.json');
+}
 
 class JoygiverProfileDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -17,100 +24,47 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
             decoration: InputDecoration(
                 filled: true, hintText: "Enter you answer here")),
         FormBuilderChipsInput(
-            name: 'hobbies',
-            decoration: InputDecoration(
-                filled: true,
-                labelText: "Hobbies",
-                hintText: "Enter a hobby and press return")),
-        FormBuilderDropdown(
-          name: "foreignLanguages",
-          decoration: InputDecoration(
-              filled: true,
-              labelText: 'Select any foreign languages you speak'),
-          items: [
-            'Afrikaans',
-            'Arabic',
-            'Bengali',
-            'Bulgarian',
-            'Catalan',
-            'Cantonese',
-            'Croatian',
-            'Czech',
-            'Danish',
-            'Dutch',
-            'Lithuanian',
-            'Malay',
-            'Malayalam',
-            'Panjabi',
-            'Tamil',
-            'English',
-            'Finnish',
-            'French',
-            'German',
-            'Greek',
-            'Hebrew',
-            'Hindi',
-            'Hungarian',
-            'Indonesian',
-            'Italian',
-            'Japanese',
-            'Javanese',
-            'Korean',
-            'Norwegian',
-            'Polish',
-            'Portuguese',
-            'Romanian',
-            'Russian',
-            'Serbian',
-            'Slovak',
-            'Slovene',
-            'Spanish',
-            'Swedish',
-            'Telugu',
-            'Thai',
-            'Turkish',
-            'Ukrainian',
-            'Vietnamese',
-            'Welsh',
-            'Sign language',
-            'Algerian',
-            'Aramaic',
-            'Armenian',
-            'Berber',
-            'Burmese',
-            'Bosnian',
-            'Brazilian',
-            'Bulgarian',
-            'Cypriot',
-            'Corsica',
-            'Creole',
-            'Scottish',
-            'Egyptian',
-            'Esperanto',
-            'Estonian',
-            'Finn',
-            'Flemish',
-            'Georgian',
-            'Hawaiian',
-            'Indonesian',
-            'Inuit',
-            'Irish',
-            'Icelandic',
-            'Latin',
-            'Mandarin',
-            'Nepalese',
-            'Sanskrit',
-            'Tagalog',
-            'Tahitian',
-            'Tibetan',
-            'Tsigan',
-            'Wu'
-          ]
-              .map((language) => DropdownMenuItem(
-                    value: language,
-                    child: Text('$language'),
-                  ))
+          allowChipEditing: true,
+          findSuggestions: (String query) => HOBBIES
+              .where(
+                  (hobby) => hobby.toLowerCase().contains(query.toLowerCase()))
               .toList(),
+          suggestionBuilder: (context, state, lang) => ListTile(
+            key: ObjectKey(lang),
+            title: Text(lang),
+            onTap: () => state.selectSuggestion(lang),
+          ),
+          chipBuilder: (context, state, hobby) => Chip(label: Text(hobby)),
+          name: 'hobbies',
+          maxChips: 5,
+          decoration: InputDecoration(
+            filled: true,
+            labelText: "Hobbies",
+            hintText: "Enter a hobby and press return",
+          ),
+        ),
+        FormBuilderChipsInput(
+          name: "languages",
+          decoration: InputDecoration(
+            filled: true,
+            labelText: 'Select any foreign languages you speak',
+          ),
+          findSuggestions: (String query) => LANGUAGES
+              .where((lang) => lang.toLowerCase().contains(query.toLowerCase()))
+              .toList(),
+          suggestionBuilder: (context, state, lang) => ListTile(
+            key: ObjectKey(lang),
+            title: Text(lang),
+            onTap: () => state.selectSuggestion(lang),
+          ),
+          chipBuilder: (context, state, lang) => Chip(label: Text(lang)),
+          // .map((language) => DropdownMenuItem(
+          //       value: {
+          //         'englishName': language,
+          //       },
+          //       child: Text(language),
+          //     ))
+          // .toList(),
         ),
 
         FormBuilderCheckboxGroup(
@@ -118,21 +72,33 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
               labelText: 'Please Select any of the following that apply'),
           name: 'preferences',
           options: [
-            'I am comfortable with pets',
-            'I have transportation',
-            'I am willing to drive the person recieving care',
-            'I am a smoker',
+            {
+              'value': 'isComfortableWithPets',
+              'label': 'I am comfortable with pets',
+            },
+            {
+              'value': 'hasTransportation',
+              'label': 'I have transportation',
+            },
+            {
+              'value': 'drives',
+              'label': 'I am willing to drive the person receiving care',
+            },
+            {
+              'value': 'isSmoker',
+              'label': 'I am a smoker',
+            },
           ]
               .map((lang) => FormBuilderFieldOption(
-                    value: lang[0],
-                    child: Text(lang),
+                    value: lang['value'],
+                    child: Text(lang['label']),
                   ))
               .toList(growable: false),
         ),
         Text(
             "What is the most challenging situation you've been in as a caregiver? How did you handle that?"),
         FormBuilderTextField(
-            name: 'challengingSituation',
+            name: 'interview.challengingSituation',
             keyboardType: TextInputType.multiline,
             maxLines: null,
             decoration: InputDecoration(
@@ -140,7 +106,7 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
         Text(
             "What would you do if a LovedOne falls, becomes confused, and doesn’t recognize you?"),
         FormBuilderTextField(
-            name: 'situational',
+            name: 'interview.lovedOneFalls',
             keyboardType: TextInputType.multiline,
             maxLines: null,
             decoration: InputDecoration(
@@ -148,7 +114,7 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
         Text(
             "Why should a careseeker hire you? What do you bring to the table?"),
         FormBuilderTextField(
-            name: 'selfPitch',
+            name: 'interview.hiringReason',
             keyboardType: TextInputType.multiline,
             maxLines: null,
             decoration: InputDecoration(

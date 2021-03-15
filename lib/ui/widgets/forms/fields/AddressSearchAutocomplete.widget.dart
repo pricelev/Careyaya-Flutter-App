@@ -15,24 +15,30 @@ class AddressSearchAutocompleteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: FormBuilderTextField(
-        decoration: InputDecoration(
-          hintText: 'Address',
-          filled: true,
-        ),
-        onTap: () async {
-          // show input autocomplete with selected mode
-          // then get the Prediction selected
-          Prediction p = await PlacesAutocomplete.show(
-              context: context, apiKey: kGoogleApiKey);
-          displayPrediction(p);
+      child: FormBuilderField(
+        name: 'address',
+        builder: (FormFieldState<dynamic> field) {
+          return TextField(
+            decoration: InputDecoration(
+              hintText: 'Address',
+              filled: true,
+            ),
+            onTap: () async {
+              // show input autocomplete with selected mode
+              // then get the Prediction selected
+              Prediction p = await PlacesAutocomplete.show(
+                  context: context, apiKey: kGoogleApiKey);
+              selectPrediction(p, field);
+            },
+          );
         },
       ),
     );
   }
 }
 
-Future<void> displayPrediction(Prediction p) async {
+Future<void> selectPrediction(
+    Prediction p, FormFieldState<dynamic> field) async {
   if (p != null) {
     PlacesDetailsResponse detail = await _places.getDetailsByPlaceId(p.placeId);
 
@@ -62,5 +68,7 @@ Future<void> displayPrediction(Prediction p) async {
       placeId: placeId,
       zip: zip,
     );
+    final jsonAddress = address.toJson();
+    field.didChange(jsonAddress);
   }
 }

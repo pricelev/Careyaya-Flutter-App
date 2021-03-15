@@ -94,7 +94,10 @@ final List<Step> steps = [
       child: FormStep(
         index: 4,
         content: JoygiverProfileDetailsPage(),
-        initialValues: {},
+        initialValues: {
+          'introDescription': '',
+          'profilePic': null,
+        },
       ),
       key: GlobalKey<FormBuilderState>(),
     ),
@@ -105,7 +108,12 @@ final List<Step> steps = [
       child: FormStep(
         index: 5,
         content: ServiceDetailsPage(),
-        initialValues: {},
+        initialValues: {
+          'tasks': [],
+          'certifications': [],
+          'preferredSexes': [],
+          'maximumSessionDistance': 40,
+        },
       ),
       key: GlobalKey<FormBuilderState>(),
     ),

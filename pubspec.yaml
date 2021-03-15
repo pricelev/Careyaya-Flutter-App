@@ -99,6 +99,9 @@ dependencies:
   # Localized text from Google Sheets
   flutter_sheet_localization: "^2.0.1"
 
+  # Model Generation
+  json_annotation: "^3.1.1"
+
   intl: "^0.16.1"
 
   # Time range picker
@@ -114,6 +117,7 @@ dev_dependencies:
     sdk: flutter
   flutter_sheet_localization_generator: "^2.1.2"
   build_runner: "^1.10.2"
+  json_serializable: "^3.5.1"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

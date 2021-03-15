@@ -1,5 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
+part 'address.model.g.dart';
+
+@JsonSerializable()
 class Address {
   final String description;
   final String city;
@@ -23,4 +27,7 @@ class Address {
     @required this.placeId,
     @required this.zip,
   });
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
+  Map<String, dynamic> toJson() => _$AddressToJson(this);
 }

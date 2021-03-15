@@ -72,7 +72,7 @@ dependencies:
   animate_do: "^1.7.5" # Movements
   shimmer: "^1.1.2" # Loading effect
 
-#  shared_preferences: ">=0.5.12+4 <2.0.0"
+  # shared_preferences: ">=0.5.12+4 <2.0.0"
   get_storage: "^1.4.0"
 
   # Easy form composition
@@ -80,6 +80,9 @@ dependencies:
 
   # Easy image/video upload
   image_picker: "^0.6.7+22"
+
+  # Address Search Autocomplete
+  flutter_google_places: "^0.2.8"
 
   # Social Sign In Buttons
   flutter_signin_button: "^1.1.0"

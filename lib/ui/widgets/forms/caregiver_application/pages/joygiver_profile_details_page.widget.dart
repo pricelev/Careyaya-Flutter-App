@@ -1,3 +1,4 @@
+import 'package:careyaya/ui/widgets/forms/fields/image_picker.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -6,6 +7,7 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
     return Column(
       children: [
         // need a way of adding a profile photo
+        ImagePickerWidget(),
         Text(
             "In 2-3 sentences, introduce yourself to people viewing your profile"),
         FormBuilderTextField(

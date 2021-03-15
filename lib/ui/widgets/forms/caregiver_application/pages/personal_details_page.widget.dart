@@ -1,3 +1,4 @@
+import 'package:careyaya/ui/widgets/forms/fields/AddressSearchAutocomplete.widget.dart';
 import 'package:careyaya/ui/widgets/forms/fields/email_field.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -23,7 +24,9 @@ class PersonalDetailsPage extends StatelessWidget {
         validator: FormBuilderValidators.required(context),
       ),
       FormBuilderRadioGroup(
-        decoration: InputDecoration(labelText: 'Sex'),
+        decoration: InputDecoration(
+          labelText: 'Sex',
+        ),
         name: 'sex',
         options: [
           'Male',
@@ -37,14 +40,7 @@ class PersonalDetailsPage extends StatelessWidget {
         validator: FormBuilderValidators.required(context),
       ),
       EmailField(),
-      // FormBuilderTextField(
-      //   name: 'address',
-      //   decoration: InputDecoration(
-      //     filled: true,
-      //     hintText: 'Address',
-      //   ),
-      //   validator: FormBuilderValidators.required(context),
-      // ),
+      AddressSearchAutocompleteWidget(),
       // Need number formatter / mask
       FormBuilderTextField(
         name: 'phoneNumber',
@@ -55,52 +51,37 @@ class PersonalDetailsPage extends StatelessWidget {
         ),
         validator: FormBuilderValidators.required(context),
       ),
+      FormBuilderDropdown(
+        name: 'referralMethod',
+        validator: FormBuilderValidators.required(context),
+        items: [
+          {
+            'label': 'Advertisement',
+            'value': 'advertisement',
+          },
+          {
+            'label': 'Friend',
+            'value': 'friend',
+          },
+          {
+            'label': 'Indeed',
+            'value': 'indeed',
+          },
+          {
+            'label': 'Other',
+            'value': 'other',
+          },
+        ]
+            .map((referralMethod) => DropdownMenuItem(
+                  value: referralMethod['value'],
+                  child: Text('${referralMethod['label']}'),
+                ))
+            .toList(),
+        decoration: InputDecoration(
+          labelText: 'Referral Method',
+          filled: true,
+        ),
+      ),
     ]);
-    // FormBuilderTextField(
-    //   name: 'availability',
-    //   decoration: InputDecoration(
-    //     filled: true,
-    //     hintText: 'Availability',
-    //   ),
-    //   validator: FormBuilderValidators.required(context),
-    // ),
-    // FormBuilderCheckbox(
-    //     name: 'schedulingFlexibility',
-    //     initialValue: false,
-    //     title: RichText(
-    //       text: TextSpan(children: [
-    //         TextSpan(
-    //           text:
-    //               'I would like to be included as a Joygiver with flexible hours, who will be offered higher pay opportunities in emergency situations.',
-    //           style: TextStyle(color: Colors.black),
-    //         ),
-    //       ]),
-    //     )),
-    // FormBuilderDropdown(
-    //   name: 'referralMethod',
-    //   validator: FormBuilderValidators.required(context),
-    //   items: [
-    //     {
-    //       'label': 'Advertisement',
-    //       'value': 'advertisement',
-    //     },
-    //     {
-    //       'label': 'Friend',
-    //       'value': 'friend',
-    //     },
-    //     {
-    //       'label': 'Other',
-    //       'value': 'other',
-    //     },
-    //   ]
-    //       .map((gender) => DropdownMenuItem(
-    //             value: gender['value'],
-    //             child: Text('${gender['label']}'),
-    //           ))
-    //       .toList(),
-    //   decoration: InputDecoration(
-    //     labelText: 'Referral Method',
-    //   ),
-    // ),
   }
 }

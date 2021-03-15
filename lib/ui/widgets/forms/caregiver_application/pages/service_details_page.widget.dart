@@ -34,19 +34,13 @@ class ServiceDetailsPage extends StatelessWidget {
             'Other',
           ]),
       // Need an upload field
-      Text("iv. Which sexes are you willing to care for?"),
-      FormBuilderRadioGroup(
-        name: 'preferredSexes',
-        options: [
+      CheckboxField(
+        'preferredSexes',
+        "iii. Which sexes are you willing to care for?",
+        [
           'Male',
           'Female',
-        ]
-            .map((lang) => FormBuilderFieldOption(
-                  value: lang[0],
-                  child: Text(lang),
-                ))
-            .toList(growable: false),
-        validator: FormBuilderValidators.required(context),
+        ],
       ),
       Text(
           "v. What’s the furthest you’re willing to drive for a care session?"),

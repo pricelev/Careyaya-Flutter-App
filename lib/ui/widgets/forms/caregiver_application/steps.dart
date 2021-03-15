@@ -109,9 +109,9 @@ final List<Step> steps = [
         index: 5,
         content: ServiceDetailsPage(),
         initialValues: {
-          'tasks': [],
-          'certifications': [],
-          'preferredSexes': [],
+          'tasks': <String>[],
+          'certifications': <String>[],
+          'preferredSexes': <String>[],
           'maximumSessionDistance': 40,
         },
       ),

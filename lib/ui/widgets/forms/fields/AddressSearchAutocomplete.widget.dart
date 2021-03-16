@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:careyaya/models/address.model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:flutter_google_places/flutter_google_places.dart' as places;
 import 'package:google_maps_webservice/places.dart';
 
 const kGoogleApiKey = "AIzaSyDS8X0xoKfDxyqAi8lfPP-8mxq7M3Ke3sg";
@@ -26,8 +26,11 @@ class AddressSearchAutocompleteWidget extends StatelessWidget {
             onTap: () async {
               // show input autocomplete with selected mode
               // then get the Prediction selected
-              Prediction p = await PlacesAutocomplete.show(
-                  context: context, apiKey: kGoogleApiKey);
+              Prediction p = await places.PlacesAutocomplete.show(
+                context: context,
+                apiKey: kGoogleApiKey,
+                mode: places.Mode.overlay,
+              );
               selectPrediction(p, field);
             },
           );

@@ -40,9 +40,18 @@ class IdentityDetailsPage extends StatelessWidget {
           ),
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(context),
-            FormBuilderValidators.numeric(context, errorText: 'Please do not use letters or special characters'),
-            FormBuilderValidators.minLength(context, 12, errorText: 'A NC drivers license number has 12 digits'),
-            FormBuilderValidators.maxLength(context, 12, errorText: 'A NC drivers license number has 12 digits'),
+            FormBuilderValidators.minLength(context, 4, errorText: 'A Drivers License number has from 4-15 letters and numbers'),
+            FormBuilderValidators.maxLength(context, 15, errorText: 'A Drivers License number has from 4-15 letters and numbers'),
+                (val){
+                  if(val.contains('~') || val.contains('`') || val.contains('!') || val.contains('@') || val.contains('#') ||
+                  val.contains('%') || val.contains('^') || val.contains('&') || val.contains('*') || val.contains('(') || val.contains(')') || val.contains('-') || val.contains('_') ||
+                  val.contains('+') || val.contains('=') || val.contains('[') || val.contains(']') || val.contains('{') || val.contains('}') || val.contains('"') || val.contains(':') ||
+                  val.contains(';') || val.contains('<') || val.contains(',') || val.contains('>') || val.contains('?') || val.contains('/') || val.contains('|'))
+                  {
+                    return 'value contains special characters';
+                  }
+              return null;
+            }
           ]),
         )
       ]

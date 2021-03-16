@@ -13,7 +13,19 @@ class PersonalDetailsPage extends StatelessWidget {
           filled: true,
           hintText: 'First name',
         ),
-        validator: FormBuilderValidators.required(context),
+        validator:  FormBuilderValidators.compose([
+          FormBuilderValidators.required(context),
+              (val){
+            if(val.contains('1') || val.contains('2')  || val.contains('3')  || val.contains('4')  || val.contains('5')  || val.contains('6')  || val.contains('7') ||
+                val.contains('8') || val.contains('9') || val.contains('0') || val.contains('~') || val.contains('`') || val.contains('!') || val.contains('@') || val.contains('#') ||
+                val.contains('%') || val.contains('^') || val.contains('&') || val.contains('*') || val.contains('(') || val.contains(')') || val.contains('-') || val.contains('_') ||
+                val.contains('+') || val.contains('=') || val.contains('[') || val.contains(']') || val.contains('{') || val.contains('}') || val.contains('"') || val.contains(':') ||
+                val.contains(';') || val.contains('<') || val.contains(',') || val.contains('>') || val.contains('?') || val.contains('/') || val.contains('|')){
+              return 'value contains special characters or letters';
+            }
+            return null;
+          }
+        ]),
       ),
       FormBuilderTextField(
         name: 'lastName',
@@ -21,7 +33,20 @@ class PersonalDetailsPage extends StatelessWidget {
           filled: true,
           hintText: 'Last name',
         ),
-        validator: FormBuilderValidators.required(context),
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(context),
+          (val){
+            if(val.contains('1') || val.contains('2')  || val.contains('3')  || val.contains('4')  || val.contains('5')  || val.contains('6')  || val.contains('7') ||
+               val.contains('8') || val.contains('9') || val.contains('0') || val.contains('~') || val.contains('`') || val.contains('!') || val.contains('@') || val.contains('#') ||
+                val.contains('%') || val.contains('^') || val.contains('&') || val.contains('*') || val.contains('(') || val.contains(')') || val.contains('-') || val.contains('_') ||
+                val.contains('+') || val.contains('=') || val.contains('[') || val.contains(']') || val.contains('{') || val.contains('}') || val.contains('"') || val.contains(':') ||
+                val.contains(';') || val.contains('<') || val.contains(',') || val.contains('>') || val.contains('?') || val.contains('/') || val.contains('|')){
+              return 'value contains special characters or letters';
+            }
+            return null;
+          }
+        ]),
+        
       ),
       FormBuilderRadioGroup(
         decoration: InputDecoration(
@@ -49,7 +74,12 @@ class PersonalDetailsPage extends StatelessWidget {
           filled: true,
           hintText: 'Phone number',
         ),
-        validator: FormBuilderValidators.required(context),
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(context),
+          FormBuilderValidators.numeric(context, errorText: 'Please do not use letters or special characters'),
+          FormBuilderValidators.minLength(context, 10, errorText: 'Please use area code and seven digit phone number'),
+          FormBuilderValidators.maxLength(context, 10, errorText: 'Please use area code and seven digit phone number'),
+        ]),
       ),
       FormBuilderDropdown(
         name: 'referralMethod',

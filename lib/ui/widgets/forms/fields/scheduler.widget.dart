@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:time_range/time_range.dart';
+import 'dart:math';
 
 class SchedulerController extends GetxController {
   FormFieldState<dynamic> field;
   List<TimeRange> timePickers = <TimeRange>[];
   RxList<TimeRangeResult> timeRanges = RxList<TimeRangeResult>([]);
   final String id;
+  var warned = false; // keeps track of if error message for overlapping time intervals should be displayed
 
   SchedulerController({@required this.field, @required this.id});
 
@@ -45,6 +47,7 @@ class SchedulerController extends GetxController {
   }
 
   void handleAddTimePress() {
+    this.warned = false;
     final index = timePickers.length;
     timePickers.add(TimeRange(
       fromTitle: Text('From', style: TextStyle(fontSize: 18)),
@@ -66,6 +69,7 @@ class SchedulerController extends GetxController {
   }
 
   void handleRemoveTimePress() {
+    this.warned = false;
     if (timePickers.length >= 1) {
       timePickers.removeLast();
     }
@@ -78,10 +82,30 @@ class SchedulerController extends GetxController {
   Function _getHandleTimeRangeCompleted({int index}) {
     return (TimeRangeResult range) {
       // Swap out the existing one
+      for (var  i = 0; i < index; i++) {
+        if (areOverlapping(range, timeRanges[i])) {
+          handleRemoveTimePress();
+          this.warned = true;
+          break;
+        }
+      }
       timeRanges.removeAt(index);
       timeRanges.insert(index, range);
     };
   }
+
+  bool areOverlapping(TimeRangeResult a, TimeRangeResult b) {
+    var startA = toDouble(a.start);
+    var endA = toDouble(a.end);
+    var startB = toDouble(b.start);
+    var endB = toDouble(b.end);
+    return max(startA, startB) < min(endA, endB);
+  }
+
+  double toDouble(TimeOfDay time) {
+    return time.hour + time.minute/60.0;
+  }
+
 }
 
 class Scheduler extends StatelessWidget {
@@ -113,8 +137,10 @@ class Scheduler extends StatelessWidget {
                       SizedBox(height: 10),
                       schedulerController.timePickers[index],
                       SizedBox(height: 10),
-                    ]);
+                    ],);
                   }),
+              Text(schedulerController.warned ? "Please enter time ranges that don't overlap" : "",
+                   style: TextStyle(color: Colors.red)),
               Row(
                 children: [
                   Expanded(
@@ -140,6 +166,7 @@ class Scheduler extends StatelessWidget {
           },
         );
       },
+      validator: FormBuilderValidators.required(context),
     );
   }
 }

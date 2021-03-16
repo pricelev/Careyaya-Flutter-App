@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class StepperController extends GetxController {
-  int activeStep = 3;
+  int activeStep = 0;
 
   void next() {
     activeStep++;

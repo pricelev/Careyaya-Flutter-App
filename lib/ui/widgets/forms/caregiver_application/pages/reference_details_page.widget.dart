@@ -13,10 +13,26 @@ class ReferenceDetailsPage extends StatelessWidget {
             filled: true,
             hintText: 'Reference Name',
           ),
-          validator: FormBuilderValidators.required(context),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(context),
+                (val){
+              if(val.contains('1') || val.contains('2')  || val.contains('3')  || val.contains('4')  || val.contains('5')  || val.contains('6')  || val.contains('7') ||
+                  val.contains('8') || val.contains('9') || val.contains('0') || val.contains('~') || val.contains('`') || val.contains('!') || val.contains('@') || val.contains('#') ||
+                  val.contains('%') || val.contains('^') || val.contains('&') || val.contains('*') || val.contains('(') || val.contains(')') || val.contains('-') || val.contains('_') ||
+                  val.contains('+') || val.contains('=') || val.contains('[') || val.contains(']') || val.contains('{') || val.contains('}') || val.contains('"') || val.contains(':') ||
+                  val.contains(';') || val.contains('<') || val.contains(',') || val.contains('>') || val.contains('?') || val.contains('/') || val.contains('|')){
+                return 'value contains special characters or letters';
+              }
+              return null;
+            }
+          ]),
         ),
         FormBuilderDropdown(
           name: 'reference1Relationship',
+          decoration: InputDecoration(
+            filled: true,
+            hintText: 'Select your relationship',
+          ),
           items: ['Employer', 'Personal']
               .map((relationship) => DropdownMenuItem(
             value: relationship,
@@ -53,7 +69,19 @@ class ReferenceDetailsPage extends StatelessWidget {
             filled: true,
             hintText: 'Reference Name',
           ),
-          validator: FormBuilderValidators.required(context),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(context),
+                (val){
+              if(val.contains('1') || val.contains('2')  || val.contains('3')  || val.contains('4')  || val.contains('5')  || val.contains('6')  || val.contains('7') ||
+                  val.contains('8') || val.contains('9') || val.contains('0') || val.contains('~') || val.contains('`') || val.contains('!') || val.contains('@') || val.contains('#') ||
+                  val.contains('%') || val.contains('^') || val.contains('&') || val.contains('*') || val.contains('(') || val.contains(')') || val.contains('-') || val.contains('_') ||
+                  val.contains('+') || val.contains('=') || val.contains('[') || val.contains(']') || val.contains('{') || val.contains('}') || val.contains('"') || val.contains(':') ||
+                  val.contains(';') || val.contains('<') || val.contains(',') || val.contains('>') || val.contains('?') || val.contains('/') || val.contains('|')){
+                return 'value contains special characters or letters';
+              }
+              return null;
+            }
+          ]),
         ),
         FormBuilderDropdown(
           name: 'reference2Relationship',

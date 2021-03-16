@@ -24,7 +24,6 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
             decoration: InputDecoration(
                 filled: true, hintText: "Enter you answer here")),
         FormBuilderChipsInput(
-          allowChipEditing: true,
           findSuggestions: (String query) => HOBBIES
               .where(
                   (hobby) => hobby.toLowerCase().contains(query.toLowerCase()))

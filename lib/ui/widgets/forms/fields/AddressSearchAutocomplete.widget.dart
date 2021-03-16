@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:careyaya/models/address.model.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +10,6 @@ const kGoogleApiKey = "AIzaSyDS8X0xoKfDxyqAi8lfPP-8mxq7M3Ke3sg";
 
 GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
 
-var fillAddress = 'address';
-
 class AddressSearchAutocompleteWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -21,9 +18,12 @@ class AddressSearchAutocompleteWidget extends StatelessWidget {
       child: FormBuilderField(
         name: 'address',
         builder: (FormFieldState<dynamic> field) {
+          print(field.value);
           return TextField(
             decoration: InputDecoration(
-              hintText: fillAddress,
+              hintText: field.value != null
+                  ? Address.fromJson(field.value).description
+                  : 'Address',
               filled: true,
             ),
             onTap: () async {
@@ -75,7 +75,6 @@ Future<void> selectPrediction(
       zip: zip,
     );
     final jsonAddress = address.toJson();
-    fillAddress = jsonAddress['line1'] + ', ' + jsonAddress['city'] + ', ' + jsonAddress['state'];
     field.didChange(jsonAddress);
   }
 }

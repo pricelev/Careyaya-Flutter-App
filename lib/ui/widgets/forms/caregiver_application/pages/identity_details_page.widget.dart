@@ -24,7 +24,12 @@ class IdentityDetailsPage extends StatelessWidget {
             filled: true,
             hintText: 'xxx-xx-xxxx',
           ),
-          validator: FormBuilderValidators.required(context),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(context),
+            FormBuilderValidators.numeric(context, errorText: 'Please do not use letters or special characters'),
+            FormBuilderValidators.minLength(context, 9, errorText: 'A SSN has 9 digits'),
+            FormBuilderValidators.maxLength(context, 9, errorText: 'A SSN has 9 digits'),
+          ]),
         ),
         FormBuilderTextField(
           name: 'driversLicenseNumber',
@@ -33,6 +38,12 @@ class IdentityDetailsPage extends StatelessWidget {
             filled: true,
             hintText: 'Drivers License Number',
           ),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(context),
+            FormBuilderValidators.numeric(context, errorText: 'Please do not use letters or special characters'),
+            FormBuilderValidators.minLength(context, 12, errorText: 'A NC drivers license number has 12 digits'),
+            FormBuilderValidators.maxLength(context, 12, errorText: 'A NC drivers license number has 12 digits'),
+          ]),
         )
       ]
     );

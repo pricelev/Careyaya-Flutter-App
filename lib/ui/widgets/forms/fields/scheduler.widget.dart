@@ -166,7 +166,6 @@ class Scheduler extends StatelessWidget {
           },
         );
       },
-      validator: FormBuilderValidators.required(context),
     );
   }
 }

@@ -46,7 +46,9 @@ final List<Step> steps = [
       child: FormStep(
         index: 0,
         content: PersonalDetailsPage(),
-        initialValues: {},
+        initialValues: {
+          'phoneNumber': '',
+        },
       ),
     ),
   ),
@@ -96,7 +98,10 @@ final List<Step> steps = [
         content: JoygiverProfileDetailsPage(),
         initialValues: {
           'introDescription': '',
-          'profilePic': null,
+          'isComfortableWithPets': false,
+          'hasTransportation': false,
+          'drives': false,
+          'isSmoker': false,
         },
       ),
       key: GlobalKey<FormBuilderState>(),
@@ -112,6 +117,7 @@ final List<Step> steps = [
           'tasks': <String>[],
           'certifications': <String>[],
           'preferredSexes': <String>[],
+          'covidHandlingMethods': <String>[],
           'maximumSessionDistance': 40,
         },
       ),
@@ -124,7 +130,16 @@ final List<Step> steps = [
       child: FormStep(
         index: 6,
         content: ReferenceDetailsPage(),
-        initialValues: {},
+        initialValues: {
+          'references.1.name': '',
+          'references.1.relationship': 'employer',
+          'references.1.phone': '',
+          'references.1.email': '',
+          'references.2.name': '',
+          'references.2.relationship': 'personal',
+          'references.2.phone': '',
+          'references.2.email': '',
+        },
       ),
       key: GlobalKey<FormBuilderState>(),
     ),

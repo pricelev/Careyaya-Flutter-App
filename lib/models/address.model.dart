@@ -23,7 +23,7 @@ class Address {
     @required this.latitude,
     @required this.city,
     @required this.line1,
-    this.line2,
+    this.line2 = '',
     @required this.placeId,
     @required this.zip,
   });

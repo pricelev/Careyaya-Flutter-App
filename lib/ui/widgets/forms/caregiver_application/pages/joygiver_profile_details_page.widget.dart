@@ -1,6 +1,5 @@
 import 'package:careyaya/constants/forms/hobbies.dart';
 import 'package:careyaya/constants/forms/languages.dart';
-import 'package:careyaya/ui/widgets/forms/fields/image_picker.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -14,15 +13,21 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
     return Column(
       children: [
         // need a way of adding a profile photo
-        ImagePickerWidget(),
+        // Removing image picker for now, will probably move to last step soon
+        // ImagePickerWidget(),
         Text(
             "In 2-3 sentences, introduce yourself to people viewing your profile"),
         FormBuilderTextField(
-            name: 'introDescription',
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-            decoration: InputDecoration(
-                filled: true, hintText: "Enter you answer here")),
+          name: 'introDescription',
+          keyboardType: TextInputType.multiline,
+          maxLines: null,
+          minLines: 4,
+          decoration: InputDecoration(
+            filled: true,
+            hintText: "Enter you answer here",
+          ),
+          validator: FormBuilderValidators.required(context),
+        ),
         FormBuilderChipsInput(
           findSuggestions: (String query) => HOBBIES
               .where(
@@ -57,42 +62,23 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
             onTap: () => state.selectSuggestion(lang),
           ),
           chipBuilder: (context, state, lang) => Chip(label: Text(lang)),
-          // .map((language) => DropdownMenuItem(
-          //       value: {
-          //         'englishName': language,
-          //       },
-          //       child: Text(language),
-          //     ))
-          // .toList(),
         ),
-
-        FormBuilderCheckboxGroup(
-          decoration: InputDecoration(
-              labelText: 'Please Select any of the following that apply'),
-          name: 'preferences',
-          options: [
-            {
-              'value': 'isComfortableWithPets',
-              'label': 'I am comfortable with pets',
-            },
-            {
-              'value': 'hasTransportation',
-              'label': 'I have transportation',
-            },
-            {
-              'value': 'drives',
-              'label': 'I am willing to drive the person receiving care',
-            },
-            {
-              'value': 'isSmoker',
-              'label': 'I am a smoker',
-            },
-          ]
-              .map((lang) => FormBuilderFieldOption(
-                    value: lang['value'],
-                    child: Text(lang['label']),
-                  ))
-              .toList(growable: false),
+        Text('Please select any of the following that apply.'),
+        FormBuilderCheckbox(
+          name: 'isComfortableWithPets',
+          title: Text('I am comfortable with pets'),
+        ),
+        FormBuilderCheckbox(
+          name: 'hasTransportation',
+          title: Text('I have transportation'),
+        ),
+        FormBuilderCheckbox(
+          name: 'drives',
+          title: Text('I am willing to drive the person receiving care'),
+        ),
+        FormBuilderCheckbox(
+          name: 'isSmoker',
+          title: Text('I am a smoker'),
         ),
         Text(
             "What is the most challenging situation you've been in as a caregiver? How did you handle that?"),
@@ -100,6 +86,8 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
             name: 'interview.challengingSituation',
             keyboardType: TextInputType.multiline,
             maxLines: null,
+            minLines: 4,
+            validator: FormBuilderValidators.required(context),
             decoration: InputDecoration(
                 filled: true, hintText: "Enter your answer here")),
         Text(
@@ -108,6 +96,8 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
             name: 'interview.lovedOneFalls',
             keyboardType: TextInputType.multiline,
             maxLines: null,
+            minLines: 4,
+            validator: FormBuilderValidators.required(context),
             decoration: InputDecoration(
                 filled: true, hintText: "Enter your answer here")),
         Text(
@@ -116,6 +106,8 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
             name: 'interview.hiringReason',
             keyboardType: TextInputType.multiline,
             maxLines: null,
+            minLines: 4,
+            validator: FormBuilderValidators.required(context),
             decoration: InputDecoration(
                 filled: true, hintText: "Enter your answer here")),
       ],

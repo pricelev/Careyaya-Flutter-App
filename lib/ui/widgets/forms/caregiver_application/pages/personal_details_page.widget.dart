@@ -1,26 +1,60 @@
-import 'package:careyaya/ui/widgets/forms/fields/AddressSearchAutocomplete.widget.dart';
-import 'package:careyaya/ui/widgets/forms/fields/email_field.widget.dart';
+import 'package:careyaya/ui/widgets/forms/fields/address_search_autocomplete.widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class PersonalDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       FormBuilderTextField(
-        name: 'firstName',
+        name: 'name.first',
         decoration: InputDecoration(
           filled: true,
-          hintText: 'First name',
+          hintText: 'Legal first name',
         ),
-        validator:  FormBuilderValidators.compose([
+        validator: FormBuilderValidators.compose([
           FormBuilderValidators.required(context),
-              (val){
-            if(val.contains('1') || val.contains('2')  || val.contains('3')  || val.contains('4')  || val.contains('5')  || val.contains('6')  || val.contains('7') ||
-                val.contains('8') || val.contains('9') || val.contains('0') || val.contains('~') || val.contains('`') || val.contains('!') || val.contains('@') || val.contains('#') ||
-                val.contains('%') || val.contains('^') || val.contains('&') || val.contains('*') || val.contains('(') || val.contains(')') || val.contains('-') || val.contains('_') ||
-                val.contains('+') || val.contains('=') || val.contains('[') || val.contains(']') || val.contains('{') || val.contains('}') || val.contains('"') || val.contains(':') ||
-                val.contains(';') || val.contains('<') || val.contains(',') || val.contains('>') || val.contains('?') || val.contains('/') || val.contains('|')){
+          (val) {
+            if (val.contains('1') ||
+                val.contains('2') ||
+                val.contains('3') ||
+                val.contains('4') ||
+                val.contains('5') ||
+                val.contains('6') ||
+                val.contains('7') ||
+                val.contains('8') ||
+                val.contains('9') ||
+                val.contains('0') ||
+                val.contains('~') ||
+                val.contains('`') ||
+                val.contains('!') ||
+                val.contains('@') ||
+                val.contains('#') ||
+                val.contains('%') ||
+                val.contains('^') ||
+                val.contains('&') ||
+                val.contains('*') ||
+                val.contains('(') ||
+                val.contains(')') ||
+                val.contains('-') ||
+                val.contains('_') ||
+                val.contains('+') ||
+                val.contains('=') ||
+                val.contains('[') ||
+                val.contains(']') ||
+                val.contains('{') ||
+                val.contains('}') ||
+                val.contains('"') ||
+                val.contains(':') ||
+                val.contains(';') ||
+                val.contains('<') ||
+                val.contains(',') ||
+                val.contains('>') ||
+                val.contains('?') ||
+                val.contains('/') ||
+                val.contains('|')) {
               return 'value contains special characters or letters';
             }
             return null;
@@ -28,25 +62,57 @@ class PersonalDetailsPage extends StatelessWidget {
         ]),
       ),
       FormBuilderTextField(
-        name: 'lastName',
+        name: 'name.last',
         decoration: InputDecoration(
           filled: true,
-          hintText: 'Last name',
+          hintText: 'Legal last name',
         ),
         validator: FormBuilderValidators.compose([
           FormBuilderValidators.required(context),
-          (val){
-            if(val.contains('1') || val.contains('2')  || val.contains('3')  || val.contains('4')  || val.contains('5')  || val.contains('6')  || val.contains('7') ||
-               val.contains('8') || val.contains('9') || val.contains('0') || val.contains('~') || val.contains('`') || val.contains('!') || val.contains('@') || val.contains('#') ||
-                val.contains('%') || val.contains('^') || val.contains('&') || val.contains('*') || val.contains('(') || val.contains(')') || val.contains('-') || val.contains('_') ||
-                val.contains('+') || val.contains('=') || val.contains('[') || val.contains(']') || val.contains('{') || val.contains('}') || val.contains('"') || val.contains(':') ||
-                val.contains(';') || val.contains('<') || val.contains(',') || val.contains('>') || val.contains('?') || val.contains('/') || val.contains('|')){
+          (val) {
+            if (val.contains('1') ||
+                val.contains('2') ||
+                val.contains('3') ||
+                val.contains('4') ||
+                val.contains('5') ||
+                val.contains('6') ||
+                val.contains('7') ||
+                val.contains('8') ||
+                val.contains('9') ||
+                val.contains('0') ||
+                val.contains('~') ||
+                val.contains('`') ||
+                val.contains('!') ||
+                val.contains('@') ||
+                val.contains('#') ||
+                val.contains('%') ||
+                val.contains('^') ||
+                val.contains('&') ||
+                val.contains('*') ||
+                val.contains('(') ||
+                val.contains(')') ||
+                val.contains('-') ||
+                val.contains('_') ||
+                val.contains('+') ||
+                val.contains('=') ||
+                val.contains('[') ||
+                val.contains(']') ||
+                val.contains('{') ||
+                val.contains('}') ||
+                val.contains('"') ||
+                val.contains(':') ||
+                val.contains(';') ||
+                val.contains('<') ||
+                val.contains(',') ||
+                val.contains('>') ||
+                val.contains('?') ||
+                val.contains('/') ||
+                val.contains('|')) {
               return 'value contains special characters or letters';
             }
             return null;
           }
         ]),
-        
       ),
       FormBuilderRadioGroup(
         decoration: InputDecoration(
@@ -54,31 +120,52 @@ class PersonalDetailsPage extends StatelessWidget {
         ),
         name: 'sex',
         options: [
-          'Male',
-          'Female',
+          {
+            'label': 'Female',
+            'value': 'F',
+          },
+          {
+            'label': 'Male',
+            'value': 'M',
+          }
         ]
-            .map((lang) => FormBuilderFieldOption(
-                  value: lang[0],
-                  child: Text(lang),
+            .map((sex) => FormBuilderFieldOption(
+                  value: sex['value'],
+                  child: Text(sex['label']),
                 ))
             .toList(growable: false),
         validator: FormBuilderValidators.required(context),
       ),
-      EmailField(),
-      AddressSearchAutocompleteWidget(),
+      FormBuilderTextField(
+        name: 'email',
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+          filled: true,
+          hintText: 'Email',
+        ),
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(context),
+          FormBuilderValidators.email(context),
+        ]),
+      ),
       // Need number formatter / mask
       FormBuilderTextField(
         name: 'phoneNumber',
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.phone,
         decoration: InputDecoration(
           filled: true,
           hintText: 'Phone number',
         ),
+        inputFormatters: [
+          MaskTextInputFormatter(mask: '+1 (###) ### ####'),
+        ],
+        valueTransformer: (String value) =>
+            value.replaceAll(RegExp("\\D"), "").substring(1),
+        // onChanged: (String value) => {phoneController.text = value},
         validator: FormBuilderValidators.compose([
           FormBuilderValidators.required(context),
-          FormBuilderValidators.numeric(context, errorText: 'Please do not use letters or special characters'),
-          FormBuilderValidators.minLength(context, 10, errorText: 'Please use area code and seven digit phone number'),
-          FormBuilderValidators.maxLength(context, 10, errorText: 'Please use area code and seven digit phone number'),
+          FormBuilderValidators.minLength(context, 17,
+              errorText: 'Please use area code and seven digit phone number'),
         ]),
       ),
       FormBuilderDropdown(
@@ -110,6 +197,14 @@ class PersonalDetailsPage extends StatelessWidget {
         decoration: InputDecoration(
           labelText: 'Referral Method',
           filled: true,
+        ),
+      ),
+      AddressSearchAutocompleteWidget(),
+      FormBuilderTextField(
+        name: 'address.line2',
+        decoration: InputDecoration(
+          filled: true,
+          hintText: 'Address Line 2 / Apt #',
         ),
       ),
     ]);

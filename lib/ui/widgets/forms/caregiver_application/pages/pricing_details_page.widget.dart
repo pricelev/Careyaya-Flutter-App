@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class PricingDetailsPage extends StatelessWidget {
   @override
@@ -37,10 +38,14 @@ class PricingDetailsPage extends StatelessWidget {
             filled: true,
             hintText: 'Hourly Rate',
           ),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.numeric(context),
-              FormBuilderValidators.required(context)
-            ]),
+          inputFormatters: [
+            MaskTextInputFormatter(mask: '\$##.##'),
+          ],
+          valueTransformer: (String value) =>
+              double.parse(value.replaceAll(RegExp("\\D"), "")),
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(context),
+          ]),
         ),
       ],
     );

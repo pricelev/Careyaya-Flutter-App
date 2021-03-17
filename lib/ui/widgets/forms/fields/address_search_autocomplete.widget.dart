@@ -16,15 +16,21 @@ class AddressSearchAutocompleteWidget extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       child: FormBuilderField(
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(context),
+        ]),
         name: 'address',
         builder: (FormFieldState<dynamic> field) {
-          print(field.value);
+          final addressDescription = field.value != null
+              ? Address.fromJson(field.value).description
+              : '';
+
           return TextField(
+            controller: TextEditingController(text: addressDescription),
             decoration: InputDecoration(
-              hintText: field.value != null
-                  ? Address.fromJson(field.value).description
-                  : 'Address',
+              hintText: 'Address',
               filled: true,
+              errorText: field.errorText,
             ),
             onTap: () async {
               // show input autocomplete with selected mode

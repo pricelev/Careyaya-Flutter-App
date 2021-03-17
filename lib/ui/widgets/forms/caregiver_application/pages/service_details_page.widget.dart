@@ -10,36 +10,111 @@ class ServiceDetailsPage extends StatelessWidget {
           'tasks',
           "i. Please check all of the following tasks you're able to help with.",
           [
-            'Companionship',
-            'Listening to music with the LovedOne',
-            'Helping the LovedOne check email and send texts',
-            'Meal preparation',
-            'Groceries & shopping',
-            'Housekeeping',
-            'Dressing',
-            'Oral Hygiene',
-            'Medication reminders',
-            'Helping the LovedOne stay safe (i.e. fall prevention)'
+            CheckboxFieldOption(
+              value: 'companionship',
+              label: 'Companionship',
+            ),
+            CheckboxFieldOption(
+              value: 'music',
+              label: 'Listening to music with the LovedOne',
+            ),
+            CheckboxFieldOption(
+              value: 'tech',
+              label: 'Helping the LovedOne check email and send texts',
+            ),
+            CheckboxFieldOption(
+              value: 'meals',
+              label: 'Meal preparation',
+            ),
+            CheckboxFieldOption(
+              value: 'groceries',
+              label: 'Groceries & shopping',
+            ),
+            CheckboxFieldOption(
+              value: 'housekeeping',
+              label: 'Housekeeping',
+            ),
+            CheckboxFieldOption(
+              value: 'dressing',
+              label: 'Dressing',
+            ),
+            CheckboxFieldOption(
+              value: 'oral',
+              label: 'Oral Hygiene',
+            ),
+            CheckboxFieldOption(
+              value: 'medications',
+              label: 'Medication reminders',
+            ),
+            CheckboxFieldOption(
+                value: 'safety',
+                label: 'Helping the LovedOne stay safe (i.e. fall prevention)'),
           ]),
       CheckboxField(
-          'certifications',
+          'skills',
           "ii. Which of the following do you have prior experience or training with?",
           [
-            'MedTech',
-            'CNA',
-            'PCA',
-            'HHA',
-            'ACA',
-            'CPR',
-            'Other',
+            CheckboxFieldOption(
+              value: 'mobility',
+              label: 'Mobility',
+            ),
+            CheckboxFieldOption(
+              value: 'toileting',
+              label: 'Toileting',
+            ),
+            CheckboxFieldOption(
+              value: 'bathing',
+              label: 'Bathing',
+            ),
+            CheckboxFieldOption(
+              value: 'feeding',
+              label: 'Feeding',
+            ),
           ]),
+      CheckboxField(
+          'certifications', "ii. Please select any certifications you have.", [
+        CheckboxFieldOption(
+          value: 'MedTech',
+          label: 'MedTech',
+        ),
+        CheckboxFieldOption(
+          value: 'CNA',
+          label: 'CNA',
+        ),
+        CheckboxFieldOption(
+          value: 'PCA',
+          label: 'PCA',
+        ),
+        CheckboxFieldOption(
+          value: 'HHA',
+          label: 'HHA',
+        ),
+        CheckboxFieldOption(
+          value: 'ACA',
+          label: 'ACA',
+        ),
+        CheckboxFieldOption(
+          value: 'CPR',
+          label: 'CPR',
+        ),
+        CheckboxFieldOption(
+          value: 'Other',
+          label: 'Other',
+        ),
+      ]),
       // Need an upload field
       CheckboxField(
         'preferredSexes',
         "iii. Which sexes are you willing to care for?",
         [
-          'Male',
-          'Female',
+          CheckboxFieldOption(
+            value: 'M',
+            label: 'Male',
+          ),
+          CheckboxFieldOption(
+            value: 'F',
+            label: 'Female',
+          ),
         ],
       ),
       Text(
@@ -58,13 +133,36 @@ class ServiceDetailsPage extends StatelessWidget {
           'covidHandlingMethods',
           "vi. Please select all of the following ways you’re handling COVID risks.",
           [
-            'I wear a mask when in public.',
-            'I wash my hands frequently.',
-            'I social distance from others.',
-            'I limit interactions with people outside my household.',
-            'I get tested once a week, and can upload results as needed.',
-            'I am vaccinated.',
-            'I have had a positive COVID test more than 14 days ago, within the past 3 months.',
+            CheckboxFieldOption(
+              value: 'mask',
+              label: 'I wear a mask when in public.',
+            ),
+            CheckboxFieldOption(
+              value: 'hands',
+              label: 'I wash my hands frequently.',
+            ),
+            CheckboxFieldOption(
+              value: 'distance',
+              label: 'I social distance from others.',
+            ),
+            CheckboxFieldOption(
+              value: 'limit',
+              label: 'I limit interactions with people outside my household.',
+            ),
+            CheckboxFieldOption(
+              value: 'tests',
+              label:
+                  'I get tested once a week, and can upload results as needed.',
+            ),
+            CheckboxFieldOption(
+              value: 'vaccination',
+              label: 'I am vaccinated.',
+            ),
+            CheckboxFieldOption(
+              value: 'antibodies',
+              label:
+                  'I have had a positive COVID test more than 14 days ago, within the past 3 months.',
+            ),
           ]),
     ]);
   }

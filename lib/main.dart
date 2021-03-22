@@ -48,7 +48,7 @@ class CaregiversApp extends StatelessWidget {
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
       themeMode: ThemeMode.light,
-      initialRoute: '/application',
+      initialRoute: '/sessions',
       getPages: AppRoutes.routes,
       defaultTransition: Transition.noTransition,
     );

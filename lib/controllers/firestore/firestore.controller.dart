@@ -70,8 +70,12 @@ class FirestoreController {
         .collection(SESSIONS_COLLECTION)
         .doc(sessionId)
         .snapshots()
-        .map((snapshot) =>
-            snapshot != null ? SessionModel.fromJson(snapshot.data()) : null);
+        .map((snapshot) => snapshot != null
+            ? SessionModel.fromJson({
+                ...snapshot.data(),
+                'id': sessionId,
+              })
+            : null);
     return sessionStream;
   }
 

@@ -8,6 +8,7 @@ part of 'session.model.dart';
 
 SessionModel _$SessionModelFromJson(Map<String, dynamic> json) {
   return SessionModel(
+    id: json['id'] as String,
     joygiverId: json['joygiverId'] as String,
     advocateId: json['advocateId'] as String,
     lovedOneId: json['lovedOneId'] as String,
@@ -53,6 +54,7 @@ SessionModel _$SessionModelFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$SessionModelToJson(SessionModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'joygiverId': instance.joygiverId,
       'advocateId': instance.advocateId,
       'lovedOneId': instance.lovedOneId,

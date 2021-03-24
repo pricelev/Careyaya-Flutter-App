@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 part 'address.model.g.dart';
 
 @JsonSerializable()
-class Address {
+class AddressModel {
   final String description;
   final String city;
   final num latitude;
@@ -16,7 +16,7 @@ class Address {
   final String country = 'US';
   final String zip;
 
-  Address({
+  AddressModel({
     @required this.description,
     @required this.state,
     @required this.longitude,
@@ -27,7 +27,7 @@ class Address {
     @required this.placeId,
     @required this.zip,
   });
-  factory Address.fromJson(Map<String, dynamic> json) =>
-      _$AddressFromJson(json);
-  Map<String, dynamic> toJson() => _$AddressToJson(this);
+  factory AddressModel.fromJson(Map<String, dynamic> json) =>
+      _$AddressModelFromJson(json);
+  Map<String, dynamic> toJson() => _$AddressModelToJson(this);
 }

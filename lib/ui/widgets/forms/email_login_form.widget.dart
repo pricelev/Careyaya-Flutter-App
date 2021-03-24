@@ -4,6 +4,7 @@ import 'package:careyaya/ui/widgets/forms/fields/email_field.widget.dart';
 import 'package:careyaya/ui/widgets/forms/fields/password_field.widget.dart';
 import 'package:careyaya/ui/widgets/forms/form.widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 // Find a way to have these values autocomplete?
 class EmailLoginValues extends FormValuesInterface {
@@ -25,10 +26,10 @@ class EmailLoginForm extends StatelessWidget {
           'email': '',
           'password': '',
         },
+        formKey: GlobalKey<FormBuilderState>(),
         onSubmit: (formKey, values) async {
           // Transform values into typed class
           final loginValues = EmailLoginValues.fromJson(values);
-
           if (formKey.currentState.saveAndValidate()) {
             final email = loginValues.email;
             final password = loginValues.password;

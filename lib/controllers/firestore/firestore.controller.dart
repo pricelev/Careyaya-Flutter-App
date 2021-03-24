@@ -2,6 +2,7 @@ import 'package:careyaya/constants/firestore.dart';
 import 'package:careyaya/controllers/auth.controller.dart';
 import 'package:careyaya/models/chats/chat.model.dart';
 import 'package:careyaya/models/chats/chat_message.model.dart';
+import 'package:careyaya/models/sessions/session.model.dart';
 import 'package:careyaya/models/user.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,11 @@ class FirestoreController {
   Future<UserModel> getFirestoreUser(String uid) async {
     final user = await _db.collection(USERS_COLLECTION).doc(uid).get();
     return UserModel.fromMap(user.data(), uid);
+  }
+
+  Future<UserModel> getAdvocateProfile(String uid) async {
+    final advocate = await _db.collection(ADVOCATES_COLLECTION).doc(uid).get();
+    return UserModel.fromMap(advocate.data(), uid);
   }
 
   Future<void> sendChatMessage(String chatId, ChatMessageModel message) async {
@@ -57,6 +63,16 @@ class FirestoreController {
       });
       return chatList;
     });
+  }
+
+  Stream<SessionModel> sessionStream({@required String sessionId}) {
+    final sessionStream = _db
+        .collection(SESSIONS_COLLECTION)
+        .doc(sessionId)
+        .snapshots()
+        .map((snapshot) =>
+            snapshot != null ? SessionModel.fromJson(snapshot.data()) : null);
+    return sessionStream;
   }
 
   //

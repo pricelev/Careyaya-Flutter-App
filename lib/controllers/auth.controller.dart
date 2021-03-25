@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:careyaya/constants/firestore.dart';
 import 'package:careyaya/constants/routes.dart';
 import 'package:careyaya/localizations.dart';
+import 'package:careyaya/models/joygivers/joygiver_profile.model.dart';
 import 'package:careyaya/models/user.model.dart';
 import 'package:careyaya/ui/screens/auth/auth.screen.dart';
 import 'package:careyaya/ui/screens/session_list.screen.dart';
@@ -22,6 +24,8 @@ class AuthController extends GetxController {
   // Streams of firebase Auth user and firestore user
   Rx<User> firebaseUser = Rx<User>();
   Rx<UserModel> firestoreUser = Rx<UserModel>();
+  Rx<JoygiverProfileModel> firestoreJoygiverProfile =
+      Rx<JoygiverProfileModel>();
 
   // Firebase user one-time fetch
   Future<User> get getUser async => _auth.currentUser;
@@ -33,6 +37,8 @@ class AuthController extends GetxController {
 
   // Get profile
   UserModel get getProfile => firestoreUser.value;
+  // Get Joygiver Profile
+  JoygiverProfileModel get getJoygiverProfile => firestoreJoygiverProfile.value;
 
   @override
   // ignore: must_call_super
@@ -51,6 +57,7 @@ class AuthController extends GetxController {
     // Get user data from firestore
     if (_firebaseUser != null && _firebaseUser?.uid != null) {
       firestoreUser.bindStream(streamFirestoreUser());
+      firestoreJoygiverProfile.bindStream(streamFirestoreJoygiver());
     }
 
     if (_firebaseUser == null) {
@@ -63,9 +70,25 @@ class AuthController extends GetxController {
   //Streams the firestore user from the firestore collection
   Stream<UserModel> streamFirestoreUser() {
     if (firebaseUser?.value?.uid != null) {
-      return _db.doc('/users/${firebaseUser.value.uid}').snapshots().map(
-          (snapshot) => snapshot != null
+      return _db
+          .doc('/$USERS_COLLECTION/${firebaseUser.value.uid}')
+          .snapshots()
+          .map((snapshot) => snapshot != null
               ? UserModel.fromMap(snapshot.data(), firebaseUser.value.uid)
+              : null);
+    }
+
+    return null;
+  }
+
+  //Streams the firestore joygiver profile from the firestore collection
+  Stream<JoygiverProfileModel> streamFirestoreJoygiver() {
+    if (firebaseUser?.value?.uid != null) {
+      return _db
+          .doc('/$JOYGIVERS_COLLECTION/${firebaseUser.value.uid}')
+          .snapshots()
+          .map((snapshot) => snapshot != null
+              ? JoygiverProfileModel(id: snapshot.id, values: snapshot.data())
               : null);
     }
 

@@ -1,5 +1,7 @@
 import 'package:careyaya/controllers/auth.controller.dart';
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
+import 'package:careyaya/models/advocates/advocate_profile.model.dart';
+import 'package:careyaya/models/joygivers/joygiver_profile.model.dart';
 import 'package:careyaya/models/sessions/session.model.dart';
 import 'package:careyaya/models/user.model.dart';
 import 'package:get/get.dart';
@@ -10,10 +12,10 @@ import 'package:meta/meta.dart';
 
 class SessionController extends GetxController {
   final String sessionId;
-  UserModel myUserProfile;
-  Rx<UserModel> advocateProfile = Rx<UserModel>();
-
-  Rx<SessionModel> firestoreSession = Rx<SessionModel>();
+  SessionModel sessionModel;
+  Rx<JoygiverProfileModel> joygiverProfile;
+  Rx<AdvocateProfileModel> advocateProfile;
+  Rx<SessionModel> firestoreSession;
 
   SessionModel get session => firestoreSession.value;
 
@@ -22,9 +24,10 @@ class SessionController extends GetxController {
   @override
   // ignore: must_call_super
   void onInit() async {
-    final sessionStream =
-        FirestoreController.to.sessionStream(sessionId: this.sessionId);
-    // ever(firestoreSession, getOtherUserProfile);
+    sessionModel = SessionModel(id: sessionId);
+    final Stream<SessionModel> sessionStream = sessionModel.reference
+        .snapshots()
+        .map((snap) => SessionModel(id: snap.id, values: snap.data()));
     once(firestoreSession, getAdvocateProfile);
     firestoreSession.bindStream(sessionStream);
     myUserProfile = AuthController.to.getProfile;

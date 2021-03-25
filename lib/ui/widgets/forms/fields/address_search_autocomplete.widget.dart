@@ -22,7 +22,7 @@ class AddressSearchAutocompleteWidget extends StatelessWidget {
         name: 'address',
         builder: (FormFieldState<dynamic> field) {
           final addressDescription = field.value != null
-              ? AddressModel.fromJson(field.value).description
+              ? AddressModel(values: field.value).description
               : '';
 
           return TextField(
@@ -80,7 +80,7 @@ Future<void> selectPrediction(
       placeId: placeId,
       zip: zip,
     );
-    final jsonAddress = address.toJson();
+    final jsonAddress = address.toData();
     field.didChange(jsonAddress);
   }
 }

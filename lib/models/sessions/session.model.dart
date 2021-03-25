@@ -1,134 +1,96 @@
 import 'package:careyaya/models/address.model.dart';
-import 'package:careyaya/utils/firestore_timestamp_serialize.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:flamingo/flamingo.dart';
+import 'package:flamingo_annotation/flamingo_annotation.dart';
 
-part 'session.model.g.dart';
+part 'session.model.flamingo.dart';
 
-@JsonSerializable()
-class SessionModel {
-  final String id;
-  final String joygiverId;
-  final String advocateId;
-  final String lovedOneId;
-  final AddressModel address;
-  final num distance;
-  final List<num> timeSlots;
-  @JsonKey(
-    fromJson: firestoreTimestampFromJson,
-    toJson: firestoreTimestampToJson,
-  )
-  final Timestamp startTimestamp;
-  @JsonKey(
-    fromJson: firestoreTimestampFromJson,
-    toJson: firestoreTimestampToJson,
-  )
-  final Timestamp endTimestamp;
-  final num hourlyRate;
-  final num hoursCount;
-  final num totalCost;
+class SessionModel extends Document<SessionModel> {
+  SessionModel({
+    String id,
+    DocumentSnapshot snapshot,
+    Map<String, dynamic> values,
+  }) : super(id: id, snapshot: snapshot, values: values);
+
+  @Field()
+  String joygiverId;
+  @Field()
+  String advocateId;
+  @Field()
+  String lovedOneId;
+  @ModelField()
+  AddressModel address;
+  @Field()
+  num distance;
+  @Field()
+  List<num> timeSlots;
+  @Field()
+  Timestamp startTimestamp;
+  @Field()
+  Timestamp endTimestamp;
+  @Field()
+  num hourlyRate;
+  @Field()
+  num hoursCount;
+  @Field()
+  num totalCost;
   // Markers
-  final String createdBy;
-  final bool accepted;
-  @JsonKey(
-    fromJson: firestoreTimestampFromJson,
-    toJson: firestoreTimestampToJson,
-  )
-  final Timestamp acceptedAt;
-  final bool rejected;
-  @JsonKey(
-    fromJson: firestoreTimestampFromJson,
-    toJson: firestoreTimestampToJson,
-  )
-  final Timestamp rejectedAt;
-  final bool completed;
-  @JsonKey(
-    fromJson: firestoreTimestampFromJson,
-    toJson: firestoreTimestampToJson,
-  )
-  final Timestamp completedAt;
-  final bool canceled;
-  @JsonKey(
-    fromJson: firestoreTimestampFromJson,
-    toJson: firestoreTimestampToJson,
-  )
-  final Timestamp canceledAt;
-  final String canceledBy;
-  final bool reviewedByAdvocate;
-  @JsonKey(
-    fromJson: firestoreTimestampFromJson,
-    toJson: firestoreTimestampToJson,
-  )
-  final Timestamp reviewedByAdvocateAt;
-  final bool reviewedByJoygiver;
-  @JsonKey(
-    fromJson: firestoreTimestampFromJson,
-    toJson: firestoreTimestampToJson,
-  )
-  final Timestamp reviewedByJoygiverAt;
-  final bool disputed;
-  @JsonKey(
-    fromJson: firestoreTimestampFromJson,
-    toJson: firestoreTimestampToJson,
-  )
-  final Timestamp disputedAt;
-  @JsonKey(
-    fromJson: firestoreTimestampFromJson,
-    toJson: firestoreTimestampToJson,
-  )
-  final Timestamp expiresAt;
-  final bool expired;
+  @Field()
+  String createdBy;
+  @Field()
+  bool accepted;
+  @Field()
+  Timestamp acceptedAt;
+  @Field()
+  bool rejected;
+  @Field()
+  Timestamp rejectedAt;
+  @Field()
+  bool completed;
+  @Field()
+  Timestamp completedAt;
+  @Field()
+  bool canceled;
+  @Field()
+  Timestamp canceledAt;
+  @Field()
+  String canceledBy;
+  @Field()
+  bool reviewedByAdvocate;
+  @Field()
+  Timestamp reviewedByAdvocateAt;
+  @Field()
+  bool reviewedByJoygiver;
+  @Field()
+  Timestamp reviewedByJoygiverAt;
+  @Field()
+  bool disputed;
+  @Field()
+  Timestamp disputedAt;
+  @Field()
+  Timestamp expiresAt;
+  @Field()
+  bool expired;
   // Stripe Data
-  final String stripeCustomerId;
-  final bool stripePaymentIntentHoldCaptured;
-  final String stripeAccountId;
-  final String stripePaymentIntentId;
-  final String stripePaymentMethodId;
-  final String stripeTransferId;
+  @Field()
+  String stripeCustomerId;
+  @Field()
+  bool stripePaymentIntentHoldCaptured;
+  @Field()
+  String stripeAccountId;
+  @Field()
+  String stripePaymentIntentId;
+  @Field()
+  String stripePaymentMethodId;
+  @Field()
+  String stripeTransferId;
   // Duplicated Data (Not currently in use)
-  // final Map<String, dynamic> joygiverData;
-  // final Map<String, dynamic> advocateData;
-  // final Map<String, dynamic> lovedOneData;
+  // Map<String, dynamic> joygiverData;
+  // Map<String, dynamic> advocateData;
+  // Map<String, dynamic> lovedOneData;
 
-  SessionModel(
-      {this.id,
-      this.joygiverId,
-      this.advocateId,
-      this.lovedOneId,
-      this.address,
-      this.distance,
-      this.timeSlots,
-      this.startTimestamp,
-      this.endTimestamp,
-      this.hourlyRate,
-      this.hoursCount,
-      this.totalCost,
-      this.createdBy,
-      this.accepted,
-      this.acceptedAt,
-      this.rejected,
-      this.rejectedAt,
-      this.completed,
-      this.completedAt,
-      this.canceled,
-      this.canceledAt,
-      this.canceledBy,
-      this.reviewedByAdvocate,
-      this.reviewedByAdvocateAt,
-      this.reviewedByJoygiver,
-      this.reviewedByJoygiverAt,
-      this.disputed,
-      this.disputedAt,
-      this.expiresAt,
-      this.expired,
-      this.stripeCustomerId,
-      this.stripePaymentIntentHoldCaptured,
-      this.stripeAccountId,
-      this.stripePaymentIntentId,
-      this.stripePaymentMethodId,
-      this.stripeTransferId});
+  @override
+  Map<String, dynamic> toData() => _$toData(this);
 
-  factory SessionModel.fromJson(Map<String, dynamic> json) =>
-      _$SessionModelFromJson(json);
-  Map<String, dynamic> toJson() => _$SessionModelToJson(this);
+  @override
+  void fromData(Map<String, dynamic> data) => _$fromData(this, data);
 }

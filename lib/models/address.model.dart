@@ -1,33 +1,46 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
+import 'package:flamingo/flamingo.dart';
+import 'package:flamingo_annotation/flamingo_annotation.dart';
 
-part 'address.model.g.dart';
+part 'address.model.flamingo.dart';
 
-@JsonSerializable()
-class AddressModel {
-  final String description;
-  final String city;
-  final num latitude;
-  final num longitude;
-  final String line1;
-  final String line2;
-  final String placeId;
-  final String state;
-  final String country = 'US';
-  final String zip;
-
+class AddressModel extends Model {
   AddressModel({
-    @required this.description,
-    @required this.state,
-    @required this.longitude,
-    @required this.latitude,
-    @required this.city,
-    @required this.line1,
+    this.description,
+    this.state,
+    this.longitude,
+    this.latitude,
+    this.city,
+    this.line1,
     this.line2 = '',
-    @required this.placeId,
-    @required this.zip,
-  });
-  factory AddressModel.fromJson(Map<String, dynamic> json) =>
-      _$AddressModelFromJson(json);
-  Map<String, dynamic> toJson() => _$AddressModelToJson(this);
+    this.placeId,
+    this.zip,
+    Map<String, dynamic> values,
+  }) : super(values: values);
+
+  @Field()
+  String description;
+  @Field()
+  String city;
+  @Field()
+  num latitude;
+  @Field()
+  num longitude;
+  @Field()
+  String line1;
+  @Field()
+  String line2;
+  @Field()
+  String placeId;
+  @Field()
+  String state;
+  @Field()
+  String country = 'US';
+  @Field()
+  String zip;
+
+  @override
+  Map<String, dynamic> toData() => _$toData(this);
+
+  @override
+  void fromData(Map<String, dynamic> data) => _$fromData(this, data);
 }

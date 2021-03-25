@@ -5,6 +5,7 @@ import 'package:careyaya/models/chats/chat_message.model.dart';
 import 'package:careyaya/models/sessions/session.model.dart';
 import 'package:careyaya/models/user.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flamingo/flamingo.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
@@ -15,6 +16,7 @@ class FirestoreController {
   // AppLocalizations_Labels labels;
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final DocumentAccessor _da = DocumentAccessor();
 
   // FirestoreController({@required this.uid})
   //     : assert(uid != null, 'Cannot create FirestoreDatabase with null uid');
@@ -65,17 +67,16 @@ class FirestoreController {
     });
   }
 
+  Future<SessionModel> getSession({@required String sessionId}) async {
+    final session = SessionModel(id: sessionId);
+    final sessionData = await _da.load<SessionModel>(session);
+  }
+
   Stream<SessionModel> sessionStream({@required String sessionId}) {
-    final sessionStream = _db
-        .collection(SESSIONS_COLLECTION)
-        .doc(sessionId)
+    final session = SessionModel(id: sessionId);
+    final Stream<SessionModel> sessionStream = session.reference
         .snapshots()
-        .map((snapshot) => snapshot != null
-            ? SessionModel.fromJson({
-                ...snapshot.data(),
-                'id': sessionId,
-              })
-            : null);
+        .listen((snap) => SessionModel(id: snap.id, values: snap.data()));
     return sessionStream;
   }
 

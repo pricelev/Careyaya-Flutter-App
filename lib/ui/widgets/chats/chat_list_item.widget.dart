@@ -1,6 +1,6 @@
+import 'package:careyaya/constants/routes.dart';
 import 'package:careyaya/controllers/firestore/user.controller.dart';
 import 'package:careyaya/models/chats/chat.model.dart';
-import 'package:careyaya/ui/screens/chat.screen.dart';
 import 'package:careyaya/ui/widgets/chats/chat_list_item_skeleton.widget.dart';
 import 'package:dash_chat/dash_chat.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +19,12 @@ class ChatListItem extends StatelessWidget {
     final otherUserId = ChatModel.getOtherUserId(this.chat);
 
     void _onTap() {
-      Get.to(ChatScreen(),
-          arguments: {
-            'chatId': this.chat.reference.id,
-          },
-          transition: Transition.rightToLeft);
+      Get.toNamed(
+        CHAT_ROUTE,
+        arguments: {
+          'chatId': this.chat.reference.id,
+        },
+      );
     }
 
     return GetBuilder<UserController>(

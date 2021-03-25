@@ -414,6 +414,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.11"
+  flamingo:
+    dependency: "direct main"
+    description:
+      name: flamingo
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.15.3"
+  flamingo_annotation:
+    dependency: "direct main"
+    description:
+      name: flamingo_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
+  flamingo_generator:
+    dependency: "direct dev"
+    description:
+      name: flamingo_generator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -722,19 +743,12 @@ packages:
     source: hosted
     version: "0.6.2"
   json_annotation:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.1"
-  json_serializable:
-    dependency: "direct dev"
-    description:
-      name: json_serializable
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.5.1"
   logging:
     dependency: transitive
     description:

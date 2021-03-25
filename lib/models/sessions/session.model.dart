@@ -7,6 +7,7 @@ part 'session.model.g.dart';
 
 @JsonSerializable()
 class SessionModel {
+  final String id;
   final String joygiverId;
   final String advocateId;
   final String lovedOneId;
@@ -90,7 +91,8 @@ class SessionModel {
   // final Map<String, dynamic> lovedOneData;
 
   SessionModel(
-      {this.joygiverId,
+      {this.id,
+      this.joygiverId,
       this.advocateId,
       this.lovedOneId,
       this.address,

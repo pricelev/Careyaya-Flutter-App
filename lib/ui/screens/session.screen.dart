@@ -1,18 +1,13 @@
 import 'package:careyaya/ui/widgets/main_screen_layout.widget.dart';
-import 'package:careyaya/ui/widgets/session/session.detail.widget.dart';
 import 'package:flutter/material.dart';
 
-class SessionScreen extends StatelessWidget{
+class SessionScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MainScreenLayout(
-        title: "SessionInfo",
-        body:SessionDetailWidget(),
-
-
+        title: "Session",
+        body: Center(child: Text("nothing here yet"))
     );
-
-    throw UnimplementedError();
   }
 }
-

@@ -7,6 +7,7 @@ import 'package:careyaya/ui/screens/chat_list.screen.dart';
 import 'package:careyaya/ui/screens/session_list.screen.dart';
 import 'package:careyaya/ui/screens/settings.screen.dart';
 import 'package:careyaya/ui/screens/splash.screen.dart';
+import 'package:careyaya/ui/screens/session.screen.dart';
 import 'package:get/get.dart';
 
 const String SPLASH_ROUTE = '/';
@@ -18,6 +19,7 @@ const String CHAT_ROUTE = '/chat';
 const String SESSIONS_ROUTE = '/sessions';
 const String SETTINGS_ROUTE = '/settings';
 const String APPLICATION_ROUTE = '/application';
+const String SESSION_SCREEN_ROUTE = '/sessionScreen';
 
 const List<String> UNAUTHENTICATED_ROUTES = [
   SPLASH_ROUTE,
@@ -41,5 +43,6 @@ class AppRoutes {
     GetPage(name: SETTINGS_ROUTE, page: () => SettingsScreen()),
     // GetPage(name: '/reset-password', page: () => ResetPasswordUI()),
     // GetPage(name: '/update-profile', page: () => UpdateProfileUI()),
+    GetPage(name: SESSION_SCREEN_ROUTE, page: () => SessionScreen()),
   ];
 }

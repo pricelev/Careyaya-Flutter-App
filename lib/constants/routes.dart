@@ -5,6 +5,7 @@ import 'package:careyaya/ui/screens/auth/register.screen.dart';
 import 'package:careyaya/ui/screens/chat.screen.dart';
 import 'package:careyaya/ui/screens/chat_list.screen.dart';
 import 'package:careyaya/ui/screens/session_list.screen.dart';
+import 'package:careyaya/ui/screens/session.screen.dart';
 import 'package:careyaya/ui/screens/settings.screen.dart';
 import 'package:careyaya/ui/screens/splash.screen.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ const String REGISTER_ROUTE = '/register';
 const String CHATS_ROUTE = '/chats';
 const String CHAT_ROUTE = '/chat';
 const String SESSIONS_ROUTE = '/sessions';
+const String SESSION_ROUTE = '/session';
 const String SETTINGS_ROUTE = '/settings';
 const String APPLICATION_ROUTE = '/application';
 
@@ -36,6 +38,7 @@ class AppRoutes {
     GetPage(name: CHATS_ROUTE, page: () => ChatListScreen(), title: 'Messages'),
     GetPage(name: CHAT_ROUTE, page: () => ChatScreen()),
     GetPage(name: SESSIONS_ROUTE, page: () => SessionListScreen()),
+    GetPage(name: SESSION_ROUTE, page: () => SessionScreen()),
     // GetPage(name: '/signup', page: () => SignUpUI()),
     GetPage(name: APPLICATION_ROUTE, page: () => ApplicationScreen()),
     GetPage(name: SETTINGS_ROUTE, page: () => SettingsScreen()),

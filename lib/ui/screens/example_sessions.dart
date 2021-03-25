@@ -8,6 +8,7 @@ class ExampleSessions {
     List<SessionModel> sessions = new List<SessionModel>();
     for (var i = 0; i < 3; i++) {
       sessions.add(new SessionModel(
+        id: "abc123",
         joygiverId: 'RyD7HIrMrUYgavB1QgKdH9b7ZE42',
         advocateId: '4oDbGXOrYQS5sRLFe7LcXC8Zz6I3',
         lovedOneId: 'lovedOneID',

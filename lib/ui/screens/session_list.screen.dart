@@ -47,7 +47,7 @@ class SessionListScreen extends StatelessWidget {
     Get.toNamed(
       SESSION_ROUTE,
       arguments: {
-        'sessionId': this.sessions[0].lovedOneId
+        'sessionId': this.sessions[0].id
       }
     );
   }

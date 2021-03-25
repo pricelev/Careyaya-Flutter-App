@@ -1,5 +1,6 @@
 import 'package:careyaya/constants/firestore.dart';
 import 'package:careyaya/controllers/auth.controller.dart';
+import 'package:careyaya/models/advocates/advocate_profile.model.dart';
 import 'package:careyaya/models/chats/chat.model.dart';
 import 'package:careyaya/models/chats/chat_message.model.dart';
 import 'package:careyaya/models/sessions/session.model.dart';
@@ -76,8 +77,18 @@ class FirestoreController {
     final session = SessionModel(id: sessionId);
     final Stream<SessionModel> sessionStream = session.reference
         .snapshots()
-        .listen((snap) => SessionModel(id: snap.id, values: snap.data()));
+        .map((snap) => SessionModel(id: snap.id, values: snap.data()));
     return sessionStream;
+  }
+
+  Stream<AdvocateProfileModel> advocateProfileStream(
+      {@required String advocateId}) {
+    final advocateProfile = AdvocateProfileModel(id: advocateId);
+    final Stream<AdvocateProfileModel> advocateProfileStream = advocateProfile
+        .reference
+        .snapshots()
+        .map((snap) => AdvocateProfileModel(id: snap.id, values: snap.data()));
+    return advocateProfileStream;
   }
 
   //

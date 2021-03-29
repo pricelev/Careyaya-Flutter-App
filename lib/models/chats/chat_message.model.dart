@@ -8,6 +8,7 @@ class ChatMessageModel {
   final String id;
   final Timestamp createdAt;
 
+
   const ChatMessageModel(
       {@required this.text,
       @required this.senderId,

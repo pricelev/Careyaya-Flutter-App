@@ -120,7 +120,7 @@ class SessionDetailWidget extends StatelessWidget {
           SizedBox(height: 5),
         ]
       ),
-    ExpansionTile(
+      ExpansionTile(
       title: Text(
           'Payment Information',
           style: TextStyle(
@@ -164,7 +164,29 @@ class SessionDetailWidget extends StatelessWidget {
         ),
         SizedBox(height:5),
       ],
-    )
+    ),
+      ButtonBar(
+        alignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          OutlinedButton.icon(
+            onPressed: null,
+            icon: Icon(session.accepted ? Icons.cancel : Icons.check),
+            label: Text(session.accepted ? "Cancel" : "Accept"),
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all<Color>(session.accepted ? Colors.red : Colors.green),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0))),
+            ),
+          ),
+          OutlinedButton.icon(
+            onPressed: null,
+            icon: Icon(Icons.chat),
+            label: Text("Start a chat"),
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(239, 52, 68, 1)),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0))),
+            ),
+          )
+      ]),
     ]);
   }
 }

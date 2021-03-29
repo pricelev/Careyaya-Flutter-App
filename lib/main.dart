@@ -18,7 +18,7 @@ FirebaseAnalytics analytics;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Flamingo.initializeApp();
+  await Firebase.initializeApp();
   await GetStorage.init();
   Get.put<LanguageController>(LanguageController(), permanent: true);
   Get.put<AuthController>(AuthController(), permanent: true);

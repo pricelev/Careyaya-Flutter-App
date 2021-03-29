@@ -16,7 +16,7 @@ class FirestoreController {
   static FirestoreController to = Get.find();
   // AppLocalizations_Labels labels;
 
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final FirebaseFirestore _db = Flamingo.instance.firestore;
   final DocumentAccessor _da = DocumentAccessor();
 
   // FirestoreController({@required this.uid})

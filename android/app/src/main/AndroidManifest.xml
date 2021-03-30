@@ -20,7 +20,8 @@
         tools:replace="android:label"
         android:name="io.flutter.app.FlutterApplication"
         android:label="Caregivers"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true">
         <service android:name="com.transistorsoft.locationmanager.service.TrackingService" android:foregroundServiceType="location" />
         <service android:name="com.transistorsoft.locationmanager.service.LocationRequestService" android:foregroundServiceType="location" />
         <meta-data android:name="com.facebook.sdk.ApplicationId"

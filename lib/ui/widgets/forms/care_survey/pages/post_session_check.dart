@@ -90,5 +90,5 @@ class PostSessionCheck extends StatelessWidget {
 }
 
 void ButtonClick() {
-  Get.offAllNamed('/survey4');
+  Get.offAllNamed('/survey3');
 }

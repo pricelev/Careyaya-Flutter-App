@@ -46,6 +46,9 @@ dependencies:
   # Storage
   firebase_storage: "^7.0.0"
 
+  #Image Upload
+  image_picker: 0.6.0+17
+
   # Performance
 #  firebase_performance:
 

@@ -32,7 +32,7 @@ class PostSessionFinal extends StatelessWidget {
                                     fontSize: 14, color: Colors.black),
                                 textAlign: TextAlign.center),
                             SizedBox(height: 30),
-                            Text('(...) level of cognition and functioning: ',
+                            Text('“How was your experience caring for (...)?',
                                 style: TextStyle(
                                     fontSize: 14, color: Colors.black)),
                             FormBuilderRating(name: 'rate'),

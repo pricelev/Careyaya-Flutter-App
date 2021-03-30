@@ -21,50 +21,32 @@ class PostSessionStar extends StatelessWidget {
                         child: Center(
                             child: ListView(
                           children: [
-                            Flexible(
-                                flex: 3,
-                                child: Text('Post Session Survey',
-                                    style: TextStyle(
-                                        fontSize: 24, color: Colors.black),
-                                    textAlign: TextAlign.center)),
+                            Text('Post Session Survey',
+                                style: TextStyle(
+                                    fontSize: 24, color: Colors.black),
+                                textAlign: TextAlign.center),
                             SizedBox(height: 5),
                             Text('Part 1 of 4',
                                 style: TextStyle(
                                     fontSize: 14, color: Colors.black),
                                 textAlign: TextAlign.center),
                             SizedBox(height: 15),
-                            Flexible(
-                                flex: 1,
-                                child: Text('Rate each field from 1 to 5 stars',
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.black))),
+                            Text('Rate each field from 1 to 5 stars',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black)),
                             SizedBox(height: 10),
-                            Flexible(
-                                flex: 1,
-                                child: Text(
-                                    '(...) level of cognition and functioning: ',
-                                    style: TextStyle(
-                                        fontSize: 14, color: Colors.black))),
-                            Flexible(
-                                flex: 1,
-                                child: FormBuilderRating(name: 'rate')),
-                            Flexible(
-                                flex: 1,
-                                child: Text(
-                                    '(...) level of physical functioning: ',
-                                    style: TextStyle(
-                                        fontSize: 14, color: Colors.black))),
-                            Flexible(
-                                flex: 1,
-                                child: FormBuilderRating(name: 'rate')),
-                            Flexible(
-                                flex: 1,
-                                child: Text('(...) overall mood was: ',
-                                    style: TextStyle(
-                                        fontSize: 14, color: Colors.black))),
-                            Flexible(
-                                flex: 1,
-                                child: FormBuilderRating(name: 'rate')),
+                            Text('(...) level of cognition and functioning: ',
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.black)),
+                            FormBuilderRating(name: 'rate'),
+                            Text('(...) level of physical functioning: ',
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.black)),
+                            FormBuilderRating(name: 'rate'),
+                            Text('(...) overall mood was: ',
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.black)),
+                            FormBuilderRating(name: 'rate'),
                             RaisedButton(
                               child: Text('Continue'),
                               onPressed: ButtonClick,

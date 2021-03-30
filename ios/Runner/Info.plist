@@ -9,6 +9,9 @@
 	<key>NSLocalNetworkUsageDescription</key>
 	<string></string>
 	<key>NSMotionUsageDescription</key>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<key>NSCameraUsageDescription</key>
+	<key>NSMicrophoneUsageDescription</key>
 	<string>This app needs access to motion usage.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>

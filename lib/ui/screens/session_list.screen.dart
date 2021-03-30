@@ -6,8 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:careyaya/constants/routes.dart';
 
+
 class SessionListScreen extends StatelessWidget {
+
   List<SessionModel> sessions = ExampleSessions().generateSessions();
+
+
+  List<SessionModel> notCanceledRejectedSession = ExampleSessions().generateSessions().where((session) => !session.canceled && !session.rejected).toList();
+
+  List<SessionModel> requestedSessions = ExampleSessions().generateSessions().where((session) => !session.canceled && !session.rejected).where((session) => !session.accepted).toList();
+  List<SessionModel> upcomingSessions = ExampleSessions().generateSessions().where((session) => !session.canceled && !session.rejected).where((session) => session.accepted &&!session.completed).toList();
+  List<SessionModel> completedSessions = ExampleSessions().generateSessions().where((session) => !session.canceled && !session.rejected).where((session) => session.completed).toList();
   @override
   Widget build(BuildContext context) {
     return MainScreenLayout(
@@ -36,21 +45,18 @@ class SessionListScreen extends StatelessWidget {
                     )
                   ),
                   Container(
-                    height: 400,
+                    height: 500,
                     decoration: BoxDecoration(
                       border: Border(top: BorderSide(color: Colors.grey, width:.5))
                     ),
                     child:TabBarView(
                       children:[
-                        Container(
-                          child:
-                            Text('coming soon')
-                        ),
                         Column( children: [
                           Expanded(child: ListView.builder(
                               itemBuilder: (_, index) {
+                                print(  upcomingSessions.length);
                                 final hasBorderBottom =
-                                    index == sessions.length - 1;
+                                    index == upcomingSessions.length - 1;
                                 final boxDecoration = hasBorderBottom
                                     ? BoxDecoration(
                                   border: Border(
@@ -62,7 +68,37 @@ class SessionListScreen extends StatelessWidget {
                                   // borderRadius: BorderRadius.circular(5.0),
                                 )
                                     : null;
-                                final session = sessions[index];
+                                final session = upcomingSessions[index];
+                                return Container(
+                                  key: Key(session.joygiverId),
+                                  child: Card(child:
+                                  ListTile(
+                                    leading: Chip(label: Text(session.accepted ? "Accepted" : "Requested")),
+                                    title: Text('${session.hoursCount} hours with ${session.lovedOneId}'),
+                                    onTap: _onTap,
+                                  )),
+                                ); //upcomingsessions
+                              },
+                              itemCount: upcomingSessions.length)),
+                        ]),
+                        Column( children: [
+                          Expanded(child: ListView.builder(
+                              itemBuilder: (_, index) {
+                                print(  requestedSessions.length);
+                                final hasBorderBottom =
+                                    index == requestedSessions.length - 1;
+                                final boxDecoration = hasBorderBottom
+                                    ? BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: Colors.grey,
+                                      width: 0.0,
+                                    ),
+                                  ),
+                                  // borderRadius: BorderRadius.circular(5.0),
+                                )
+                                    : null;
+                                final session = notCanceledRejectedSession[index];
                                 return Container(
                                   key: Key(session.joygiverId),
                                   child: Card(child:
@@ -73,16 +109,68 @@ class SessionListScreen extends StatelessWidget {
                                   )),
                                 );
                               },
-                              itemCount: sessions.length)),
-                        ]),
-                        Container(
-                            child:
-                            Text('coming soon')
-                        ),
-                        Container(
-                            child:
-                            Text('coming soon')
-                        ),
+                              itemCount: requestedSessions.length)),
+                        ]),//requested item
+                        Column( children: [
+                          Expanded(child: ListView.builder(
+                              itemBuilder: (_, index) {
+                                print(  completedSessions.length);
+                                final hasBorderBottom =
+                                    index == completedSessions.length - 1;
+                                final boxDecoration = hasBorderBottom
+                                    ? BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: Colors.grey,
+                                      width: 0.0,
+                                    ),
+                                  ),
+                                  // borderRadius: BorderRadius.circular(5.0),
+                                )
+                                    : null;
+                                final session = completedSessions[index];
+                                return Container(
+                                  key: Key(session.joygiverId),
+                                  child: Card(child:
+                                  ListTile(
+                                    leading: Chip(label: Text(session.accepted ? "Accepted" : "Requested")),
+                                    title: Text('${session.hoursCount} hours with ${session.lovedOneId}'),
+                                    onTap: _onTap,
+                                  )),
+                                );
+                              },
+                              itemCount: completedSessions.length)),
+                        ]),//completed
+                        Column( children: [
+                          Expanded(child: ListView.builder(
+                              itemBuilder: (_, index) {
+                                print(  requestedSessions.length);
+                                final hasBorderBottom =
+                                    index == requestedSessions.length - 1;
+                                final boxDecoration = hasBorderBottom
+                                    ? BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: Colors.grey,
+                                      width: 0.0,
+                                    ),
+                                  ),
+                                  // borderRadius: BorderRadius.circular(5.0),
+                                )
+                                    : null;
+                                final session = notCanceledRejectedSession[index];
+                                return Container(
+                                  key: Key(session.joygiverId),
+                                  child: Card(child:
+                                  ListTile(
+                                    leading: Chip(label: Text(session.accepted ? "Accepted" : "Requested")),
+                                    title: Text('${session.hoursCount} hours with ${session.lovedOneId}'),
+                                    onTap: _onTap,
+                                  )),
+                                );
+                              },
+                              itemCount: requestedSessions.length)),
+                        ]),//declined
                       ]
                     )
                   )

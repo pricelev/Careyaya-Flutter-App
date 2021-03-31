@@ -1,10 +1,14 @@
+import 'package:careyaya/models/sessions/session.model.dart';
 import 'package:careyaya/ui/screens/example_sessions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 final session = ExampleSessions().generateSessions()[3];
 
 class SessionDetailWidget extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [

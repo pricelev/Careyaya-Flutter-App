@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:careyaya/constants/routes.dart';
+import 'package:intl/intl.dart';
 
 
 class SessionListScreen extends StatelessWidget {
@@ -76,8 +77,31 @@ class SessionListScreen extends StatelessWidget {
                                   key: Key(session.joygiverId),
                                   child: Card(child:
                                   ListTile(
-                                    leading: Chip(label: Text(session.accepted ? "Accepted" : "Requested")),
-                                    title: Text('${session.hoursCount} hours with ${session.lovedOneId}'),
+                                    leading: Text( '${DateFormat('hh:mm aa').format(
+                                      DateTime.fromMillisecondsSinceEpoch(
+                                          session.startTimestamp.millisecondsSinceEpoch),
+                                    )} -\n${DateFormat('hh:mm aa').format(
+                                      DateTime.fromMillisecondsSinceEpoch(
+                                          session.endTimestamp.millisecondsSinceEpoch),
+                                    )}',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                    title: Text(
+                                      '${DateFormat.yMMMMd('en_US').format(DateTime.fromMillisecondsSinceEpoch(
+                                        session.endTimestamp.millisecondsSinceEpoch))}'
+                                      ,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      )
+                                    ),
+                                    trailing: Text(
+                                      '${session.lovedOneId}',
+                                        style: TextStyle(
+                                      color: Colors.black,
+                                    ))
+                                    ,
                                     onTap: _onTap,
                                   )),
                                 ); //upcomingsessions
@@ -107,12 +131,35 @@ class SessionListScreen extends StatelessWidget {
                                   key: Key(session.joygiverId),
                                   child: Dismissible(
                                       key: Key(session.joygiverId),
-                                      child:Card(
-                                          child: ListTile(
-                                              leading: Chip(label: Text(session.accepted ? "Accepted" : "Requested")),
-                                              title: Text('${session.hoursCount} hours with ${session.lovedOneId}'),
-                                              onTap: _onTap,)
-                                      ),
+                                      child: Card(child:
+                                      ListTile(
+                                        leading: Text( '${DateFormat('hh:mm aa').format(
+                                          DateTime.fromMillisecondsSinceEpoch(
+                                              session.startTimestamp.millisecondsSinceEpoch),
+                                        )} -\n${DateFormat('hh:mm aa').format(
+                                          DateTime.fromMillisecondsSinceEpoch(
+                                              session.endTimestamp.millisecondsSinceEpoch),
+                                        )}',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        title: Text(
+                                            '${DateFormat.yMMMMd('en_US').format(DateTime.fromMillisecondsSinceEpoch(
+                                                session.endTimestamp.millisecondsSinceEpoch))}'
+                                            ,
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                            )
+                                        ),
+                                        trailing: Text(
+                                            '${session.lovedOneId}',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                            ))
+                                        ,
+                                        onTap: _onTap,
+                                      )),
                                       onDismissed: (direction){
                                         print(direction);
                                         if(direction == DismissDirection.endToStart){

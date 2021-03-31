@@ -81,7 +81,7 @@ class PostSessionCheck extends StatelessWidget {
                             SizedBox(height: 5),
                             RaisedButton(
                               child: Text('Continue'),
-                              onPressed: () {},
+                              onPressed: ButtonClick,
                               color: Colors.red[900],
                             ),
                           ],
@@ -89,6 +89,6 @@ class PostSessionCheck extends StatelessWidget {
   }
 }
 
-void _ButtonClick() {
-  Get.offAllNamed('/survey2');
+void ButtonClick() {
+  Get.offAllNamed('/survey4');
 }

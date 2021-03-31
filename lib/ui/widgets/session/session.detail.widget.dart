@@ -2,7 +2,7 @@ import 'package:careyaya/ui/screens/example_sessions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-final session = ExampleSessions().generateSessions()[0];
+final session = ExampleSessions().generateSessions()[3];
 
 class SessionDetailWidget extends StatelessWidget {
   @override

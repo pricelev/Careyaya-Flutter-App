@@ -29,13 +29,13 @@ class SessionModel {
   final num totalCost;
   // Markers
   final String createdBy;
-  final bool accepted;
+  bool accepted;
   @JsonKey(
     fromJson: firestoreTimestampFromJson,
     toJson: firestoreTimestampToJson,
   )
   final Timestamp acceptedAt;
-  final bool rejected;
+  bool rejected;
   @JsonKey(
     fromJson: firestoreTimestampFromJson,
     toJson: firestoreTimestampToJson,

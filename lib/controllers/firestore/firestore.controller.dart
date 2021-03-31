@@ -19,10 +19,6 @@ class FirestoreController {
   final FirebaseFirestore _db = Flamingo.instance.firestore;
   final DocumentAccessor _da = DocumentAccessor();
 
-  // FirestoreController({@required this.uid})
-  //     : assert(uid != null, 'Cannot create FirestoreDatabase with null uid');
-  // final String uid;
-
   Future<UserModel> getFirestoreUser(String uid) async {
     final user = await _db.collection(USERS_COLLECTION).doc(uid).get();
     return UserModel.fromMap(user.data(), uid);
@@ -51,7 +47,7 @@ class FirestoreController {
     return chatStream;
   }
 
-  Future<Stream<List<ChatModel>>> myChatsStream() async {
+  Stream<List<ChatModel>> myChatsStream() {
     final currentUser = AuthController.to.user;
     final uid = currentUser.uid;
     final chatsStream = _db
@@ -81,6 +77,22 @@ class FirestoreController {
     return sessionStream;
   }
 
+  Stream<List<SessionModel>> mySessionsStream() {
+    final currentUser = AuthController.to.user;
+    final uid = currentUser.uid;
+    final sessionsStream = _db
+        .collection(SESSIONS_COLLECTION)
+        .where('joygiverId', isEqualTo: uid)
+        .snapshots();
+    return sessionsStream.map((querySnapshot) {
+      List<SessionModel> sessionList = List<SessionModel>();
+      querySnapshot.docs.forEach((snap) {
+        sessionList.add(SessionModel(id: snap.id, values: snap.data()));
+      });
+      return sessionList;
+    });
+  }
+
   Stream<AdvocateProfileModel> advocateProfileStream(
       {@required String advocateId}) {
     final advocateProfile = AdvocateProfileModel(id: advocateId);
@@ -101,16 +113,6 @@ class FirestoreController {
           updateObject[k] = v;
         }
       });
-      print(updateObject);
-      //
-      //
-      //   if(applicationFinished==0){
-      //     return await _db.collection(JOYGIVER_APPLICATIONS_COLLECTION).doc('pricelev@gmail.com').set(value, SetOptions(merge: true));
-      //   }
-      //   else{
-      //     print('application is not filled');
-      //   }
-
     } catch (error) {
       print(error);
     }

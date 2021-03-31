@@ -11,13 +11,13 @@ enum AdvocateProfileModelKey {
   name,
   email,
   phoneNumber,
-  address,
   profilePicUrl,
   dob,
   joygiverIds,
   favoriteJoygiverIds,
   totalSessionCount,
   canceledSessionCount,
+  address,
 }
 
 extension AdvocateProfileModelKeyExtension on AdvocateProfileModelKey {
@@ -29,8 +29,6 @@ extension AdvocateProfileModelKeyExtension on AdvocateProfileModelKey {
         return 'email';
       case AdvocateProfileModelKey.phoneNumber:
         return 'phoneNumber';
-      case AdvocateProfileModelKey.address:
-        return 'address';
       case AdvocateProfileModelKey.profilePicUrl:
         return 'profilePicUrl';
       case AdvocateProfileModelKey.dob:
@@ -43,6 +41,8 @@ extension AdvocateProfileModelKeyExtension on AdvocateProfileModelKey {
         return 'totalSessionCount';
       case AdvocateProfileModelKey.canceledSessionCount:
         return 'canceledSessionCount';
+      case AdvocateProfileModelKey.address:
+        return 'address';
       default:
         return null;
     }
@@ -55,13 +55,14 @@ Map<String, dynamic> _$toData(AdvocateProfileModel doc) {
   Helper.writeNotNull(data, 'name', doc.name);
   Helper.writeNotNull(data, 'email', doc.email);
   Helper.writeNotNull(data, 'phoneNumber', doc.phoneNumber);
-  Helper.writeNotNull(data, 'address', doc.address);
   Helper.writeNotNull(data, 'profilePicUrl', doc.profilePicUrl);
   Helper.writeNotNull(data, 'dob', doc.dob);
   Helper.writeNotNull(data, 'joygiverIds', doc.joygiverIds);
   Helper.writeNotNull(data, 'favoriteJoygiverIds', doc.favoriteJoygiverIds);
   Helper.writeNotNull(data, 'totalSessionCount', doc.totalSessionCount);
   Helper.writeNotNull(data, 'canceledSessionCount', doc.canceledSessionCount);
+
+  Helper.writeModelNotNull(data, 'address', doc.address);
 
   return data;
 }
@@ -71,7 +72,6 @@ void _$fromData(AdvocateProfileModel doc, Map<String, dynamic> data) {
   doc.name = Helper.valueFromKey<dynamic>(data, 'name');
   doc.email = Helper.valueFromKey<String>(data, 'email');
   doc.phoneNumber = Helper.valueFromKey<String>(data, 'phoneNumber');
-  doc.address = Helper.valueFromKey<AddressModel>(data, 'address');
   doc.profilePicUrl = Helper.valueFromKey<String>(data, 'profilePicUrl');
   doc.dob = Helper.valueFromKey<String>(data, 'dob');
   doc.joygiverIds = Helper.valueListFromKey<String>(data, 'joygiverIds');
@@ -80,4 +80,11 @@ void _$fromData(AdvocateProfileModel doc, Map<String, dynamic> data) {
   doc.totalSessionCount = Helper.valueFromKey<num>(data, 'totalSessionCount');
   doc.canceledSessionCount =
       Helper.valueFromKey<num>(data, 'canceledSessionCount');
+
+  final _address = Helper.valueMapFromKey<String, dynamic>(data, 'address');
+  if (_address != null) {
+    doc.address = AddressModel(values: _address);
+  } else {
+    doc.address = null;
+  }
 }

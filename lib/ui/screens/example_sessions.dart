@@ -1,4 +1,3 @@
-import 'package:careyaya/models/address.model.dart';
 import 'package:careyaya/models/sessions/session.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -13,16 +12,16 @@ class ExampleSessions {
             'joygiverId': 'RyD7HIrMrUYgavB1QgKdH9b7ZE42',
             'advocateId': '4oDbGXOrYQS5sRLFe7LcXC8Zz6I3',
             'lovedOneId': 'lovedOneID',
-            'address': new AddressModel(
-              description: "2914 Somerset Drive, Charlotte, NC, USA",
-              state: "North Carolina",
-              longitude: null,
-              latitude: null,
-              city: "Charlotte",
-              line1: "2914 Somerset Drive",
-              placeId: "ChIJ5RetIKefVogR63y72aQrvJo",
-              zip: "28209",
-            ),
+            'address': {
+              'description': "2914 Somerset Drive, Charlotte, NC, USA",
+              'state': "North Carolina",
+              'longitude': null,
+              'latitude': null,
+              'city': "Charlotte",
+              'line1': "2914 Somerset Drive",
+              'placeId': "ChIJ5RetIKefVogR63y72aQrvJo",
+              'zip': "28209",
+            },
             'distance': 2.336977054004613,
             'timeSlots': List.from([
               1616428800000,

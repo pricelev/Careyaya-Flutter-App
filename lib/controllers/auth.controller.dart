@@ -9,6 +9,7 @@ import 'package:careyaya/ui/screens/auth/auth.screen.dart';
 import 'package:careyaya/ui/screens/session_list.screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flamingo/flamingo.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class AuthController extends GetxController {
   AppLocalizations_Labels labels;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final FirebaseFirestore _db = Flamingo.instance.firestore;
 
   // Streams of firebase Auth user and firestore user
   Rx<User> firebaseUser = Rx<User>();
@@ -85,7 +86,8 @@ class AuthController extends GetxController {
   Stream<JoygiverProfileModel> streamFirestoreJoygiver() {
     if (firebaseUser?.value?.uid != null) {
       return _db
-          .doc('/$JOYGIVERS_COLLECTION/${firebaseUser.value.uid}')
+          .collection(JOYGIVERS_COLLECTION)
+          .doc(firebaseUser.value.uid)
           .snapshots()
           .map((snapshot) => snapshot != null
               ? JoygiverProfileModel(id: snapshot.id, values: snapshot.data())

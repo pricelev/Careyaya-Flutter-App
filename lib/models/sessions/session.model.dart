@@ -1,3 +1,4 @@
+import 'package:careyaya/constants/firestore.dart';
 import 'package:careyaya/models/address.model.dart';
 import 'package:flamingo/flamingo.dart';
 import 'package:flamingo_annotation/flamingo_annotation.dart';
@@ -9,7 +10,13 @@ class SessionModel extends Document<SessionModel> {
     String id,
     DocumentSnapshot snapshot,
     Map<String, dynamic> values,
-  }) : super(id: id, snapshot: snapshot, values: values);
+  }) : super(
+          id: id,
+          snapshot: snapshot,
+          values: values,
+          collectionRef:
+              Flamingo.instance.firestore.collection(SESSIONS_COLLECTION),
+        );
 
   @Field()
   String joygiverId;

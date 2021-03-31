@@ -9,17 +9,6 @@ class SessionDetailWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       SizedBox(height:25),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('Status:',
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                  decoration: TextDecoration.underline)),
-          Chip(label: Text(session.accepted ? "Accepted" : "Requested")),
-        ],
-      ),
       ExpansionTile(
         title: Text(
           'Appointment Information',
@@ -182,7 +171,8 @@ class SessionDetailWidget extends StatelessWidget {
             icon: Icon(Icons.chat),
             label: Text("Start a chat"),
             style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(239, 52, 68, 1)),
+              foregroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(
+                  239, 52, 68, 1.0)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0))),
             ),
           )

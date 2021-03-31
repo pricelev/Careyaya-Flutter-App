@@ -21,6 +21,8 @@ class SessionListScreen extends StatelessWidget {
   List<SessionModel> rejectedSessions = ExampleSessions().generateSessions().where((session) => session.rejected).toList();
 
 
+
+
   @override
   Widget build(BuildContext context) {
     return MainScreenLayout(
@@ -89,7 +91,7 @@ class SessionListScreen extends StatelessWidget {
                                     ),
                                     ),
                                     title: Text(
-                                      '${DateFormat.yMMMMd('en_US').format(DateTime.fromMillisecondsSinceEpoch(
+                                      '${DateFormat('E, MMM d').format(DateTime.fromMillisecondsSinceEpoch(
                                         session.endTimestamp.millisecondsSinceEpoch))}'
                                       ,
                                       style: TextStyle(
@@ -145,7 +147,7 @@ class SessionListScreen extends StatelessWidget {
                                           ),
                                         ),
                                         title: Text(
-                                            '${DateFormat.yMMMMd('en_US').format(DateTime.fromMillisecondsSinceEpoch(
+                                            '${DateFormat('E, MMM d').format(DateTime.fromMillisecondsSinceEpoch(
                                                 session.endTimestamp.millisecondsSinceEpoch))}'
                                             ,
                                             style: TextStyle(
@@ -163,6 +165,7 @@ class SessionListScreen extends StatelessWidget {
                                       onDismissed: (direction){
                                         print(direction);
                                         if(direction == DismissDirection.endToStart){
+                                          showAlertDialogDecline(context);
 
                                             session.rejected = true;
                                             requestedSessions.remove(session);
@@ -171,6 +174,7 @@ class SessionListScreen extends StatelessWidget {
 
                                         }
                                         if(direction == DismissDirection.startToEnd){
+                                          showAlertDialogAccept(context);
                                           print('right');
                                           session.accepted = true;
                                           requestedSessions.remove(session);
@@ -265,6 +269,68 @@ class SessionListScreen extends StatelessWidget {
       }
     );
   }
+}
+
+showAlertDialogAccept(BuildContext context) {
+
+  // set up the buttons
+  Widget cancelButton = FlatButton(
+    child: Text("Cancel"),
+    onPressed:  () {},
+  );
+  Widget continueButton = FlatButton(
+    child: Text("Continue"),
+    onPressed:  () {},
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Accept Dialog"),
+    content: Text("Would you like to Accept this Meeting?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+showAlertDialogDecline(BuildContext context) {
+
+  // set up the buttons
+  Widget cancelButton = FlatButton(
+    child: Text("Cancel"),
+    onPressed:  () {},
+  );
+  Widget continueButton = FlatButton(
+    child: Text("Continue"),
+    onPressed:  () {},
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Decline Dialog"),
+    content: Text("Would you like to Decline this Meeting?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
 
 // ignore: camel_case_types

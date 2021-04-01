@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
     as bg;
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -38,6 +39,44 @@ class LocationController extends GetxController {
         // print('[providerchange] - $event');
       });
 
+
+      //adds a geofence location
+      bg.BackgroundGeolocation.addGeofence(Geofence(
+          identifier: "Home",
+          radius: 200,
+          latitude: 35.707170,
+          longitude: -78.685220,
+          notifyOnEntry: true,
+          notifyOnExit: true,
+          extras: {
+            "route_id": 1234
+          }
+      )).then((bool success) {
+        print('[addGeofence] success');
+      }).catchError((dynamic error) {
+        print('[addGeofence] FAILURE: $error');
+      });
+
+      //triggers on ENTER EXIT AND DWELL of the geoFence
+
+      bg.BackgroundGeolocation.onGeofence((GeofenceEvent event) {
+        print('[geofence] ${event.identifier}, ${event.action}');
+        //sends to location trigger on ENTER and Exit of the geoFence radius
+        if(event.identifier == "Home") {
+          if (event.action == "ENTER") {
+            bg.BackgroundGeolocation.start();
+          }
+          else if (event.action == "EXIT") {
+            bg.BackgroundGeolocation.startGeofences()
+          }
+
+          if (event.action == "ENTER" || event.action == "EXIT") {
+            LocationCallbackHandler.geoFenceNotify(event.location);
+          }
+        }
+
+      });
+
       ////
       // 2.  Configure the plugin
       //
@@ -54,7 +93,11 @@ class LocationController extends GetxController {
         ////
         // 3.  Start the plugin.
         //
-        bg.BackgroundGeolocation.start();
+        //bg.BackgroundGeolocation.start();
+
+        // --------- start getFences -------
+        //--------can replace with above line if not working---------
+        bg.BackgroundGeolocation.startGeofences();
       }
     } catch (error) {
       print('[BackgroundFetch] config error: $error');
@@ -128,6 +171,30 @@ class LocationCallbackHandler {
     }
   }
 
+  static Future<void> geoFenceNotify(location) async {
+    print('sending location from geoFenceNotify');
+    final timestamp = Timestamp.now();
+    final timestampNumber = timestamp.millisecondsSinceEpoch;
+    final timestampString = timestampNumber.toString();
+    final date = timestamp.toDate();
+    await Firebase.initializeApp();
+    final FirebaseFirestore _db = FirebaseFirestore.instance;
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    if (_auth != null &&
+        _auth.currentUser != null &&
+        _auth.currentUser.uid != null) {
+      await _db
+          .collection('caregiverLocations')
+          .doc(_auth.currentUser.uid)
+          .collection('caregiverLocations')
+          .doc(timestampString)
+          .set({
+        'createdAt': timestamp,
+        'latitude': location.coords.latitude,
+        'longitude': location.coords.longitude,
+      });
+    }
+  }
   // static Future<void> notificationCallback() async {
   //   print('***notificationCallback');
   // }

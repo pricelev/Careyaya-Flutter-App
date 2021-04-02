@@ -3,14 +3,14 @@ import 'package:careyaya/models/firestore/chats/chat.model.dart';
 import 'package:get/get.dart';
 
 class ChatsController extends GetxController {
-  Rx<List<ChatModel>> chatList = Rx<List<ChatModel>>();
+  RxList<ChatModel> _chatList = RxList<ChatModel>();
 
-  List<ChatModel> get chats => chatList.value;
+  List<ChatModel> get chats => _chatList.toList();
 
   @override
   void onInit() async {
-    final myChatsStream = await FirestoreController.to.myChatsStream();
-    chatList.bindStream(myChatsStream); // stream chats from firestore
+    final myChatsStream = FirestoreController.to.myChatsStream();
+    _chatList.bindStream(myChatsStream); // stream chats from firestore
     super.onInit();
   }
 }

@@ -12,19 +12,20 @@ class ChatListScreen extends StatelessWidget {
     return MainScreenLayout(
       title: 'Messages',
       body: GetX<ChatsController>(
-        init: Get.put(ChatsController()),
+        init: Get.put<ChatsController>(ChatsController()),
         builder: (ChatsController chatsController) {
           if (chatsController != null &&
-              chatsController.chatList != null &&
-              chatsController.chatList.value != null) {
-            if (chatsController.chatList.value.isEmpty) {
+              !chatsController.isBlank &&
+              chatsController.chats != null &&
+              chatsController.chats != null) {
+            if (chatsController.chats.isEmpty) {
               return Center(
                 child: Text('No chats found.'),
               );
             }
-            chatsController.chatList.value.sort((ChatModel a, ChatModel b) =>
-                a.lastUpdated.millisecondsSinceEpoch >
-                            b.lastUpdated.millisecondsSinceEpoch ==
+            chatsController.chats.sort((ChatModel a, ChatModel b) =>
+                a.updatedAt.millisecondsSinceEpoch >
+                            b.updatedAt.millisecondsSinceEpoch ==
                         false
                     ? 1
                     : 0);
@@ -37,10 +38,10 @@ class ChatListScreen extends StatelessWidget {
                             thickness: 0,
                             color: Colors.grey,
                           ),
-                      itemCount: chatsController.chatList.value.length,
+                      itemCount: chatsController.chats.length,
                       itemBuilder: (_, index) {
                         final hasBorderBottom =
-                            index == chatsController.chatList.value.length - 1;
+                            index == chatsController.chats.length - 1;
                         final boxDecoration = hasBorderBottom
                             ? BoxDecoration(
                                 border: Border(
@@ -52,7 +53,7 @@ class ChatListScreen extends StatelessWidget {
                                 // borderRadius: BorderRadius.circular(5.0),
                               )
                             : null;
-                        final chat = chatsController.chatList.value[index];
+                        final chat = chatsController.chats[index];
                         return Container(
                           key: Key(chat.reference.id),
                           child: ChatListItem(chat: chat),

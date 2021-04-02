@@ -1,6 +1,7 @@
 import 'package:careyaya/controllers/firestore/sessions/sessions.controller.dart';
 import 'package:careyaya/models/firestore/sessions/session.model.dart';
 import 'package:careyaya/ui/screens/example_sessions.dart';
+import 'package:careyaya/ui/widgets/loading.widget.dart';
 import 'package:careyaya/ui/widgets/main_screen_layout.widget.dart';
 import 'package:careyaya/ui/widgets/session/session_list_item.widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,8 +42,12 @@ class SessionListScreen extends StatelessWidget {
       title: 'Sessions',
       body: Container(
           child: GetX<SessionsController>(
-        init: SessionsController(),
+        init: Get.put<SessionsController>(SessionsController()),
         builder: (SessionsController sessionsController) {
+          final sessions = sessionsController.sessions;
+          if (sessions == null) {
+            return Loading();
+          }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -57,10 +62,10 @@ class SessionListScreen extends StatelessWidget {
                                 labelColor: Colors.blue,
                                 unselectedLabelColor: Colors.black,
                                 tabs: [
-                              Tab(text: 'upcoming'),
-                              Tab(text: 'requested'),
-                              Tab(text: 'past'),
-                              Tab(text: 'declined'),
+                              Tab(text: 'Upcoming'),
+                              Tab(text: 'Requested'),
+                              Tab(text: 'Past'),
+                              Tab(text: 'Declined'),
                             ])),
                         Container(
                             height: 500,
@@ -82,19 +87,6 @@ class SessionListScreen extends StatelessWidget {
                                 Expanded(
                                     child: ListView.builder(
                                         itemBuilder: (_, index) {
-                                          final hasBorderBottom = index ==
-                                              requestedSessions.length - 1;
-                                          final boxDecoration = hasBorderBottom
-                                              ? BoxDecoration(
-                                                  border: Border(
-                                                    bottom: BorderSide(
-                                                      color: Colors.grey,
-                                                      width: 0.0,
-                                                    ),
-                                                  ),
-                                                  // borderRadius: BorderRadius.circular(5.0),
-                                                )
-                                              : null;
                                           final session =
                                               requestedSessions[index];
 
@@ -102,17 +94,8 @@ class SessionListScreen extends StatelessWidget {
                                             key: Key(session.joygiverId),
                                             child: Dismissible(
                                                 key: Key(session.joygiverId),
-                                                child: Card(
-                                                    child: ListTile(
-                                                  leading: Chip(
-                                                      label: Text(
-                                                          session.accepted
-                                                              ? "Accepted"
-                                                              : "Requested")),
-                                                  title: Text(
-                                                      '${session.hoursCount} hours with ${session.lovedOneId}'),
-                                                  // onTap: _onTap,
-                                                )),
+                                                child: SessionListItem(
+                                                    session: session),
                                                 onDismissed: (direction) {
                                                   print(direction);
                                                   if (direction ==

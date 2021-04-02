@@ -13,8 +13,8 @@ class ChatListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String dateString = DateFormat('hh:mm aa MM/dd/yyyy')
-        .format(this.chat.lastUpdated.toDate());
+    final String dateString =
+        DateFormat('hh:mm aa MM/dd/yyyy').format(this.chat.updatedAt.toDate());
 
     final otherUserId = ChatModel.getOtherUserId(this.chat);
 
@@ -29,7 +29,8 @@ class ChatListItem extends StatelessWidget {
 
     return GetBuilder<UserController>(
       tag: otherUserId,
-      init: Get.put(UserController(uid: otherUserId), tag: otherUserId),
+      init: Get.put<UserController>(UserController(uid: otherUserId),
+          tag: otherUserId),
       builder: (UserController userController) {
         if (userController != null &&
             userController.user != null &&

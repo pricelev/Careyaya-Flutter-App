@@ -14,4 +14,22 @@ class FirebaseFunctionsController extends GetxController {
       'url': 'https://accounts-dev.careyaya.com',
     });
   }
+
+  Future<void> acceptSession(String sessionId) async {
+    HttpsCallable callable =
+        FirebaseFunctions.instance.httpsCallable('acceptSession');
+    return await callable(sessionId);
+  }
+
+  Future<void> rejectSession(String sessionId) async {
+    HttpsCallable callable =
+        FirebaseFunctions.instance.httpsCallable('rejectSession');
+    return await callable(sessionId);
+  }
+
+  Future<void> cancelSession(String sessionId) async {
+    HttpsCallable callable =
+        FirebaseFunctions.instance.httpsCallable('cancelSession');
+    return await callable(sessionId);
+  }
 }

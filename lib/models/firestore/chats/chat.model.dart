@@ -29,7 +29,7 @@ class ChatModel extends Document<ChatModel> {
   @Field()
   Timestamp createdAt;
   @Field()
-  Timestamp lastUpdated;
+  Timestamp updatedAt;
 
   static getOtherUserId(ChatModel chat) => chat.participantIds.firstWhere(
       (participantId) => participantId != AuthController.to.user.uid);

@@ -8,6 +8,10 @@ class SessionListItem extends StatelessWidget {
 
   SessionListItem({@required this.session});
 
+  void _onTap() {
+    Get.toNamed(SESSION_ROUTE, arguments: {'sessionId': session.id});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,12 +20,8 @@ class SessionListItem extends StatelessWidget {
           child: ListTile(
         leading: Chip(label: Text(session.accepted ? "Accepted" : "Requested")),
         title: Text('${session.hoursCount} hours with ${session.lovedOneId}'),
-        onTap: () => _onTap(session.id),
+        onTap: _onTap,
       )),
     );
   }
-}
-
-void _onTap(String sessionId) {
-  Get.toNamed(SESSION_ROUTE, arguments: {'sessionId': sessionId});
 }

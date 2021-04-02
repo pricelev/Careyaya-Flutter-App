@@ -9,10 +9,10 @@ import 'package:meta/meta.dart';
 
 class SessionController extends GetxController {
   final String sessionId;
-  Rx<SessionModel> _sessionStream;
-  Rx<JoygiverProfileModel> _joygiverProfileStream;
-  Rx<AdvocateProfileModel> _advocateProfileStream;
-  Rx<LovedOneProfileModel> _lovedOneProfileStream;
+  Rx<SessionModel> _sessionStream = Rx<SessionModel>();
+  Rx<JoygiverProfileModel> _joygiverProfileStream = Rx<JoygiverProfileModel>();
+  Rx<AdvocateProfileModel> _advocateProfileStream = Rx<AdvocateProfileModel>();
+  Rx<LovedOneProfileModel> _lovedOneProfileStream = Rx<LovedOneProfileModel>();
 
   SessionModel get session => _sessionStream.value;
   JoygiverProfileModel get joygiverProfile => _joygiverProfileStream.value;

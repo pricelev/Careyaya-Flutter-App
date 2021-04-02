@@ -4,7 +4,8 @@ import 'package:meta/meta.dart';
 
 class SessionReviewByJoygiverController extends GetxController {
   final String reviewId;
-  Rx<SessionReviewByJoygiverModel> _sessionReviewStream;
+  Rx<SessionReviewByJoygiverModel> _sessionReviewStream =
+      Rx<SessionReviewByJoygiverModel>();
 
   SessionReviewByJoygiverModel get sessionReview => _sessionReviewStream.value;
 

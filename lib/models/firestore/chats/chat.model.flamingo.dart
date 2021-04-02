@@ -10,7 +10,7 @@ part of 'chat.model.dart';
 enum ChatModelKey {
   participantIds,
   createdAt,
-  lastUpdated,
+  updatedAt,
   messages,
 }
 
@@ -21,8 +21,8 @@ extension ChatModelKeyExtension on ChatModelKey {
         return 'participantIds';
       case ChatModelKey.createdAt:
         return 'createdAt';
-      case ChatModelKey.lastUpdated:
-        return 'lastUpdated';
+      case ChatModelKey.updatedAt:
+        return 'updatedAt';
       case ChatModelKey.messages:
         return 'messages';
       default:
@@ -36,7 +36,7 @@ Map<String, dynamic> _$toData(ChatModel doc) {
   final data = <String, dynamic>{};
   Helper.writeNotNull(data, 'participantIds', doc.participantIds);
   Helper.writeNotNull(data, 'createdAt', doc.createdAt);
-  Helper.writeNotNull(data, 'lastUpdated', doc.lastUpdated);
+  Helper.writeNotNull(data, 'updatedAt', doc.updatedAt);
 
   Helper.writeModelListNotNull(data, 'messages', doc.messages);
 
@@ -52,10 +52,10 @@ void _$fromData(ChatModel doc, Map<String, dynamic> data) {
     doc.createdAt = Helper.valueFromKey<Timestamp>(data, 'createdAt');
   }
 
-  if (data['lastUpdated'] is Map) {
-    doc.lastUpdated = Helper.timestampFromMap(data, 'lastUpdated');
+  if (data['updatedAt'] is Map) {
+    doc.updatedAt = Helper.timestampFromMap(data, 'updatedAt');
   } else {
-    doc.lastUpdated = Helper.valueFromKey<Timestamp>(data, 'lastUpdated');
+    doc.updatedAt = Helper.valueFromKey<Timestamp>(data, 'updatedAt');
   }
 
   final _messages =

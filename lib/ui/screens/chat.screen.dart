@@ -19,14 +19,14 @@ class ChatScreen extends StatelessWidget {
             chatController.otherUserProfile.value != null &&
             chatController.myUserProfile != null) {
           final myChatProfile = ChatUser(
-              uid: chatController.myUserProfile?.uid,
+              uid: chatController.myUserProfile?.id,
               firstName: chatController.myUserProfile.name['first'],
               lastName: chatController.myUserProfile.name['last'],
               avatar: chatController.myUserProfile.profilePicUrl);
           final otherChatProfileName =
               '${chatController.otherUserProfile.value.name['first']} ${chatController.otherUserProfile.value.name['last']}';
           final otherChatProfile = ChatUser(
-              uid: chatController.otherUserProfile.value.uid,
+              uid: chatController.otherUserProfile.value.id,
               name: otherChatProfileName,
               avatar: chatController.otherUserProfile.value.profilePicUrl);
           final List<ChatMessage> dashChatMessages =

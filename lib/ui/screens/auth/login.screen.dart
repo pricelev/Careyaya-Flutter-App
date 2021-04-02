@@ -1,12 +1,41 @@
+import 'package:careyaya/controllers/auth.controller.dart';
 import 'package:careyaya/ui/screens/auth/register.screen.dart';
 import 'package:careyaya/ui/widgets/forms/email_login_form.widget.dart';
-import 'package:careyaya/ui/widgets/forms/fields/facebook_sign_in_button.widget.dart';
 import 'package:careyaya/ui/widgets/forms/fields/google_sign_in_button.widget.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class LoginScreenController extends GetxController {
   bool emailFormOpen = false;
+
+  @override
+  void onInit() async {
+    final PendingDynamicLinkData data =
+        await FirebaseDynamicLinks.instance.getInitialLink();
+    final Uri deepLink = data?.link;
+
+    FirebaseDynamicLinks.instance.onLink(
+      onSuccess: (linkData) async {
+        if (linkData?.link != null) {
+          return await AuthController.to
+              .signInWithEmailLink(linkData.link.toString());
+        }
+      },
+      onError: (error) {
+        print(error);
+        return;
+      },
+    );
+    print(data);
+
+    if (deepLink != null) {
+      await AuthController.to.signInWithEmailLink(deepLink.toString());
+    }
+    super.onInit();
+  }
+
   void openEmailForm() {
     emailFormOpen = true;
   }
@@ -22,6 +51,7 @@ class LoginScreen extends StatelessWidget {
     final int delayedAmount = 0;
     final color = Colors.white;
     final double _scale = 1;
+
     return Scaffold(
       backgroundColor: Colors.blueGrey[900],
       body: SafeArea(
@@ -58,14 +88,14 @@ class LoginScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: GoogleSignInButton(),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: FacebookSignInButton(),
-              ),
+              // Container(
+              //   padding: EdgeInsets.symmetric(vertical: 10),
+              //   child: FacebookSignInButton(),
+              // ),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 20),
                 child: GetBuilder<LoginScreenController>(
-                  init: LoginScreenController(),
+                  init: Get.put<LoginScreenController>(LoginScreenController()),
                   builder: (loginScreenController) {
                     if (loginScreenController.emailFormOpen) {
                       return Column(

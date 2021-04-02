@@ -1,4 +1,4 @@
-import 'package:careyaya/models/sessions/session.model.dart';
+import 'package:careyaya/models/firestore/sessions/session.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ExampleSessions {
@@ -67,5 +67,6 @@ class ExampleSessions {
         ),
       );
     }
+    return sessions;
   }
 }

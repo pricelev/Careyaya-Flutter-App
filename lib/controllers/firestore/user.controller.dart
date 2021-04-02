@@ -1,5 +1,5 @@
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
-import 'package:careyaya/models/user.model.dart';
+import 'package:careyaya/models/firestore/users/user.model.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 

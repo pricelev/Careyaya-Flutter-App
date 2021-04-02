@@ -1,5 +1,5 @@
 import 'package:careyaya/controllers/firestore/chats/chats.controller.dart';
-import 'package:careyaya/models/chats/chat.model.dart';
+import 'package:careyaya/models/firestore/chats/chat.model.dart';
 import 'package:careyaya/ui/screens/loading.screen.dart';
 import 'package:careyaya/ui/widgets/chats/chat_list_item.widget.dart';
 import 'package:careyaya/ui/widgets/main_screen_layout.widget.dart';

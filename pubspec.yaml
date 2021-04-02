@@ -33,6 +33,7 @@ dependencies:
   firebase_auth: "^0.20.0+1"
   google_sign_in: "^4.5.9"
   flutter_facebook_auth: "^2.0.0+1"
+  firebase_dynamic_links: "^0.7.0+1"
 
   # Database
   cloud_firestore: "^0.16.0"
@@ -50,7 +51,7 @@ dependencies:
 #  firebase_performance:
 
   # State management, routing and dependency management
-  get:
+  get: "^3.26.0"
 
   # Chat UI Elements
   dash_chat: "^1.1.15"

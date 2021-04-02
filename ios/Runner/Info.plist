@@ -33,12 +33,22 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+            <string>careyaya.com</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.580815345526-id9blvas408uv7b4aiace9rite1kpkld</string>
+				<string>careyaya</string>
+				<string>com.careyaya.joygivers</string>
 			</array>
 		</dict>
 	</array>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+    <array>
+      <string>https://accounts-dev.careyaya.com</string>
+      <string>https://accounts-dev.careyaya.com/</string>
+      <string>https://accounts-dev.careyaya.com/verify</string>
+    </array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -56,6 +66,9 @@
 		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
+	<key>FlutterDeepLinkingEnabled</key>
+    <true/>
+
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

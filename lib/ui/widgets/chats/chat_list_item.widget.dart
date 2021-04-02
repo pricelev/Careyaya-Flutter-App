@@ -1,6 +1,6 @@
 import 'package:careyaya/constants/routes.dart';
 import 'package:careyaya/controllers/firestore/user.controller.dart';
-import 'package:careyaya/models/chats/chat.model.dart';
+import 'package:careyaya/models/firestore/chats/chat.model.dart';
 import 'package:careyaya/ui/widgets/chats/chat_list_item_skeleton.widget.dart';
 import 'package:dash_chat/dash_chat.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class ChatListItem extends StatelessWidget {
       builder: (UserController userController) {
         if (userController != null &&
             userController.user != null &&
-            userController.user.uid != null) {
+            userController.user.id != null) {
           final title =
               '${userController.user.name['first']} ${userController.user.name['last']}';
           final avatar = userController.user.profilePicUrl.length == 0

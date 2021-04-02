@@ -1,5 +1,5 @@
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
-import 'package:careyaya/models/sessions/session.model.dart';
+import 'package:careyaya/models/firestore/sessions/session.model.dart';
 import 'package:get/get.dart';
 
 class SessionsController extends GetxController {

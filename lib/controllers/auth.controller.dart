@@ -2,17 +2,16 @@ import 'dart:async';
 
 import 'package:careyaya/constants/firestore.dart';
 import 'package:careyaya/constants/routes.dart';
+import 'package:careyaya/controllers/firebase_functions.controller.dart';
 import 'package:careyaya/localizations.dart';
-import 'package:careyaya/models/joygivers/joygiver_profile.model.dart';
-import 'package:careyaya/models/user.model.dart';
-import 'package:careyaya/ui/screens/auth/auth.screen.dart';
-import 'package:careyaya/ui/screens/session_list.screen.dart';
+import 'package:careyaya/models/firestore/joygivers/joygiver_profile.model.dart';
+import 'package:careyaya/models/firestore/users/user.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flamingo/flamingo.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
@@ -62,9 +61,9 @@ class AuthController extends GetxController {
     }
 
     if (_firebaseUser == null) {
-      Get.offAll(AuthScreen());
+      Get.offAllNamed(AUTH_ROUTE);
     } else if (UNAUTHENTICATED_ROUTES.contains(Get.currentRoute)) {
-      Get.offAll(SessionListScreen());
+      Get.offAllNamed(SESSIONS_ROUTE);
     }
   }
 
@@ -75,7 +74,7 @@ class AuthController extends GetxController {
           .doc('/$USERS_COLLECTION/${firebaseUser.value.uid}')
           .snapshots()
           .map((snapshot) => snapshot != null
-              ? UserModel.fromMap(snapshot.data(), firebaseUser.value.uid)
+              ? UserModel(id: snapshot.id, values: snapshot.data())
               : null);
     }
 
@@ -100,9 +99,13 @@ class AuthController extends GetxController {
   //get the firestore user from the firestore collection
   Future<UserModel> getFirestoreUser() {
     if (firebaseUser?.value?.uid != null) {
-      return _db.doc('/users/${firebaseUser.value.uid}').get().then(
-          (documentSnapshot) => UserModel.fromMap(
-              documentSnapshot.data(), firebaseUser.value.uid));
+      return _db
+          .doc('/users/${firebaseUser.value.uid}')
+          .get()
+          .then((snap) => UserModel(
+                id: snap.id,
+                values: snap.data(),
+              ));
     }
     return null;
   }
@@ -144,6 +147,39 @@ class AuthController extends GetxController {
 
       // Once signed in, return the UserCredential
       await _auth.signInWithCredential(googleAuthCredential);
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  //Method to handle user sign in using email link
+  sendSignInWithEmailLink(BuildContext context,
+      {@required String email}) async {
+    await GetStorage().write('signInEmail', email.trim());
+    final labels = AppLocalizations.of(context);
+    // showLoadingIndicator();
+    try {
+      await FirebaseFunctionsController.to
+          .sendPasswordlessSignInLink(email.trim());
+      // hideLoadingIndicator();
+    } catch (error) {
+      // hideLoadingIndicator();
+      Get.snackbar(labels.auth.signInErrorTitle, error.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 7),
+          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
+          colorText: Get.theme.snackBarTheme.actionTextColor);
+    }
+  }
+
+  signInWithEmailLink(String link) async {
+    try {
+      final signInEmail = await GetStorage().read('signInEmail');
+      if (signInEmail != null) {
+        if (_auth.isSignInWithEmailLink(link)) {
+          await _auth.signInWithEmailLink(email: signInEmail, emailLink: link);
+        }
+      }
     } catch (error) {
       print(error);
     }

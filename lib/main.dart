@@ -1,6 +1,7 @@
 import 'package:careyaya/constants/routes.dart';
 import 'package:careyaya/constants/themes.dart';
 import 'package:careyaya/controllers/auth.controller.dart';
+import 'package:careyaya/controllers/firebase_functions.controller.dart';
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
 import 'package:careyaya/controllers/language.controller.dart';
 // import 'package:careyaya/controllers/location/location.controller.dart';
@@ -21,6 +22,7 @@ Future<void> main() async {
   await GetStorage.init();
   Get.put<ThemeController>(ThemeController());
   Get.put<LanguageController>(LanguageController(), permanent: true);
+  Get.put<FirebaseFunctionsController>(FirebaseFunctionsController());
   Get.put<AuthController>(AuthController(), permanent: true);
   Get.put<FirestoreController>(FirestoreController());
   // Get.put<LocationController>(LocationController());

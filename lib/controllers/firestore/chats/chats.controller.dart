@@ -1,5 +1,5 @@
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
-import 'package:careyaya/models/chats/chat.model.dart';
+import 'package:careyaya/models/firestore/chats/chat.model.dart';
 import 'package:get/get.dart';
 
 class ChatsController extends GetxController {

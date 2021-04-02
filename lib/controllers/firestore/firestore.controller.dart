@@ -1,10 +1,11 @@
 import 'package:careyaya/constants/firestore.dart';
 import 'package:careyaya/controllers/auth.controller.dart';
-import 'package:careyaya/models/advocates/advocate_profile.model.dart';
-import 'package:careyaya/models/chats/chat.model.dart';
-import 'package:careyaya/models/chats/chat_message.model.dart';
-import 'package:careyaya/models/sessions/session.model.dart';
-import 'package:careyaya/models/user.model.dart';
+import 'package:careyaya/models/firestore/advocates/advocate_profile.model.dart';
+import 'package:careyaya/models/firestore/chats/chat.model.dart';
+import 'package:careyaya/models/firestore/chats/chat_message.model.dart';
+import 'package:careyaya/models/firestore/loved_ones/loved_one_profile.model.dart';
+import 'package:careyaya/models/firestore/sessions/session.model.dart';
+import 'package:careyaya/models/firestore/users/user.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flamingo/flamingo.dart';
 import 'package:get/get.dart';
@@ -21,18 +22,21 @@ class FirestoreController {
 
   Future<UserModel> getFirestoreUser(String uid) async {
     final user = await _db.collection(USERS_COLLECTION).doc(uid).get();
-    return UserModel.fromMap(user.data(), uid);
+    return UserModel(id: uid, values: user.data());
   }
 
   Future<UserModel> getAdvocateProfile(String uid) async {
     final advocate = await _db.collection(ADVOCATES_COLLECTION).doc(uid).get();
-    return UserModel.fromMap(advocate.data(), uid);
+    return UserModel(
+      id: uid,
+      values: advocate.data(),
+    );
   }
 
   Future<void> sendChatMessage(String chatId, ChatMessageModel message) async {
     return await _db.collection(CHATS_COLLECTION).doc(chatId).update({
       'lastUpdated': FieldValue.serverTimestamp(),
-      'messages': FieldValue.arrayUnion([message.toMap()]),
+      'messages': FieldValue.arrayUnion([message.toData()]),
     });
   }
 
@@ -42,7 +46,7 @@ class FirestoreController {
         .doc(chatId)
         .snapshots()
         .map((snapshot) => snapshot != null
-            ? ChatModel.fromMap(snapshot.data(), snapshot.reference)
+            ? ChatModel(id: snapshot.id, values: snapshot.data())
             : null);
     return chatStream;
   }
@@ -56,9 +60,8 @@ class FirestoreController {
         .snapshots();
     return chatsStream.map((querySnapshot) {
       List<ChatModel> chatList = List();
-      querySnapshot.docs.forEach((docSnapshot) {
-        chatList
-            .add(ChatModel.fromMap(docSnapshot.data(), docSnapshot.reference));
+      querySnapshot.docs.forEach((snap) {
+        chatList.add(ChatModel(id: snap.id, values: snap.data()));
       });
       return chatList;
     });
@@ -67,6 +70,7 @@ class FirestoreController {
   Future<SessionModel> getSession({@required String sessionId}) async {
     final session = SessionModel(id: sessionId);
     final sessionData = await _da.load<SessionModel>(session);
+    return sessionData;
   }
 
   Stream<SessionModel> sessionStream({@required String sessionId}) {
@@ -103,7 +107,16 @@ class FirestoreController {
     return advocateProfileStream;
   }
 
-  //
+  Stream<LovedOneProfileModel> lovedOneProfileStream(
+      {@required String lovedOneId}) {
+    final lovedOneProfile = LovedOneProfileModel(id: lovedOneId);
+    final Stream<LovedOneProfileModel> lovedOneProfileStream = lovedOneProfile
+        .reference
+        .snapshots()
+        .map((snap) => LovedOneProfileModel(id: snap.id, values: snap.data()));
+    return lovedOneProfileStream;
+  }
+
   Future<void> setCaregiverApplication(joygiverApplication) async {
     final updateObject = {};
     int applicationFinished = 0;

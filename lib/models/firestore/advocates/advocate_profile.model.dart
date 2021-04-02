@@ -32,6 +32,10 @@ class AdvocateProfileModel extends Document<AdvocateProfileModel> {
   @Field()
   num canceledSessionCount;
 
+  Stream<AdvocateProfileModel> get stream => reference
+      .snapshots()
+      .map((snap) => AdvocateProfileModel(id: snap.id, values: snap.data()));
+
   @override
   Map<String, dynamic> toData() => _$toData(this);
 

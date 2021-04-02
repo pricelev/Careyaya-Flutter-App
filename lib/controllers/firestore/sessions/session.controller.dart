@@ -1,35 +1,40 @@
 import 'package:careyaya/controllers/auth.controller.dart';
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
-import 'package:careyaya/models/advocates/advocate_profile.model.dart';
-import 'package:careyaya/models/joygivers/joygiver_profile.model.dart';
-import 'package:careyaya/models/sessions/session.model.dart';
+import 'package:careyaya/models/firestore/advocates/advocate_profile.model.dart';
+import 'package:careyaya/models/firestore/joygivers/joygiver_profile.model.dart';
+import 'package:careyaya/models/firestore/loved_ones/loved_one_profile.model.dart';
+import 'package:careyaya/models/firestore/sessions/session.model.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
 class SessionController extends GetxController {
   final String sessionId;
-  Rx<SessionModel> sessionStream;
-  Rx<JoygiverProfileModel> joygiverProfileStream;
-  Rx<AdvocateProfileModel> advocateProfileStream;
+  Rx<SessionModel> _sessionStream;
+  Rx<JoygiverProfileModel> _joygiverProfileStream;
+  Rx<AdvocateProfileModel> _advocateProfileStream;
+  Rx<LovedOneProfileModel> _lovedOneProfileStream;
 
-  SessionModel get session => sessionStream.value;
-  JoygiverProfileModel get joygiverProfile => joygiverProfileStream.value;
-  AdvocateProfileModel get advocateProfile => advocateProfileStream.value;
+  SessionModel get session => _sessionStream.value;
+  JoygiverProfileModel get joygiverProfile => _joygiverProfileStream.value;
+  AdvocateProfileModel get advocateProfile => _advocateProfileStream.value;
+  LovedOneProfileModel get lovedOneProfile => _lovedOneProfileStream.value;
 
   SessionController({@required this.sessionId});
 
   @override
   // ignore: must_call_super
   void onInit() async {
-    once(sessionStream, handleSessionChange);
-    sessionStream
+    once(_sessionStream, _handleSessionChange);
+    _sessionStream
         .bindStream(FirestoreController.to.sessionStream(sessionId: sessionId));
-    joygiverProfileStream
+    _joygiverProfileStream
         .bindStream(AuthController.to.streamFirestoreJoygiver());
   }
 
-  void handleSessionChange(SessionModel sessionModel) {
-    advocateProfileStream.bindStream(FirestoreController.to
+  void _handleSessionChange(SessionModel sessionModel) {
+    _advocateProfileStream.bindStream(FirestoreController.to
         .advocateProfileStream(advocateId: sessionModel.advocateId));
+    _lovedOneProfileStream.bindStream(FirestoreController.to
+        .lovedOneProfileStream(lovedOneId: sessionModel.lovedOneId));
   }
 }

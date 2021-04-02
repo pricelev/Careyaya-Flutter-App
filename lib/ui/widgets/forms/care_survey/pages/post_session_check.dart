@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:get/get.dart';
+import 'package:careyaya/controllers/firestore/sessions/session.controller.dart';
 import 'package:careyaya/ui/widgets/forms/care_survey/widgets/checkfield.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PostSessionCheck extends StatelessWidget {
   @override
@@ -20,71 +20,86 @@ class PostSessionCheck extends StatelessWidget {
                     child: Padding(
                         padding: EdgeInsets.all(15),
                         child: Center(
-                            child: ListView(
-                          children: [
-                            Text('Post Session Survey',
-                                style: TextStyle(
-                                    fontSize: 24, color: Colors.black),
-                                textAlign: TextAlign.center),
-                            SizedBox(height: 5),
-                            Text('Part 2 of 4',
-                                style: TextStyle(
-                                    fontSize: 14, color: Colors.black),
-                                textAlign: TextAlign.center),
-                            SizedBox(height: 15),
-                            CheckField(
-                              titleText:
-                                  '(...) experienced a change in level of assistance required by Joygiver in physical support or during activities',
-                            ),
-                            SizedBox(height: 5),
-                            CheckField(
-                              titleText:
-                                  '(...) was verbally aggressive with me',
-                            ),
-                            SizedBox(height: 5),
-                            CheckField(
-                              titleText:
-                                  '(...) was physically aggressive with me',
-                            ),
-                            SizedBox(height: 5),
-                            CheckField(
-                              titleText:
-                                  '(...) didn’t listen to me or was noncompliant',
-                            ),
-                            SizedBox(height: 5),
-                            CheckField(
-                              titleText: '(...) tried to leave the house.',
-                            ),
-                            SizedBox(height: 5),
-                            CheckField(
-                              titleText:
-                                  '(...) experienced severe emotional distress (for example: anger outbursts, intense sadness)',
-                            ),
-                            SizedBox(height: 5),
-                            CheckField(
-                              titleText: '(...) had difficulty swallowing',
-                            ),
-                            SizedBox(height: 5),
-                            CheckField(
-                              titleText:
-                                  '(...) suddenly had difficulty eating independently',
-                            ),
-                            SizedBox(height: 5),
-                            CheckField(
-                              titleText: '(...) fell.',
-                            ),
-                            SizedBox(height: 5),
-                            CheckField(
-                              titleText:
-                                  '(...) experienced other medical issues',
-                            ),
-                            SizedBox(height: 5),
-                            RaisedButton(
-                              child: Text('Continue'),
-                              onPressed: ButtonClick,
-                              color: Colors.red[900],
-                            ),
-                          ],
+                            child: GetBuilder<SessionController>(
+                          init: SessionController(),
+                          builder: (SessionController sessionController) {
+                            final lovedOneData =
+                                sessionController.lovedOneProfile;
+                            if (lovedOneData == null) {
+                              return null;
+                            }
+                            final lovedOneFirstName = lovedOneData.name['first']
+                                ? lovedOneData.name['first']
+                                : 'The loved one';
+                            return ListView(
+                              children: [
+                                Text('Post Session Survey',
+                                    style: TextStyle(
+                                        fontSize: 24, color: Colors.black),
+                                    textAlign: TextAlign.center),
+                                SizedBox(height: 5),
+                                Text('Part 2 of 4',
+                                    style: TextStyle(
+                                        fontSize: 14, color: Colors.black),
+                                    textAlign: TextAlign.center),
+                                SizedBox(height: 15),
+                                CheckField(
+                                  titleText:
+                                      '$lovedOneFirstName experienced a change in level of assistance required by Joygiver in physical support or during activities',
+                                ),
+                                SizedBox(height: 5),
+                                CheckField(
+                                  titleText:
+                                      '$lovedOneFirstName was verbally aggressive with me',
+                                ),
+                                SizedBox(height: 5),
+                                CheckField(
+                                  titleText:
+                                      '$lovedOneFirstName was physically aggressive with me',
+                                ),
+                                SizedBox(height: 5),
+                                CheckField(
+                                  titleText:
+                                      '$lovedOneFirstName didn’t listen to me or was noncompliant',
+                                ),
+                                SizedBox(height: 5),
+                                CheckField(
+                                  titleText:
+                                      '$lovedOneFirstName tried to leave the house.',
+                                ),
+                                SizedBox(height: 5),
+                                CheckField(
+                                  titleText:
+                                      '$lovedOneFirstName experienced severe emotional distress (for example: anger outbursts, intense sadness)',
+                                ),
+                                SizedBox(height: 5),
+                                CheckField(
+                                  titleText:
+                                      '$lovedOneFirstName had difficulty swallowing',
+                                ),
+                                SizedBox(height: 5),
+                                CheckField(
+                                  titleText:
+                                      '$lovedOneFirstName suddenly had difficulty eating independently',
+                                ),
+                                SizedBox(height: 5),
+                                CheckField(
+                                  titleText: '$lovedOneFirstName fell.',
+                                ),
+                                SizedBox(height: 5),
+                                CheckField(
+                                  titleText:
+                                      '$lovedOneFirstName experienced other medical issues',
+                                ),
+                                SizedBox(height: 5),
+                                RaisedButton(
+                                  child: Text('Continue'),
+                                  onPressed: ButtonClick,
+                                  color: Colors.red[900],
+                                ),
+                              ],
+                            );
+                          },
                         )))))));
   }
 }

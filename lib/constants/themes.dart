@@ -17,6 +17,7 @@ class AppThemes {
   //constants color range for light theme
   //main color
   static const Color _lightPrimaryColor = Color.fromRGBO(239, 52, 68, 1);
+  static const Color _lightSecondaryColor = Color.fromRGBO(69, 123, 157, 1);
 
   //Background Colors
   static const Color _lightBackgroundColor = whiteLilac;
@@ -105,7 +106,7 @@ class AppThemes {
     colorScheme: ColorScheme.light(
       primary: _lightPrimaryColor,
       primaryVariant: _lightBackgroundColor,
-      // secondary: _lightSecondaryColor,
+      secondary: _lightSecondaryColor,
     ),
     snackBarTheme: SnackBarThemeData(
         backgroundColor: _lightBackgroundAlertColor,

@@ -1,5 +1,3 @@
-import 'package:careyaya/constants/forms/hobbies.dart';
-import 'package:careyaya/constants/forms/languages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -28,41 +26,41 @@ class JoygiverProfileDetailsPage extends StatelessWidget {
           ),
           validator: FormBuilderValidators.required(context),
         ),
-        FormBuilderChipsInput(
-          findSuggestions: (String query) => HOBBIES
-              .where(
-                  (hobby) => hobby.toLowerCase().contains(query.toLowerCase()))
-              .toList(),
-          suggestionBuilder: (context, state, lang) => ListTile(
-            key: ObjectKey(lang),
-            title: Text(lang),
-            onTap: () => state.selectSuggestion(lang),
-          ),
-          chipBuilder: (context, state, hobby) => Chip(label: Text(hobby)),
-          name: 'hobbies',
-          maxChips: 5,
-          decoration: InputDecoration(
-            filled: true,
-            labelText: "Hobbies",
-            hintText: "Enter a hobby and press return",
-          ),
-        ),
-        FormBuilderChipsInput(
-          name: "languages",
-          decoration: InputDecoration(
-            filled: true,
-            labelText: 'Select any foreign languages you speak',
-          ),
-          findSuggestions: (String query) => LANGUAGES
-              .where((lang) => lang.toLowerCase().contains(query.toLowerCase()))
-              .toList(),
-          suggestionBuilder: (context, state, lang) => ListTile(
-            key: ObjectKey(lang),
-            title: Text(lang),
-            onTap: () => state.selectSuggestion(lang),
-          ),
-          chipBuilder: (context, state, lang) => Chip(label: Text(lang)),
-        ),
+        // FormBuilderChipsInput(
+        //   findSuggestions: (String query) => HOBBIES
+        //       .where(
+        //           (hobby) => hobby.toLowerCase().contains(query.toLowerCase()))
+        //       .toList(),
+        //   suggestionBuilder: (context, state, lang) => ListTile(
+        //     key: ObjectKey(lang),
+        //     title: Text(lang),
+        //     onTap: () => state.selectSuggestion(lang),
+        //   ),
+        //   chipBuilder: (context, state, hobby) => Chip(label: Text(hobby)),
+        //   name: 'hobbies',
+        //   maxChips: 5,
+        //   decoration: InputDecoration(
+        //     filled: true,
+        //     labelText: "Hobbies",
+        //     hintText: "Enter a hobby and press return",
+        //   ),
+        // ),
+        // FormBuilderChipsInput(
+        //   name: "languages",
+        //   decoration: InputDecoration(
+        //     filled: true,
+        //     labelText: 'Select any foreign languages you speak',
+        //   ),
+        //   findSuggestions: (String query) => LANGUAGES
+        //       .where((lang) => lang.toLowerCase().contains(query.toLowerCase()))
+        //       .toList(),
+        //   suggestionBuilder: (context, state, lang) => ListTile(
+        //     key: ObjectKey(lang),
+        //     title: Text(lang),
+        //     onTap: () => state.selectSuggestion(lang),
+        //   ),
+        //   chipBuilder: (context, state, lang) => Chip(label: Text(lang)),
+        // ),
         Text('Please select any of the following that apply.'),
         FormBuilderCheckbox(
           name: 'isComfortableWithPets',

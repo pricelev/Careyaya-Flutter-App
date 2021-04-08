@@ -1,11 +1,10 @@
 import 'package:careyaya/constants/routes.dart';
+import 'package:careyaya/controllers/firebase_functions.controller.dart';
 import 'package:careyaya/controllers/firestore/sessions/session.controller.dart';
-import 'package:careyaya/ui/screens/example_sessions.dart';
+import 'package:careyaya/ui/widgets/loading.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
-final session = ExampleSessions().generateSessions()[1];
 
 class SessionDetailWidget extends StatelessWidget {
   final String sessionId;
@@ -14,11 +13,14 @@ class SessionDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-        init: SessionController(sessionId: sessionId),
+    return GetX(
+        init:
+            Get.put<SessionController>(SessionController(sessionId: sessionId)),
         builder: (SessionController sessionController) {
-          print(session);
-          // final session = sessionController.session;
+          final session = sessionController.session;
+          if (session == null) {
+            return Loading();
+          }
           return Column(children: [
             SizedBox(height: 25),
             ExpansionTile(
@@ -161,7 +163,9 @@ class SessionDetailWidget extends StatelessWidget {
             ),
             ButtonBar(alignment: MainAxisAlignment.spaceEvenly, children: [
               OutlinedButton.icon(
-                onPressed: null,
+                onPressed: () {
+                  FirebaseFunctionsController.to.acceptSession(sessionId);
+                },
                 icon: Icon(session.accepted ? Icons.cancel : Icons.check),
                 label: Text(session.accepted ? "Cancel" : "Accept"),
                 style: ButtonStyle(

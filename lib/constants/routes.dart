@@ -8,9 +8,9 @@ import 'package:careyaya/ui/screens/session.screen.dart';
 import 'package:careyaya/ui/screens/session_list.screen.dart';
 import 'package:careyaya/ui/screens/settings.screen.dart';
 import 'package:careyaya/ui/screens/splash.screen.dart';
-import 'package:careyaya/ui/widgets/forms/care_survey/pages/post_session_star.dart';
 import 'package:careyaya/ui/widgets/forms/care_survey/pages/post_session_check.dart';
 import 'package:careyaya/ui/widgets/forms/care_survey/pages/post_session_final.dart';
+import 'package:careyaya/ui/widgets/forms/care_survey/pages/post_session_star.dart';
 import 'package:careyaya/ui/widgets/forms/care_survey/pages/post_session_upload.dart';
 import 'package:get/get.dart';
 
@@ -34,10 +34,6 @@ const List<String> UNAUTHENTICATED_ROUTES = [
   AUTH_ROUTE,
   LOGIN_ROUTE,
   REGISTER_ROUTE,
-  SURVEY_ROUTE,
-  SURVEY2_ROUTE,
-  SURVEY3_ROUTE,
-  SURVEY4_ROUTE,
 ];
 
 class AppRoutes {

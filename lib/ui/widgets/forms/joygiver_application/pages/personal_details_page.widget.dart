@@ -136,18 +136,18 @@ class PersonalDetailsPage extends StatelessWidget {
             .toList(growable: false),
         validator: FormBuilderValidators.required(context),
       ),
-      FormBuilderTextField(
-        name: 'email',
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          filled: true,
-          hintText: 'Email',
-        ),
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(context),
-          FormBuilderValidators.email(context),
-        ]),
-      ),
+      // FormBuilderTextField(
+      //   name: 'email',
+      //   keyboardType: TextInputType.emailAddress,
+      //   decoration: InputDecoration(
+      //     filled: true,
+      //     hintText: 'Email',
+      //   ),
+      //   validator: FormBuilderValidators.compose([
+      //     FormBuilderValidators.required(context),
+      //     FormBuilderValidators.email(context),
+      //   ]),
+      // ),
       // Need number formatter / mask
       FormBuilderTextField(
         name: 'phoneNumber',
@@ -168,43 +168,12 @@ class PersonalDetailsPage extends StatelessWidget {
               errorText: 'Please use area code and seven digit phone number'),
         ]),
       ),
-      FormBuilderDropdown(
-        name: 'referralMethod',
-        validator: FormBuilderValidators.required(context),
-        items: [
-          {
-            'label': 'Advertisement',
-            'value': 'advertisement',
-          },
-          {
-            'label': 'Friend',
-            'value': 'friend',
-          },
-          {
-            'label': 'Indeed',
-            'value': 'indeed',
-          },
-          {
-            'label': 'Other',
-            'value': 'other',
-          },
-        ]
-            .map((referralMethod) => DropdownMenuItem(
-                  value: referralMethod['value'],
-                  child: Text('${referralMethod['label']}'),
-                ))
-            .toList(),
-        decoration: InputDecoration(
-          labelText: 'Referral Method',
-          filled: true,
-        ),
-      ),
       AddressSearchAutocompleteWidget(),
       FormBuilderTextField(
         name: 'address.line2',
         decoration: InputDecoration(
           filled: true,
-          hintText: 'Address Line 2 / Apt #',
+          hintText: 'Address Line 2 / Apt # (Optional)',
         ),
       ),
     ]);

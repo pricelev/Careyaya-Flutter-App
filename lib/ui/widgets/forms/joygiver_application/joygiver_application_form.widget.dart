@@ -1,5 +1,5 @@
 import 'package:careyaya/controllers/form.controller.dart';
-import 'package:careyaya/ui/widgets/forms/caregiver_application/steps.dart';
+import 'package:careyaya/ui/widgets/forms/joygiver_application/steps.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

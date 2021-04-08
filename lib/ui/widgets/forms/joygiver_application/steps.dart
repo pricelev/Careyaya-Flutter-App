@@ -1,14 +1,14 @@
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
-import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/identity_details_page.widget.dart';
-import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/joygiver_profile_details_page.widget.dart';
-import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/personal_details_page.widget.dart';
-import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/pricing_details_page.widget.dart';
-import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/reference_details_page.widget.dart';
-import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/schedule_meeting_page.widget.dart';
-import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/scheduling_details_page.widget.dart';
-import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/service_details_page.widget.dart';
-import 'package:careyaya/ui/widgets/forms/caregiver_application/pages/upload_video_page.widget.dart';
 import 'package:careyaya/ui/widgets/forms/form.widget.dart';
+import 'package:careyaya/ui/widgets/forms/joygiver_application/pages/identity_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/joygiver_application/pages/joygiver_profile_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/joygiver_application/pages/personal_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/joygiver_application/pages/pricing_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/joygiver_application/pages/reference_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/joygiver_application/pages/schedule_meeting_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/joygiver_application/pages/scheduling_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/joygiver_application/pages/service_details_page.widget.dart';
+import 'package:careyaya/ui/widgets/forms/joygiver_application/pages/upload_video_page.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 

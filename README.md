@@ -1,16 +1,25 @@
-# careyaya
+<h1 align="center">Welcome to flutter-caregiver-app 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-.1-blue.svg?cacheSeconds=2592000" />
+</p>
 
-The care of the future.
+> The app used by CareYaya Joygivers to interact with clients.
 
-## Getting Started
+## Usage
 
-This project is a starting point for a Flutter application.
+```sh
+flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Run tests
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```sh
+flutter test
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

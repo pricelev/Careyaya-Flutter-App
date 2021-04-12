@@ -67,5 +67,6 @@ class ExampleSessions {
         ),
       );
     }
+    return sessions;
   }
 }

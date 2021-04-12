@@ -67,7 +67,7 @@ class LocationController extends GetxController {
             bg.BackgroundGeolocation.start();
           }
           else if (event.action == "EXIT") {
-            bg.BackgroundGeolocation.startGeofences()
+            bg.BackgroundGeolocation.startGeofences();
           }
 
           if (event.action == "ENTER" || event.action == "EXIT") {

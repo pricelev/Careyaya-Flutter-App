@@ -10,8 +10,8 @@ import 'package:intl/intl.dart';
 
 class SessionListScreen extends StatelessWidget {
 
-  List<SessionModel> sessions = ExampleSessions().generateSessions();
 
+  List<SessionModel> sessions = ExampleSessions().generateSessions();
 
   List<SessionModel> notCanceledRejectedSession = ExampleSessions().generateSessions().where((session) => !session.canceled && !session.rejected).toList();
 

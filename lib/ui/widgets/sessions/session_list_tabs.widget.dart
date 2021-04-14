@@ -59,38 +59,31 @@ class SessionListTabs extends StatelessWidget {
                     itemBuilder: (_, index) {
                       final session = requestedSessions[index];
 
-                      return Container(
-                        key: Key(session.joygiverId),
-                        child: Dismissible(
-                            key: Key(session.joygiverId),
-                            child: SessionListItem(session: session),
-                            onDismissed: (direction) {
-                              print(direction);
-                              if (direction == DismissDirection.endToStart) {
-                                session.rejected = true;
-                                requestedSessions.remove(session);
-                                index--;
-                              }
-                              if (direction == DismissDirection.startToEnd) {
-                                print('right');
-                                session.accepted = true;
-                                requestedSessions.remove(session);
-                                index--;
-                                upcomingSessions.add(session);
-                                print(upcomingSessions);
-                              }
-                            }),
+                      return SessionListItem(
+                        session: completedSessions[index],
+                        onSwipeLeft: () {
+                          // session.rejected = true;
+                          // requestedSessions.remove(session);
+                          // index--;
+                        },
+                        onSwipeRight: () {
+                          // session.accepted = true;
+                          // requestedSessions.remove(session);
+                          // index--;
+                          // upcomingSessions.add(session);
+                          // print(upcomingSessions);
+                        },
                       );
                     },
                     itemCount: requestedSessions.length), //requested item
                 ListView.builder(
                     itemBuilder: (_, index) {
-                      return SessionListItem(session: upcomingSessions[index]);
+                      return SessionListItem(session: completedSessions[index]);
                     },
                     itemCount: completedSessions.length),
                 ListView.builder(
                     itemBuilder: (_, index) {
-                      return SessionListItem(session: upcomingSessions[index]);
+                      return SessionListItem(session: rejectedSessions[index]);
                     },
                     itemCount: rejectedSessions.length),
               ],

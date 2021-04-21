@@ -1,5 +1,7 @@
+import 'package:careyaya/constants/routes.dart';
 import 'package:careyaya/models/firestore/sessions/session.model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class SessionDetailWidget extends StatelessWidget {
@@ -154,7 +156,11 @@ class SessionDetailWidget extends StatelessWidget {
           if (!(session.canceled || session.completed || session.rejected))
             acceptOrCancelButton(session),
           OutlinedButton.icon(
-            onPressed: null,
+            onPressed: () {
+              Get.toNamed(CHAT_ROUTE, arguments: {
+                'chatId': 'needToGetChatId',
+              });
+            },
             icon: Icon(Icons.chat),
             label: Text("Start a chat"),
             style: ButtonStyle(
@@ -169,4 +175,18 @@ class SessionDetailWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+OutlinedButton acceptOrCancelButton(SessionModel session) {
+  return OutlinedButton.icon(
+    onPressed: () => {},
+    icon: Icon(session.accepted ? Icons.cancel : Icons.check),
+    label: Text(session.accepted ? "Cancel" : "Accept"),
+    style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.all<Color>(
+          session.accepted ? Colors.red : Colors.green),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0))),
+    ),
+  );
 }

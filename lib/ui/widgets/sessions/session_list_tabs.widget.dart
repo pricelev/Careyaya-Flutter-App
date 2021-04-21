@@ -60,7 +60,7 @@ class SessionListTabs extends StatelessWidget {
                       final session = requestedSessions[index];
 
                       return SessionListItem(
-                        session: completedSessions[index],
+                        session: session,
                         onSwipeLeft: () {
                           // session.rejected = true;
                           // requestedSessions.remove(session);

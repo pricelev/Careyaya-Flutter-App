@@ -6,6 +6,7 @@ import 'package:careyaya/ui/widgets/forms/care_survey/widgets/checkfield.dart';
 class PostSessionCheck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var device = MediaQuery.of(context);
     return Scaffold(
         appBar: AppBar(
           title: Text('Star Section'),

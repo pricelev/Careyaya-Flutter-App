@@ -52,6 +52,9 @@ dependencies:
   # Performance
 #  firebase_performance:
 
+  # Messaging
+  firebase_messaging: ^5.0.2
+
   # State management, routing and dependency management
   get:
 

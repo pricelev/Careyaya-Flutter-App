@@ -60,6 +60,22 @@ class LocationController extends GetxController {
       print('[BackgroundFetch] config error: $error');
     }
 
+    bg.BackgroundGeolocation.addGeofence(Geofence(
+        identifier: "Home",
+        radius: 200,
+        latitude: 35.707170,
+        longitude: -78.685220,
+        notifyOnEntry: true,
+        notifyOnExit: true,
+        extras: {
+          "route_id": 1234
+        }
+    )).then((bool success) {
+      print('[addGeofence] success');
+    }).catchError((dynamic error) {
+      print('[addGeofence] FAILURE: $error');
+    });
+
     super.onInit();
   }
 

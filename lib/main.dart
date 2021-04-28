@@ -23,7 +23,7 @@ Future<void> main() async {
   Get.put<ThemeController>(ThemeController());
   Get.put<LanguageController>(LanguageController(), permanent: true);
   Get.put<FirebaseFunctionsController>(FirebaseFunctionsController());
-  Get.put<AuthController>(AuthController(), permanent: true);
+  // Get.put<AuthController>(AuthController(), permanent: true);
   Get.put<FirestoreController>(FirestoreController());
   // Get.put<LocationController>(LocationController());
   analytics = FirebaseAnalytics();
@@ -50,7 +50,7 @@ class CaregiversApp extends StatelessWidget {
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
       themeMode: ThemeMode.light,
-      initialRoute: SPLASH_ROUTE,
+      initialRoute: SESSIONS_ROUTE,
       getPages: AppRoutes.routes,
       defaultTransition: Transition.noTransition,
     );

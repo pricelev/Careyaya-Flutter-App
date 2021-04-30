@@ -27,10 +27,10 @@ Future<void> main() async {
   Get.put<FirestoreController>(FirestoreController());
   // Get.put<LocationController>(LocationController());
   analytics = FirebaseAnalytics();
-  runApp(CaregiversApp());
+  runApp(JoygiversApp());
 }
 
-class CaregiversApp extends StatelessWidget {
+class JoygiversApp extends StatelessWidget {
   // The app root.
   @override
   Widget build(BuildContext context) {

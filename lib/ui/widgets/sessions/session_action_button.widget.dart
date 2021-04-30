@@ -1,4 +1,3 @@
-import 'package:careyaya/controllers/firebase_functions.controller.dart';
 import 'package:flutter/material.dart';
 
 class SessionActionButton extends StatelessWidget {
@@ -29,12 +28,3 @@ class SessionActionButton extends StatelessWidget {
     );
   }
 }
-
-SessionActionButton AcceptSessionButton(String sessionId) =>
-    SessionActionButton(
-      onPressed: () {
-        FirebaseFunctionsController.to.acceptSession(sessionId);
-      },
-      label: "Accept",
-      icon: Icons.check,
-    );

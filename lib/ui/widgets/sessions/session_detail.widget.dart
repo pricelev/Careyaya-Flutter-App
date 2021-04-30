@@ -1,8 +1,12 @@
 import 'package:careyaya/constants/routes.dart';
 import 'package:careyaya/models/firestore/sessions/session.model.dart';
+import 'package:careyaya/utils/get_chat_id_from_user_ids.dart';
+import 'package:flamingo/flamingo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
+import 'session_action_button.widget.dart';
 
 class SessionDetailWidget extends StatelessWidget {
   final SessionModel session;
@@ -152,41 +156,59 @@ class SessionDetailWidget extends StatelessWidget {
             SizedBox(height: 5),
           ],
         ),
-        ButtonBar(alignment: MainAxisAlignment.spaceEvenly, children: [
-          if (!(session.canceled || session.completed || session.rejected))
-            acceptOrCancelButton(session),
-          OutlinedButton.icon(
-            onPressed: () {
-              Get.toNamed(CHAT_ROUTE, arguments: {
-                'chatId': 'needToGetChatId',
-              });
-            },
-            icon: Icon(Icons.chat),
-            label: Text("Start a chat"),
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(
-                  Color.fromRGBO(239, 52, 68, 1.0)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0))),
-            ),
-          )
-        ]),
+        ButtonBar(
+          alignment: MainAxisAlignment.spaceEvenly,
+          children: getSessionActionButtons(session),
+        ),
       ],
     );
   }
 }
 
-OutlinedButton acceptOrCancelButton(SessionModel session) {
-  return OutlinedButton.icon(
-    onPressed: () => {},
-    icon: Icon(session.accepted ? Icons.cancel : Icons.check),
-    label: Text(session.accepted ? "Cancel" : "Accept"),
-    style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all<Color>(
-          session.accepted ? Colors.red : Colors.green),
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0))),
+List<SessionActionButton> getSessionActionButtons(SessionModel session) {
+  List<SessionActionButton> buttons = [];
+
+  if (!session.accepted && !session.rejected && !session.canceled) {
+    buttons.add(
+      SessionActionButton(
+        onPressed: () async {
+          session.accepted = true;
+          final documentAccessor = DocumentAccessor();
+          await documentAccessor.update(session);
+        },
+        icon: Icons.check,
+        label: 'Accept',
+      ),
+    );
+    buttons.add(
+      SessionActionButton(
+        onPressed: () async {
+          session.rejected = true;
+          final documentAccessor = DocumentAccessor();
+          await documentAccessor.update(session);
+        },
+        icon: Icons.close,
+        label: 'Reject',
+      ),
+    );
+  }
+
+  buttons.add(
+    SessionActionButton(
+      onPressed: () {
+        final chatId = getChatIdFromUserIds(
+          [
+            session.advocateId,
+            session.joygiverId,
+          ],
+        );
+        Get.toNamed(CHAT_ROUTE, arguments: {
+          'chatId': chatId,
+        });
+      },
+      icon: Icons.chat,
+      label: 'Start a Chat',
     ),
   );
+  return buttons;
 }

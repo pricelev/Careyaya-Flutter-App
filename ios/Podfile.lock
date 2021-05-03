@@ -106,7 +106,7 @@ PODS:
     - FirebaseCore (~> 7.0)
     - GTMSessionFetcher/Core (~> 1.4)
   - Flutter (1.0.0)
-  - flutter_background_geolocation (1.11.0):
+  - flutter_background_geolocation (1.11.1):
     - CocoaLumberjack (~> 3.6.0)
     - Flutter
   - flutter_facebook_auth (1.0.0):
@@ -296,7 +296,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 30646fc9a61c6f4ee3cd7a8b7231721842b40c95
   FirebaseStorage: 5002b1895bfe74a5ce92ad54f966e6162d0da2e5
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_background_geolocation: 5a1e2c73ba4499a1063db68d604c3ed47e460f80
+  flutter_background_geolocation: 35f598f4e5eca84a4a1da764a75b6fb28ebfdcc0
   flutter_facebook_auth: bad08a3d465e7b7ba9d8468a9dc7df3f69c136b8
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   google_maps_flutter: c7f9c73576de1fbe152a227bfd6e6c4ae8088619

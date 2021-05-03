@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 class SessionListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return MainScreenLayout(
       title: 'Sessions',
       body: GetX<SessionsController>(

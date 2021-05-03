@@ -4,7 +4,7 @@ import 'package:careyaya/controllers/auth.controller.dart';
 import 'package:careyaya/controllers/firebase_functions.controller.dart';
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
 import 'package:careyaya/controllers/language.controller.dart';
-// import 'package:careyaya/controllers/location/location.controller.dart';
+import 'package:careyaya/controllers/location/location.controller.dart';
 import 'package:careyaya/controllers/theme.controller.dart';
 import 'package:careyaya/localizations.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -23,9 +23,9 @@ Future<void> main() async {
   Get.put<ThemeController>(ThemeController());
   Get.put<LanguageController>(LanguageController(), permanent: true);
   Get.put<FirebaseFunctionsController>(FirebaseFunctionsController());
-  // Get.put<AuthController>(AuthController(), permanent: true);
+  Get.put<AuthController>(AuthController(), permanent: true);
   Get.put<FirestoreController>(FirestoreController());
-  // Get.put<LocationController>(LocationController());
+  Get.put<LocationController>(LocationController());
   analytics = FirebaseAnalytics();
   runApp(JoygiversApp());
 }

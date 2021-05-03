@@ -27,8 +27,8 @@ class SessionGenerator {
         'address': {
           'description': address,
           'state': "North Carolina",
-          'longitude': null,
-          'latitude': null,
+          'longitude': -78.685220,
+          'latitude': 35.707170,
           'city': "Chapel Hill",
           'line1': streetAddress,
           'placeId':

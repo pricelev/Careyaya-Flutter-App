@@ -61,7 +61,7 @@ dependencies:
   google_maps_flutter: "^1.1.1"
 
   # Background Geolocation Updates
-  flutter_background_geolocation: "^1.11.0"
+  flutter_background_geolocation: "^1.9.0"
 
   # Permissions Handler
   permission_handler: "^5.0.1+1"

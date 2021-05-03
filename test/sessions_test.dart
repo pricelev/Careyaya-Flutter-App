@@ -2,7 +2,6 @@ import 'package:careyaya/models/firestore/sessions/session.model.dart';
 import 'package:careyaya/ui/widgets/sessions/session_detail.widget.dart';
 import 'package:flamingo/flamingo.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'data/session_generator.dart';
 import 'util/setup_firebase_mocks.dart';
 import 'util/wrap_with_material.dart';

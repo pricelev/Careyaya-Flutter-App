@@ -1,7 +1,10 @@
 // import 'package:background_location/background_location.dart';
+import 'package:careyaya/controllers/firestore/sessions/sessions.controller.dart';
+import 'package:careyaya/models/firestore/sessions/session.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
     as bg;
 import 'package:get/get.dart';
@@ -9,6 +12,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 class LocationController extends GetxController {
   static LocationController to = Get.find();
+  static SessionsController sessionsController = Get.find();
 
   @override
   void onInit() async {
@@ -60,21 +64,11 @@ class LocationController extends GetxController {
       print('[BackgroundFetch] config error: $error');
     }
 
-    bg.BackgroundGeolocation.addGeofence(Geofence(
-        identifier: "Home",
-        radius: 200,
-        latitude: 35.707170,
-        longitude: -78.685220,
-        notifyOnEntry: true,
-        notifyOnExit: true,
-        extras: {
-          "route_id": 1234
-        }
-    )).then((bool success) {
-      print('[addGeofence] success');
-    }).catchError((dynamic error) {
-      print('[addGeofence] FAILURE: $error');
-    });
+    for (SessionModel session in sessionsController.sessions) {
+      if (session.startTimestamp.toDate() == DateTime.now()) {
+        addGeofence(session.id, session.address.latitude, session.address.longitude);
+      }
+    }
 
     super.onInit();
   }
@@ -105,6 +99,23 @@ class LocationController extends GetxController {
         return false;
         break;
     }
+  }
+  static addGeofence(String id, num lat, num lon) {
+    bg.BackgroundGeolocation.addGeofence(Geofence(
+        identifier: id,
+        radius: 200,
+        latitude: lat,
+        longitude: lon,
+        notifyOnEntry: true,
+        notifyOnExit: true,
+        extras: {
+          "route_id": 1234,
+        }
+    )).then((bool success) {
+      print('[addGeofence] success');
+    }).catchError((dynamic error) {
+      print('[addGeofence] FAILURE: $error');
+    });
   }
 }
 

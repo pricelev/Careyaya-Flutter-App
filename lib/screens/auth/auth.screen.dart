@@ -1,5 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:careyaya/screens/sign_in/sign_in.screen.dart';
+import 'package:careyaya/config/routes.dart';
 import 'package:careyaya/widgets/forms/fields/button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -84,5 +84,5 @@ class AuthScreen extends StatelessWidget {
 }
 
 void _onTapLogin() {
-  Get.offAll(LoginScreen());
+  Get.offAllNamed(LOGIN_ROUTE);
 }

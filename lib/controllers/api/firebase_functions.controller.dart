@@ -7,11 +7,13 @@ class FirebaseFunctionsController extends GetxController {
   FirebaseFunctions functions = FirebaseFunctions.instance;
 
   Future<void> sendPasswordlessSignInLink(String email) async {
-    HttpsCallable callable = FirebaseFunctions.instance
+    final HttpsCallable callable = FirebaseFunctions.instance
         .httpsCallable('https-callables-auth-sendSignInEmail');
-    return await callable({
-      'email': email,
-      'url': 'https://accounts-dev.careyaya.com/verify',
+    return callable({
+      'data': {
+        'email': email,
+        'url': 'https://accounts-dev.careyaya.com/verify',
+      }
     });
   }
 }

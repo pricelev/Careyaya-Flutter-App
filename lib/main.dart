@@ -1,8 +1,8 @@
 import 'package:careyaya/config/localizations.dart';
 import 'package:careyaya/config/routes.dart';
 import 'package:careyaya/config/themes.dart';
-import 'package:careyaya/controllers/auth/auth.controller.dart';
 import 'package:careyaya/controllers/api/firebase_functions.controller.dart';
+import 'package:careyaya/controllers/auth/auth.controller.dart';
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
 import 'package:careyaya/controllers/language.controller.dart';
 // import 'package:careyaya/controllers/location/location.controller.dart';
@@ -37,14 +37,13 @@ class JoygiversApp extends StatelessWidget {
     ThemeController.to.getThemeModeFromStore();
     return GetMaterialApp(
       locale: AppLocalizations.languages.keys.first,
-      localizationsDelegates: [
-        const AppLocalizationsDelegate(), // Custom delegate
+      localizationsDelegates: const [
+        AppLocalizationsDelegate(), // Custom delegate
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales:
           AppLocalizations.languages.keys.toList(), // <- Supported locales,
-      debugShowCheckedModeBanner: true,
       textDirection: TextDirection.ltr,
       title: 'Caregivers',
       theme: AppThemes.lightTheme,
@@ -53,6 +52,7 @@ class JoygiversApp extends StatelessWidget {
       initialRoute: SPLASH_ROUTE,
       getPages: AppRoutes.routes,
       defaultTransition: Transition.noTransition,
+      // debugShowCheckedModeBanner: false,
     );
   }
 }

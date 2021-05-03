@@ -1,12 +1,12 @@
-import 'package:careyaya/constants/routes.dart';
-import 'package:careyaya/constants/themes.dart';
-import 'package:careyaya/controllers/auth.controller.dart';
-import 'package:careyaya/controllers/firebase_functions.controller.dart';
+import 'package:careyaya/config/localizations.dart';
+import 'package:careyaya/config/routes.dart';
+import 'package:careyaya/config/themes.dart';
+import 'package:careyaya/controllers/auth/auth.controller.dart';
+import 'package:careyaya/controllers/api/firebase_functions.controller.dart';
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
 import 'package:careyaya/controllers/language.controller.dart';
 // import 'package:careyaya/controllers/location/location.controller.dart';
 import 'package:careyaya/controllers/theme.controller.dart';
-import 'package:careyaya/localizations.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flamingo/flamingo.dart';
 import 'package:flutter/material.dart';

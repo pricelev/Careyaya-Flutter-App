@@ -1,5 +1,6 @@
 import 'package:careyaya/constants/firestore.dart';
 import 'package:flamingo/flamingo.dart';
+import 'package:careyaya/models/firestore/name.model.dart';
 import 'package:flamingo_annotation/flamingo_annotation.dart';
 
 part 'loved_one_profile.model.flamingo.dart';
@@ -17,8 +18,8 @@ class LovedOneProfileModel extends Document<LovedOneProfileModel> {
               Flamingo.instance.firestore.collection(LOVED_ONES_COLLECTION),
         );
 
-  @Field()
-  dynamic name;
+  @ModelField()
+  NameModel name;
   @Field()
   String profilePicUrl;
   @Field()

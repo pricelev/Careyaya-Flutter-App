@@ -1,5 +1,5 @@
 import 'package:careyaya/constants/firestore.dart';
-import 'package:careyaya/controllers/auth.controller.dart';
+import 'package:careyaya/controllers/auth/auth.controller.dart';
 import 'package:careyaya/models/firestore/chats/chat_message.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flamingo/flamingo.dart';
@@ -31,8 +31,9 @@ class ChatModel extends Document<ChatModel> {
   @Field()
   Timestamp updatedAt;
 
-  static getOtherUserId(ChatModel chat) => chat.participantIds.firstWhere(
-      (participantId) => participantId != AuthController.to.user.uid);
+  static String getOtherUserId(ChatModel chat) =>
+      chat.participantIds.firstWhere(
+          (participantId) => participantId != AuthController.to.user.uid);
 
   @override
   String toString() => "Record<$participantIds:$createdAt>";

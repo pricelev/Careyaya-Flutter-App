@@ -1,5 +1,6 @@
-import 'package:careyaya/models/address.model.dart';
+import 'package:careyaya/models/firestore/address.model.dart';
 import 'package:flamingo/flamingo.dart';
+import 'package:careyaya/models/firestore/name.model.dart';
 import 'package:flamingo_annotation/flamingo_annotation.dart';
 
 part 'advocate_profile.model.flamingo.dart';
@@ -11,8 +12,8 @@ class AdvocateProfileModel extends Document<AdvocateProfileModel> {
     Map<String, dynamic> values,
   }) : super(id: id, snapshot: snapshot, values: values);
 
-  @Field()
-  dynamic name;
+  @ModelField()
+  NameModel name;
   @Field()
   String email;
   @Field()

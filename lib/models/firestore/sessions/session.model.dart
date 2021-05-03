@@ -1,5 +1,5 @@
 import 'package:careyaya/constants/firestore.dart';
-import 'package:careyaya/models/address.model.dart';
+import 'package:careyaya/models/firestore/address.model.dart';
 import 'package:flamingo/flamingo.dart';
 import 'package:flamingo_annotation/flamingo_annotation.dart';
 

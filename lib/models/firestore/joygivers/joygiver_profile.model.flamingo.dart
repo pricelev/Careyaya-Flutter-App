@@ -8,7 +8,6 @@ part of 'joygiver_profile.model.dart';
 
 /// Field value key
 enum JoygiverProfileModelKey {
-  name,
   email,
   phoneNumber,
   profilePicUrl,
@@ -60,14 +59,13 @@ enum JoygiverProfileModelKey {
   interviewQuestions,
   thirdPartyQuotes,
   experienceDescription,
+  name,
   address,
 }
 
 extension JoygiverProfileModelKeyExtension on JoygiverProfileModelKey {
   String get value {
     switch (this) {
-      case JoygiverProfileModelKey.name:
-        return 'name';
       case JoygiverProfileModelKey.email:
         return 'email';
       case JoygiverProfileModelKey.phoneNumber:
@@ -170,6 +168,8 @@ extension JoygiverProfileModelKeyExtension on JoygiverProfileModelKey {
         return 'thirdPartyQuotes';
       case JoygiverProfileModelKey.experienceDescription:
         return 'experienceDescription';
+      case JoygiverProfileModelKey.name:
+        return 'name';
       case JoygiverProfileModelKey.address:
         return 'address';
       default:
@@ -181,7 +181,6 @@ extension JoygiverProfileModelKeyExtension on JoygiverProfileModelKey {
 /// For save data
 Map<String, dynamic> _$toData(JoygiverProfileModel doc) {
   final data = <String, dynamic>{};
-  Helper.writeNotNull(data, 'name', doc.name);
   Helper.writeNotNull(data, 'email', doc.email);
   Helper.writeNotNull(data, 'phoneNumber', doc.phoneNumber);
   Helper.writeNotNull(data, 'profilePicUrl', doc.profilePicUrl);
@@ -238,6 +237,7 @@ Map<String, dynamic> _$toData(JoygiverProfileModel doc) {
   Helper.writeNotNull(data, 'thirdPartyQuotes', doc.thirdPartyQuotes);
   Helper.writeNotNull(data, 'experienceDescription', doc.experienceDescription);
 
+  Helper.writeModelNotNull(data, 'name', doc.name);
   Helper.writeModelNotNull(data, 'address', doc.address);
 
   return data;
@@ -245,7 +245,6 @@ Map<String, dynamic> _$toData(JoygiverProfileModel doc) {
 
 /// For load data
 void _$fromData(JoygiverProfileModel doc, Map<String, dynamic> data) {
-  doc.name = Helper.valueFromKey<dynamic>(data, 'name');
   doc.email = Helper.valueFromKey<String>(data, 'email');
   doc.phoneNumber = Helper.valueFromKey<String>(data, 'phoneNumber');
   doc.profilePicUrl = Helper.valueFromKey<String>(data, 'profilePicUrl');
@@ -329,6 +328,13 @@ void _$fromData(JoygiverProfileModel doc, Map<String, dynamic> data) {
       Helper.valueListFromKey<dynamic>(data, 'thirdPartyQuotes');
   doc.experienceDescription =
       Helper.valueFromKey<String>(data, 'experienceDescription');
+
+  final _name = Helper.valueMapFromKey<String, dynamic>(data, 'name');
+  if (_name != null) {
+    doc.name = NameModel(values: _name);
+  } else {
+    doc.name = null;
+  }
 
   final _address = Helper.valueMapFromKey<String, dynamic>(data, 'address');
   if (_address != null) {

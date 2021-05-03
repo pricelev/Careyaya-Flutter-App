@@ -8,7 +8,6 @@ part of 'advocate_profile.model.dart';
 
 /// Field value key
 enum AdvocateProfileModelKey {
-  name,
   email,
   phoneNumber,
   profilePicUrl,
@@ -17,14 +16,13 @@ enum AdvocateProfileModelKey {
   favoriteJoygiverIds,
   totalSessionCount,
   canceledSessionCount,
+  name,
   address,
 }
 
 extension AdvocateProfileModelKeyExtension on AdvocateProfileModelKey {
   String get value {
     switch (this) {
-      case AdvocateProfileModelKey.name:
-        return 'name';
       case AdvocateProfileModelKey.email:
         return 'email';
       case AdvocateProfileModelKey.phoneNumber:
@@ -41,6 +39,8 @@ extension AdvocateProfileModelKeyExtension on AdvocateProfileModelKey {
         return 'totalSessionCount';
       case AdvocateProfileModelKey.canceledSessionCount:
         return 'canceledSessionCount';
+      case AdvocateProfileModelKey.name:
+        return 'name';
       case AdvocateProfileModelKey.address:
         return 'address';
       default:
@@ -52,7 +52,6 @@ extension AdvocateProfileModelKeyExtension on AdvocateProfileModelKey {
 /// For save data
 Map<String, dynamic> _$toData(AdvocateProfileModel doc) {
   final data = <String, dynamic>{};
-  Helper.writeNotNull(data, 'name', doc.name);
   Helper.writeNotNull(data, 'email', doc.email);
   Helper.writeNotNull(data, 'phoneNumber', doc.phoneNumber);
   Helper.writeNotNull(data, 'profilePicUrl', doc.profilePicUrl);
@@ -62,6 +61,7 @@ Map<String, dynamic> _$toData(AdvocateProfileModel doc) {
   Helper.writeNotNull(data, 'totalSessionCount', doc.totalSessionCount);
   Helper.writeNotNull(data, 'canceledSessionCount', doc.canceledSessionCount);
 
+  Helper.writeModelNotNull(data, 'name', doc.name);
   Helper.writeModelNotNull(data, 'address', doc.address);
 
   return data;
@@ -69,7 +69,6 @@ Map<String, dynamic> _$toData(AdvocateProfileModel doc) {
 
 /// For load data
 void _$fromData(AdvocateProfileModel doc, Map<String, dynamic> data) {
-  doc.name = Helper.valueFromKey<dynamic>(data, 'name');
   doc.email = Helper.valueFromKey<String>(data, 'email');
   doc.phoneNumber = Helper.valueFromKey<String>(data, 'phoneNumber');
   doc.profilePicUrl = Helper.valueFromKey<String>(data, 'profilePicUrl');
@@ -80,6 +79,13 @@ void _$fromData(AdvocateProfileModel doc, Map<String, dynamic> data) {
   doc.totalSessionCount = Helper.valueFromKey<num>(data, 'totalSessionCount');
   doc.canceledSessionCount =
       Helper.valueFromKey<num>(data, 'canceledSessionCount');
+
+  final _name = Helper.valueMapFromKey<String, dynamic>(data, 'name');
+  if (_name != null) {
+    doc.name = NameModel(values: _name);
+  } else {
+    doc.name = null;
+  }
 
   final _address = Helper.valueMapFromKey<String, dynamic>(data, 'address');
   if (_address != null) {

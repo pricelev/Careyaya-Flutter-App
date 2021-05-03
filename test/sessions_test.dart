@@ -1,5 +1,5 @@
 import 'package:careyaya/models/firestore/sessions/session.model.dart';
-import 'package:careyaya/ui/widgets/sessions/session_detail.widget.dart';
+import 'package:careyaya/screens/session/local_widgets/session_detail.widget.dart';
 import 'package:flamingo/flamingo.dart';
 import 'package:flutter_test/flutter_test.dart';
 

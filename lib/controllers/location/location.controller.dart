@@ -1,5 +1,5 @@
 // import 'package:background_location/background_location.dart';
-import 'package:careyaya/controllers/firestore/sessions/sessions.controller.dart';
+import 'package:careyaya/screens/session_list/local_controllers/sessions.controller.dart';
 import 'package:careyaya/models/firestore/sessions/session.model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -101,7 +101,7 @@ class LocationController extends GetxController {
         break;
     }
   }
-  static addGeofence(String id, num lat, num lon) {
+  static addGeofence(String id, double lat, double lon) {
     bg.BackgroundGeolocation.addGeofence(Geofence(
         identifier: id,
         radius: 200,

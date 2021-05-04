@@ -15,7 +15,8 @@ class SessionListScreen extends StatelessWidget {
       body: GetX<SessionsController>(
         init: Get.put<SessionsController>(SessionsController()),
         builder: (SessionsController sessionsController) {
-          final sessions = sessionsController.sessions;
+          // final sessions = sessionsController.sessions;
+          final sessions = sessionsController.generateDemoSessions();
 
           if (sessions == null) {
             return Loading();

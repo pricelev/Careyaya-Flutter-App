@@ -25,7 +25,7 @@ class SessionListItem extends StatelessWidget {
       key: Key(session.joygiverId),
       child: Card(
           child: ListTile(
-        leading: Chip(label: Text(session.accepted ? "Accepted" : "Requested")),
+        leading: Chip(label: Text(session.completed ? "Completed" : (session.accepted ? "Accepted" : (session.rejected ? "Rejected" : "Requested")))),
         title: Text('${session.hoursCount} hours with ${session.lovedOneId}'),
         onTap: _onTap,
       )),

@@ -1,6 +1,7 @@
 import 'package:careyaya/controllers/firestore/firestore.controller.dart';
 import 'package:careyaya/models/firestore/sessions/session.model.dart';
 import 'package:get/get.dart';
+import 'package:careyaya/utils/session_generator.dart';
 
 class SessionsController extends GetxController {
   RxList<SessionModel> _sessionsStream = RxList<SessionModel>();
@@ -23,5 +24,10 @@ class SessionsController extends GetxController {
   void handleSessionsChange(List<SessionModel> sessions) {
     // advocateProfileStream.bindStream(FirestoreController.to
     //     .advocateProfileStream(advocateId: sessionModel.advocateId));
+  }
+
+  List<SessionModel> generateDemoSessions() {
+    List<SessionModel> sessions = SessionGenerator.generateSessions();
+    return sessions;
   }
 }

@@ -1,5 +1,5 @@
 import 'package:careyaya/constants/firestore.dart';
-import 'package:careyaya/controllers/auth.controller.dart';
+import 'package:careyaya/controllers/auth/auth.controller.dart';
 import 'package:careyaya/models/firestore/advocates/advocate_profile.model.dart';
 import 'package:careyaya/models/firestore/chats/chat.model.dart';
 import 'package:careyaya/models/firestore/chats/chat_message.model.dart';

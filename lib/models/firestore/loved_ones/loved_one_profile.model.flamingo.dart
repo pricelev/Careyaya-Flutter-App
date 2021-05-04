@@ -8,18 +8,16 @@ part of 'loved_one_profile.model.dart';
 
 /// Field value key
 enum LovedOneProfileModelKey {
-  name,
   profilePicUrl,
   phoneNumber,
   dob,
   advocateId,
+  name,
 }
 
 extension LovedOneProfileModelKeyExtension on LovedOneProfileModelKey {
   String get value {
     switch (this) {
-      case LovedOneProfileModelKey.name:
-        return 'name';
       case LovedOneProfileModelKey.profilePicUrl:
         return 'profilePicUrl';
       case LovedOneProfileModelKey.phoneNumber:
@@ -28,6 +26,8 @@ extension LovedOneProfileModelKeyExtension on LovedOneProfileModelKey {
         return 'dob';
       case LovedOneProfileModelKey.advocateId:
         return 'advocateId';
+      case LovedOneProfileModelKey.name:
+        return 'name';
       default:
         return null;
     }
@@ -37,20 +37,27 @@ extension LovedOneProfileModelKeyExtension on LovedOneProfileModelKey {
 /// For save data
 Map<String, dynamic> _$toData(LovedOneProfileModel doc) {
   final data = <String, dynamic>{};
-  Helper.writeNotNull(data, 'name', doc.name);
   Helper.writeNotNull(data, 'profilePicUrl', doc.profilePicUrl);
   Helper.writeNotNull(data, 'phoneNumber', doc.phoneNumber);
   Helper.writeNotNull(data, 'dob', doc.dob);
   Helper.writeNotNull(data, 'advocateId', doc.advocateId);
+
+  Helper.writeModelNotNull(data, 'name', doc.name);
 
   return data;
 }
 
 /// For load data
 void _$fromData(LovedOneProfileModel doc, Map<String, dynamic> data) {
-  doc.name = Helper.valueFromKey<dynamic>(data, 'name');
   doc.profilePicUrl = Helper.valueFromKey<String>(data, 'profilePicUrl');
   doc.phoneNumber = Helper.valueFromKey<String>(data, 'phoneNumber');
   doc.dob = Helper.valueFromKey<String>(data, 'dob');
   doc.advocateId = Helper.valueFromKey<String>(data, 'advocateId');
+
+  final _name = Helper.valueMapFromKey<String, dynamic>(data, 'name');
+  if (_name != null) {
+    doc.name = NameModel(values: _name);
+  } else {
+    doc.name = null;
+  }
 }

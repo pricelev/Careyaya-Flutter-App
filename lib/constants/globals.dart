@@ -1,4 +1,4 @@
-import 'package:careyaya/models/menu_option.model.dart';
+import 'package:careyaya/models/ui/menu_option.model.dart';
 
 class Globals {
   static final String defaultLanguage = 'en';

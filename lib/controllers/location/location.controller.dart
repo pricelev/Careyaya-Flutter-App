@@ -12,10 +12,11 @@ import 'package:permission_handler/permission_handler.dart';
 
 class LocationController extends GetxController {
   static LocationController to = Get.find();
-  static SessionsController sessionsController = Get.find();
+  SessionsController sessionsController;
 
   @override
   void onInit() async {
+    sessionsController = Get.find<SessionsController>();
     // Configure BackgroundFetch.
     try {
       bg.BackgroundGeolocation.stop();

@@ -67,7 +67,7 @@ class LocationController extends GetxController {
 
     for (SessionModel session in sessionsController.sessions) {
       if (session.startTimestamp.toDate() == DateTime.now()) {
-        addGeofence(session.id, session.address.latitude, session.address.longitude);
+        addGeofence(session.id, session.address.latitude.toDouble(), session.address.longitude.toDouble());
       }
     }
 

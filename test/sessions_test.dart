@@ -1,6 +1,8 @@
 import 'package:careyaya/models/firestore/sessions/session.model.dart';
+import 'package:careyaya/screens/session/local_widgets/session_action_button.widget.dart';
 import 'package:careyaya/screens/session/local_widgets/session_detail.widget.dart';
 import 'package:flamingo/flamingo.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'data/session_generator.dart';
@@ -38,14 +40,22 @@ Future<void> main() async {
     expect(_sessionB.totalCost, sessionB.totalCost);
   });
 
-  testWidgets('Session Detail widget renders', (WidgetTester tester) async {
+  testWidgets('Session Detail expansion tiles render', (WidgetTester tester) async {
     final session = SessionGenerator.generateSession();
+
     await tester
         .pumpWidget(wrapWithMaterial(SessionDetailWidget(session: session)));
 
     // Create finders
     final titleFinder = find.text('Appointment Information');
-
+    final locationInfo = find.text('Location Information');
+    final paymentInfo = find.text('Payment Information');
     expect(titleFinder, findsOneWidget);
+    expect(locationInfo, findsOneWidget);
+    expect(paymentInfo, findsOneWidget);
+
+
   });
+
+
 }
